@@ -113,23 +113,37 @@ sources:
 
   - key: active-stereo
     repo: visgraf/active-stereo
-    sha: null
+    sha: 3f7a263011d9c5c53a4733957ac34cd28c2e85ba
     role: >-
       Predecessor. A full implementation with verified geometry and a decision
       record, whose loop never ran. The draft cites it for two things: the
       failure that motivated the low-ceremony lane, and the constitution clause
       that was false and talked a reviewer out of verifying.
-    checkout_status: CLONED 2026-09-08 (default branch; no SHA pinned). See gap-001.
+    checkout_status: >-
+      CLONED 2026-09-08 and PINNED at 3f7a263 (gap-003). Claims 2, 5 and 46 of
+      the first pass rest on it. Claim 2 is a VERBATIM QUOTATION cited to
+      CLAUDE.md:141; re-verified at the pinned SHA on the day it was pinned —
+      the line reads "the rule above would be unenforceable — Chat holds
+      excerpts by construction, so", continuing into :142. 3f7a263 is the
+      repository's final merge, so the pin will not move, but that is a fact
+      about this repository's history and not a substitute for pinning.
 
   - key: bioeye
     repo: visgraf/bioeye
-    sha: null
+    sha: e90817018e629ce1cd23af0c9e8bc4a6aa15daff
     role: >-
       Predecessor. A thin vertical slice that closed the accumulation loop and
       not the perception-action loop. Listed with NO measurements attributed to
       it, which is a fact and not an oversight: "we read it and it had nothing"
       and "we never read it" are different, and this is the second.
-    checkout_status: CLONED 2026-09-08 (default branch; no SHA pinned). See gap-001.
+    checkout_status: >-
+      CLONED 2026-09-08 and PINNED at 3f7a263 (gap-003). Claims 2, 5 and 46 of
+      the first pass rest on it. Claim 2 is a VERBATIM QUOTATION cited to
+      CLAUDE.md:141; re-verified at the pinned SHA on the day it was pinned —
+      the line reads "the rule above would be unenforceable — Chat holds
+      excerpts by construction, so", continuing into :142. 3f7a263 is the
+      repository's final merge, so the pin will not move, but that is a fact
+      about this repository's history and not a substitute for pinning.
 
 schema:
   id: Stable. Never reused, never renumbered. Cite this.
@@ -581,6 +595,14 @@ gaps:
       field-counting collapses the result to a single line. See od-003.
 
   - id: gap-003
+    status: CLOSED 2026-09-08
+    closed_by: >-
+      Both SHAs recorded in `sources` above and claim 2's quotation re-read at
+      active-stereo@3f7a263, CLAUDE.md:141, where it still says what the claim
+      says. THE POINT OF THE CLOSURE IS THE RE-READ, NOT THE PIN: a line number
+      against a branch is a citation to whatever that branch says on the day it
+      is read, and pinning without re-reading would have recorded the SHA
+      without ever confirming the line survived to it.
     statement: >-
       active-stereo and bioeye are cloned at their default branches, not at a
       pinned SHA. No SHA for either is recorded in `sources`.

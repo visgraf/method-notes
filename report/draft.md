@@ -16,10 +16,15 @@
 > repositories it makes claims about.
 >
 > **42 claims: 22 confirmed, 5 corrected, 8 under-qualified, 6 unsupported, 1
-> partial** (`mn-004`). **The corrections have not been applied to this prose.**
-> Every verdict, with its source and a proposed replacement sentence, is in
-> `report/claims-verified.md`; the sentences stand as drafted until the first
-> author decides on each. Do not typeset before that.
+> partial** (`mn-004`). **The thirteen corrected and under-qualified claims have
+> been applied**, across twenty passages. Every verdict, its source, and the
+> sentence it replaced are in `report/claims-verified.md`.
+>
+> **Six claims remain UNSUPPORTED and are unchanged in the prose.** They are not
+> contradicted by the record; they are unestablishable from it, and four of the
+> six describe events this method guarantees will leave no artifact — see
+> `gap-004` and `od-006`. Read §4.2's rejection count and §4.5's cold-session
+> search as recollection, not record.
 >
 > Sections 8.6, 8.7 and 8.8 are the first author's, written in the first person.
 > They make no checkable factual claims and are out of scope for that pass.
@@ -229,8 +234,9 @@ spike is deleted, or it did not, and the spike is deleted. Directories that sit
 there deciding nothing are the failure mode the lane has.
 
 It exists because of a specific thing that went wrong in the predecessor
-project. A step was written up twice and never started, accumulating five open
-questions, because the constitution had exactly one standard — plan, decision
+project. A step was written up twice and never started, accumulating five declared
+items, four of them open questions, because the constitution had exactly one
+standard — plan, decision
 record, findings, tests, definition of done — and that standard is right for
 library code and far too expensive for exploration. When a question is open and
 the only sanctioned move is to write about it, **uncertainty turns into
@@ -307,7 +313,7 @@ was wrong with it.
 
 ## The shape of the work
 
-Thirteen experiments over five days, each pre-registered before its runner
+Thirteen experiments over five working days, each pre-registered before its runner
 existed. Two predecessor repositories, from which geometry, measurements and a
 set of methods were carried forward. Roughly four thousand lines of library code
 against a slightly larger volume of tests, thirteen foreclosed decisions,
@@ -332,9 +338,9 @@ cost, and the benefit decomposed almost entirely into **coverage** rather than
 accuracy: the moving system's advantage was that it *saw more of the scene*, not
 that it *estimated better*.
 
-And four of the thirteen experiments turned out to be about the instrument
-rather than the framework. They were the precondition for reading the other
-nine.
+And four of the thirteen experiments turned out to be about the instrument or
+the criterion rather than the framework. They were the precondition for reading
+the other nine.
 
 None of that is the subject of these notes. It is the material the examples come
 from.
@@ -393,8 +399,8 @@ which is the one thing a wrong report is most likely to be.
 
 *A claims pass on any document making factual assertions.* Before the project's
 technical report was typeset, every load-bearing claim in it was checked at
-source and marked confirmed, corrected, under-qualified, or unsupported. Of
-eighteen claims in the first draft, seven stood as written.
+source and marked confirmed, corrected, under-qualified, or unsupported. Of the
+eighteen substantive claims in the first pass, seven stood as written.
 
 **Did it hold?** Yes, and the numbers are the argument. Three claims wrong on
 the figure, eight true only in the band or arm they came from, none unsupported
@@ -525,9 +531,10 @@ the contradiction was legible.
 The methods were not handled at all, and nothing in the apparatus noticed. A
 statistical criterion, a set of band thresholds, a search window, an inhibition
 radius, a foveal width, the parameters of a validity test — all carried across,
-all used, none marked. Thirteen carried methods, **eight of which had never been
-examined by anyone in this project**, and one of them was the criterion in §4.3
-that governed ten experiments before its properties were checked.
+all used, none marked. Thirteen carried constants and criteria, ten of them
+carried in from elsewhere, **eight never examined by anyone in this project** —
+and one of the eight was the criterion in §4.3 that governed ten experiments
+before its properties were checked.
 
 The asymmetry is the finding. The same repository that would not let a *number*
 cross without provenance let a *criterion* cross unmarked — and the criterion
@@ -540,7 +547,7 @@ Then one rule that the project learned the expensive way:
 > **A carried method gets its entry at first use, not at first suspicion.**
 
 **Did it hold?** It was not in place when it was needed. Applied to numbers on
-day two and to methods at experiment twelve, by which point the damage was done
+day one and to methods at experiment twelve, by which point the damage was done
 and required a re-analysis of every recorded verdict. That re-analysis is the
 reason the failure is well documented rather than well hidden.
 
@@ -559,8 +566,8 @@ and load-bearing and feels like part of the project.
 
 **What it looked like.** An eighteen-step plan, with stages, altitudes, and two
 recorded amendments, existed in a chat window and nowhere else. It had shaped
-every specification for a week. Nobody noticed, because both parties to the
-conversation could see it.
+every specification for a day — seven merged pull requests — before anyone wrote
+it down. Nobody noticed, because both parties to the conversation could see it.
 
 It was found the moment a session was cleared. The fresh session was asked to
 record the plan, searched the repository, the git history including commit
@@ -620,10 +627,11 @@ artefact was **harder than the real thing it stood in for, and it passed the
 validity test built to catch exactly that class of failure** — self-consistent
 enough to be accepted, wrong enough to poison the estimate, and concentrated in
 precisely the region where the scientific question lived. Rendering the same
-geometry physically, the synthetic fixture was an order of magnitude worse in
-the tail. Two fifths of the measured pixels, four fifths of the total error.
+geometry physically, the synthetic fixture was roughly twenty times worse in the
+tail. Two fifths of the valid measured pixels, four fifths of the total *squared*
+error.
 
-Four of thirteen experiments went to establishing this. Conclusions already
+Three of thirteen experiments went to establishing this. Conclusions already
 drawn had to be re-read. And the obvious correction — restrict the analysis to
 the clean region — was itself wrong, because the contaminated band was also the
 only band where the question was live: excluding it did not isolate clean
@@ -642,7 +650,7 @@ that **they do** — because the regime you care about is usually the hardest
 thing to synthesise, and therefore where the synthesis cuts its corners.
 
 **Did it hold?** It was learned rather than applied, at a cost of roughly a
-third of the project's experiments. That said, the cost bought a durable result:
+quarter of the project's experiments. That said, the cost bought a durable result:
 the fixture's operating range is now measured, and every experiment afterwards
 was sized against it.
 
@@ -802,7 +810,7 @@ are not two lists. They are the same list, read twice.**
 **Verification costs an iteration.** Checking a document's claims at source
 before typesetting it took a full cycle and produced no prose. Re-scoring every
 recorded verdict under a corrected criterion took another. Two of thirteen
-iterations produced no new science.
+experiments' worth of effort produced no new science.
 
 **Pre-registration costs a commit and an argument.** Declaring what would
 falsify a hypothesis, and separately what would mean the experiment asked the
@@ -813,7 +821,7 @@ strongest.
 **Rejections cost round trips.** Three specifications were rejected on false
 premises. Each cost a cycle.
 
-**The record costs reading.** Nine thousand lines of ledger in five days, and
+**The record costs reading.** Nine thousand lines of ledger in five working days, and
 one human reading every pull request.
 
 ## What the friction caught
@@ -905,7 +913,7 @@ serious one, and I want to arrive at it properly.
 
 ## Three that arrived late
 
-**The inherited marker was applied to numbers and not to methods.** Day two for
+**The inherited marker was applied to numbers and not to methods.** Day one for
 figures, experiment twelve for criteria — by which point a carried statistical
 bar had governed ten experiments. The asymmetry is the finding: a repository
 that would not let a number cross without provenance let a criterion cross
@@ -957,8 +965,8 @@ specific and damning.
 
 **The lane was built as a fix for exactly this failure, in the previous project,
 where it had already cost something.** In that project a step was written up
-twice and never started, accumulating five open questions, because the
-constitution had one standard — plan, decision record, findings, tests,
+twice and never started, accumulating five declared items, four of them open
+questions, because the constitution had one standard — plan, decision record, findings, tests,
 definition of done — and that standard is right for library code and far too
 expensive for exploration. When a question is open and the only sanctioned move
 is to write about it, uncertainty turns into documents. The diagnosis was made
@@ -997,7 +1005,7 @@ afternoons of writing about a question — carefully, with pointers and open
 questions and a plan for resolving it — where the honest move was to spend
 twenty minutes finding out. The writing was good. It met the standard. It also
 postponed the answer, and it was easier than admitting I did not know, because a
-document that says *here are the five open questions* looks like progress and a
+document that says *here are the four open questions* looks like progress and a
 directory called `does-the-fixture-need-occlusion` looks like not knowing.
 
 That is the thing a methodology cannot fix by adding a rule, which is why it is
@@ -1104,9 +1112,9 @@ of failures with their remedies attached, it is evidence.
 
 The template was audited against one question: can a session starting cold, with
 no other context, read it and write a first specification without asking what
-any of it means? That audit found several gaps, most of which were closed. Four
-remain open and are recorded in the repository rather than fixed, because fixing
-them would mean inventing rules the original project never exercised.
+any of it means? That audit found several gaps, and four were closed in a single
+change. Its residue is argued below rather than recorded in the template, because
+recording it would mean inventing rules the original project never exercised.
 
 The largest: one of the method's own concepts — the distinction between
 decisions that change what the project *is* and decisions about how to build it
@@ -1141,7 +1149,7 @@ the rule, for that reason.
 
 ## 8.1 The bottleneck moved
 
-Thirteen experiments in five days. At no point was implementation the limiting
+Thirteen experiments in five working days. At no point was implementation the limiting
 resource.
 
 What limited the work was **trust** — and specifically, one human reading. Every
@@ -1248,9 +1256,9 @@ Three things a second project would settle that this one could not.
 **Whether the failures are the method's or mine.** One researcher. Every failure
 in §6 is consistent with *this is what happens to a rigorous project* and
 equally consistent with *this is what happens when this particular person is
-given a rigorous framework*. I lean toward the first because the low-ceremony
-lane went unused in two consecutive projects under different conditions, but two
-is not many.
+given a rigorous framework*. I lean toward the first because informal exploration went
+undone in two consecutive projects — in the first because there was no lane, in
+the second although there was — but two is not many.
 
 **Whether the mechanisms transfer or were shaped by the domain.**
 Pre-registration with a falsifier works cleanly when an experiment produces a
@@ -1260,7 +1268,7 @@ is a construction rather than a measurement, I do not know. I would guess the
 falsifier survives and the threshold does not.
 
 **Whether the record is readable by anyone but its author.** Nine thousand lines
-of ledger, written by one collaborator, read by one human, in five days. A
+of ledger, written by one collaborator, read by one human, in five working days. A
 colleague opening it cold is the test that has not been run, and until it is,
 *the repository is the memory* is a claim about a memory of one.
 

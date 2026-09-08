@@ -562,29 +562,41 @@ does not yet reach, the rejections. Recorded as `od-006`.
 
 ## What is still flagged and was not corrected
 
-**Every claim above with a verdict other than CONFIRMED is in this list.** The
-specification reserved prose corrections to the maintainer; this pass's output
-is the record. Ordered by what it would cost to leave.
+**APPLIED 2026-09-08.** All 13 proposed replacements — every CORRECTED and every
+UNDER-QUALIFIED claim — were applied to `report/draft.md` by the maintainer's
+wholesale approval. They touched **20 passages**, because five claims recur:
 
-| # | claim | verdict | whose call |
-|---|---|---|---|
-| **14** | "Of eighteen claims… seven stood" (§4.1:391) | UNDER-QUALIFIED | **Maintainer — urgent.** The same figure was amended at :870 and :1219 and not here, so the document now states it two ways. This is the repeated-claim defect, currently live, in the document that ships the check. |
-| 17 | "three specifications were rejected" (§4.2, §5) | UNSUPPORTED | Maintainer. Either soften to the one recorded rejection, or accept that the strongest evidence for §4.2 is unrecorded and say so. |
-| 24 | "shaped every specification for a week" | CORRECTED → one day | Maintainer. |
-| 22 | "numbers on day two" (§4.4, §6) | CORRECTED → day one | Maintainer. Two locations. |
-| 41 | "four remain open" (§7) | CORRECTED | Maintainer. |
-| 29 | "four of thirteen went to establishing this" (§4.6) | CORRECTED → three | Maintainer. Two locations (:620, :638). |
-| 26 | "an order of magnitude worse in the tail" | CORRECTED → 22.7× | Maintainer. |
-| 11 | "about the instrument" (§3) | UNDER-QUALIFIED | Maintainer. Related to 29. |
-| 27 | "four fifths of the total error" | UNDER-QUALIFIED | Maintainer — one word, "squared". |
-| 21 | "thirteen carried methods" | UNDER-QUALIFIED | Maintainer. |
-| 31 | "two of thirteen iterations" | UNDER-QUALIFIED | Maintainer. |
-| 46 | "unused in two consecutive projects" | UNDER-QUALIFIED | Maintainer. |
-| 1 | "five days" | UNDER-QUALIFIED | Maintainer — affects six locations. |
-| 5 | "five open questions" | UNDER-QUALIFIED | Maintainer. |
-| 12, 20, 25, 38, 45 | the remaining unsupported claims | UNSUPPORTED | **Maintainer, and see `od-006`.** Four of the five are unrecordable by construction, not merely unrecorded. |
+| claim | verdict | locations changed |
+|---|---|---|
+| 1 | UNDER-QUALIFIED | 4 of 6 "five days" — the two register descriptors (§1, §7) were left, per the entry, since they are not about elapsed time |
+| 5 | UNDER-QUALIFIED | 3 — §2, §6, **and §6's later "here are the five open questions"**, which the check caught and the entry had not named |
+| 11 | UNDER-QUALIFIED | 1 |
+| 14 | UNDER-QUALIFIED | 1 — §4.1:398, the third occurrence the previous commit left inconsistent |
+| 21 | UNDER-QUALIFIED | 1 |
+| 22 | CORRECTED | 2 — §4.4 and §6 |
+| 24 | CORRECTED | 1 |
+| 26 | CORRECTED | 1 |
+| 27 | UNDER-QUALIFIED | 1 |
+| 29 | CORRECTED | 2 — the count and the proportion that follows from it |
+| 31 | UNDER-QUALIFIED | 1 |
+| 41 | CORRECTED | 1 — first option taken; the second would require editing `template` |
+| 46 | UNDER-QUALIFIED | 1 |
+
+**Two entries offered alternatives and the first was taken in both** (31 and 41).
+For 41 the second option — record the four gaps in the template and cite them —
+is not available from this repository.
+
+### Still standing: the six UNSUPPORTED claims
+
+**12, 17, 20, 25, 38, 45 are unchanged in the prose.** They carry no proposed
+replacement because none can be written from the record: four of the six describe
+events the workflow guarantees leave no artifact. `gap-004` and `od-006` hold the
+argument. **This is the maintainer's decision and it has not been taken** — the
+options are to soften each to what the record supports, or to keep them and say
+in the text that they rest on recollection.
 
 ---
+
 
 # The repeated-figure check, as run — and the fix for `od-003`
 

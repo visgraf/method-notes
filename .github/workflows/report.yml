@@ -44,14 +44,22 @@ jobs:
   # CLAUDE.md's working agreement says never add a dependency without asking.
   # Ruby ships Psych in its standard library and is preinstalled on
   # ubuntu-latest, so this costs one `ruby -ryaml` and no install step at all.
-  # `YAML.load` rather than `safe_load_file`, which is Ruby 3.x only: these are
-  # our own files, they contain no anchors or aliases, and the portable form
-  # works on every Psych version.
+  # `YAML.parse`, NOT `YAML.load`, AND THE REASON IS A FAILURE THIS CHECK ALREADY
+  # HAD. The first version used YAML.load. It passed locally on Ruby 2.6 (Psych 3,
+  # where load is unsafe-by-default) and FAILED on ubuntu-latest with
+  # "Tried to load unspecified class: Date" -- Psych 4 made YAML.load
+  # safe-by-default, and the ledgers carry unquoted dates like `2026-09-08`,
+  # which YAML resolves to a Date. The fix is not to permit the class; it is to
+  # stop instantiating classes at all. YAML.parse returns the node tree and
+  # constructs nothing, which is exactly what "is this file parseable" asks, and
+  # it behaves the same on every Psych version.
   #
-  # IT WAS TESTED BY BREAKING A LEDGER ON PURPOSE before it was committed --
-  # appending an unclosed flow sequence to docs/state.yaml made it exit 1 and
-  # name the file, line and column. A check nobody has watched fail is a check
-  # nobody knows can.
+  # THE LESSON IS THE ONE THIS REPOSITORY IS ABOUT, so it is recorded rather than
+  # quietly fixed: the check WAS watched failing before it was committed -- a
+  # broken ledger made it exit 1 -- but only on the axis its author thought of.
+  # It was never run anywhere but the author's machine, so the environment
+  # difference was invisible until CI. A check tested on one axis is a check
+  # tested on one axis.
   ledgers:
     runs-on: ubuntu-latest
     steps:
@@ -63,9 +71,10 @@ jobs:
             ok = true
             ["docs/state.yaml", "docs/inherited-measurements.yaml"].each do |f|
               begin
-                d = YAML.load(File.read(f))
-                raise "top level is #{d.class}, expected a mapping" unless d.is_a?(Hash)
-                puts "ok   #{f} (#{d.keys.size} top-level keys)"
+                doc = YAML.parse(File.read(f))
+                raise "empty document" if doc.nil?
+                raise "root is #{doc.root.class}, expected a mapping" unless doc.root.is_a?(Psych::Nodes::Mapping)
+                puts "ok   #{f} (#{doc.root.children.length / 2} top-level keys)"
               rescue => e
                 warn "FAIL #{f}: #{e.message.split("\n").first}"
                 ok = false

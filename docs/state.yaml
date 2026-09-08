@@ -565,12 +565,29 @@ open_decisions:
       A SEPARATE JOB RATHER THAN A STEP IN `build`, so a one-character YAML error
       is not reported from behind a 44-second TeX install, and so it still runs
       when the document fails to compile.
-      IT WAS WATCHED FAILING BEFORE IT WAS COMMITTED. An unclosed flow sequence
-      appended to each ledger in turn made it exit 1 and name the file, line and
-      column; the command was extracted from the workflow file itself and run,
-      rather than a hand-typed approximation of it. A check nobody has seen fail
-      is a check nobody knows can fail, which is CLAUDE.md's own standard and
-      §4.3's subject.
+      IT WAS WATCHED FAILING BEFORE IT WAS COMMITTED — ON ONE AXIS, WHICH WAS
+      NOT ENOUGH, AND THE FIRST VERSION SHIPPED BROKEN. An unclosed flow
+      sequence appended to each ledger made it exit 1 and name the file, line
+      and column, and the command was extracted from the workflow file rather
+      than hand-typed. It still failed on the first CI run:
+      `Tried to load unspecified class: Date`.
+      THE CAUSE: `YAML.load` is unsafe-by-default in Psych 3 (Ruby 2.6, the
+      author's machine) and SAFE-by-default in Psych 4 (Ruby 3.x, ubuntu-latest),
+      where it refuses to instantiate Date — and these ledgers carry unquoted
+      dates like 2026-09-08, which YAML resolves to a Date.
+      THE FIX IS NOT TO PERMIT THE CLASS. It is `YAML.parse`, which returns the
+      node tree and constructs nothing, behaves identically on every Psych
+      version, and is a more exact test of what this entry actually asks: not
+      "does this file load into Ruby objects" but "is this file parseable".
+      Re-verified on three axes — good ledgers pass, a broken one exits 1 naming
+      file and line, a non-mapping root is rejected, and an unquoted date parses.
+      WHY THE FAILURE IS RECORDED RATHER THAN QUIETLY FIXED: it is this
+      repository's own subject, and it is the shape .gitignore already warns
+      about — something that passes locally and fails everywhere else because
+      the author's environment is not the runner's. The check was tested on the
+      axis its author thought of. A check tested on one axis is a check tested
+      on one axis, and "I watched it fail" is not the same claim as "I watched
+      it fail where it runs".
       WHAT IT DOES NOT CHECK, so nobody reads it as more coverage than it is: it
       tests that the files PARSE, not that any id is unique, that a `superseded`
       entry names its successor, or that a cited id resolves. Those are real and

@@ -8,12 +8,30 @@
 # Update it in the same commit as the change it describes. If it disagrees with
 # the repository, the repository is right and this file is a bug.
 #
-# TEMPLATE. Every block below carries its schema and its rules and NO ENTRIES.
-# The headers are the part that generalises; delete none of them. Fill the lists.
+# DOES A DOCUMENT-ONLY PROJECT HAVE A DECISION LEDGER? YES, AND THE ARGUMENT FOR
+# ONE NEVER DEPENDED ON THERE BEING EXPERIMENTS. The ledger exists so a later
+# session can tell "we decided against this" from "nobody thought of it" — two
+# states that look identical in a tree and are not the same thing. Editorial
+# decisions have exactly that property, and arguably more strongly: a deleted
+# directory leaves no trace at all, whereas an abandoned code path usually leaves
+# an import. The template's own instantiation into this repository deleted six
+# things, and without `foreclosures` below there would be nowhere to say why —
+# a future reader would find a repository that simply never had tests.
+#
+# THE TEST THIS FILE PASSED: the adaptation task that produced this repository
+# generated six foreclosures, five open decisions and a stopping rule ON ITS OWN,
+# before any report work started. A file that fills up during its own
+# instantiation is not ceremony.
+#
+# WHAT DOES NOT TRANSFER, marked rather than deleted: `falsifier_verdicts` and
+# `constraints` are still empty and may stay that way. See their headers.
+#
+# The blocks below carry the template's schemas and rules. Entries are this
+# repository's own.
 # ==============================================================================
 
 schema_version: 1
-updated_at: null          # ISO date. Set it when you first write an entry.
+updated_at: 2026-09-08    # ISO date. Set it when you first write an entry.
 
 # ------------------------------------------------------------------------------
 # HOW IDS ARE ALLOCATED
@@ -70,6 +88,8 @@ updated_at: null          # ISO date. Set it when you first write an entry.
 # always fires is one a cold session learns to skip. Staleness is tested per
 # half in `sequence`, and each half gets the test it can actually pass.
 updated_by_commit: null   # the repository state this file describes
+# Null on the commit that introduces it, necessarily: no commit can name itself.
+# Set it to the adaptation commit on the next change to this file.
 
 # ------------------------------------------------------------------------------
 # SEQUENCE — where this project is, and what it plans next
@@ -117,13 +137,25 @@ sequence:
   #   - a gate: "the loop must run before any further instrument work"
   #   - "none yet", with the date it was last considered
   stopping_rule:
-    rule: none yet
-    decided_at: null        # commit or date. `null` while `rule` is "none yet".
-    last_considered: null   # ISO date. Bump it even when the answer is unchanged.
+    rule: >-
+      A gate, not a budget. THE REPORT IS NOT TYPESET UNTIL THE
+      CLAIMS-VERIFICATION PASS HAS RUN AGAINST A CLONED CHECKOUT (gap-001), and
+      it is not published until every claim in report/draft.md is either
+      CONFIRMED or carries its correction in the sentence. If the pass cannot be
+      run — if the source repositories are unavailable at the pinned SHAs — the
+      work stops and the reason is recorded here, rather than the document
+      shipping with its figures unresolved.
+    decided_at: 2026-09-08
+    last_considered: 2026-09-08
     note: >-
-      REPLACE THIS. If the answer stays "none yet" for more than a few
-      iterations, that is itself a finding about the project and belongs in the
-      record, not in this comment.
+      TYPED AT INSTANTIATION RATHER THAN LEFT AT "none yet", which the template
+      says is a legal answer and which the source instance left standing for five
+      days after being told in week one. It was easy to type here for a reason
+      worth recording: a document-only project has a natural terminal condition
+      that a research project does not, because the deliverable is finite and its
+      correctness criterion is already written down in report/claims-verified.md.
+      Do not read the ease of filling this field as evidence that the template's
+      complaint was overblown.
 
   staleness:
     note: >-
@@ -174,11 +206,25 @@ sequence:
       RECORD EACH RUN HERE, INCLUDING THE ONES THAT FAIL, and keep the previous
       record beside the correction rather than overwriting it. The defect is
       worth more than the fix.
-    complete: []            # step numbers
+    complete: [1]
     deferred: []            # - {step: <n>, until: <condition>}
-    next: null              # the lowest step that is neither complete nor deferred
-    evidence: {}            # <step n>: <file, id, or commit that establishes it>
-    out_of_sequence: []
+    next: 2
+    evidence:
+      1: >-
+        fc-001 through fc-006 in this file, and the adaptation commit that
+        carries them. Read against clause (1) above: step 1's title is "Adapt the
+        template to a document-only shape", and each foreclosure names one thing
+        deleted or kept AND WHY — not merely that it happened.
+    out_of_sequence:
+      - what: >-
+          Two inherited measurements (mn-001, mn-002) and two carried methods
+          (met-001, met-002) were entered in docs/inherited-measurements.yaml.
+        note: >-
+          Recorded here so no id in that file is orphaned. They were not the task
+          and are not step 1's output: they came out of READING the draft closely
+          enough to decide whether the measurement ledger belonged in this
+          repository. The met- entries are required by CLAUDE.md's first-use
+          rule; the mn- pair is the evidence that settled fc-006.
     # out_of_sequence holds work that was really done and is not one of the
     # numbered steps. Entries are {what, note}. IT IS NOT A REMAINDER BIN: its
     # job is that a cold session finding a verdict id or a measurement id in this
@@ -194,7 +240,7 @@ sequence:
       pins it. Treat it as a prior, exactly as an `inherited` entry in
       docs/inherited-measurements.yaml is treated — usable, and an assumption
       whenever it is relied on.
-    amended: null           # how many times, and over how many iterations
+    amended: 0              # how many times, and over how many iterations
     staleness:
       last_amended_commit: null
       rule: >-
@@ -218,7 +264,50 @@ sequence:
         One clause is not answerable from the repository at all: whether the
         maintainer has taken an amendment that was never recorded here. No marker
         can close that, and it is exactly what `source: chat` is warning about.
-    stages: []
+    stages:
+      - stage: 1
+        name: Instantiate
+        steps:
+          - n: 1
+            title: Adapt the template from a research shape to a document-only one
+            altitude: infra
+            status: complete
+            outcome: fc-001..fc-006, od-001..od-005, gap-001, gap-002
+      - stage: 2
+        name: Verify
+        steps:
+          - n: 2
+            title: >-
+              Clone the sources at their pinned SHAs and run the
+              claims-verification pass over report/draft.md
+            altitude: exp
+            status: next
+            outcome: null
+          - n: 3
+            title: Reconcile mn-001 against mn-002 and define "load-bearing" (met-002)
+            altitude: exp
+            status: planned
+            outcome: null
+      - stage: 3
+        name: Typeset
+        steps:
+          - n: 4
+            title: >-
+              Typeset the verified draft into report/main.tex, in the same pull
+              request as the draft revision it came from
+            altitude: impl
+            status: planned
+            outcome: null
+          - n: 5
+            title: Section 8.6, to be written by the first author
+            altitude: impl
+            status: planned
+            outcome: null
+    # THE STANDING OF THIS BLOCK IS UNCHANGED AND WORTH RE-READING: `source: chat`
+    # means nothing here established this plan. Steps 2-5 are read off the draft's
+    # own status block and Appendix A, which is INFERENCE FROM THE DOCUMENT, not
+    # an amendment taken from the maintainer. If the maintainer's plan differs,
+    # this half is wrong and the repository will not contradict it.
     # - stage: <n>
     #   name: <short name>
     #   steps:
@@ -242,11 +331,29 @@ sequence:
 # what stops "what does this repository do" from being answered by reading src/.
 # ------------------------------------------------------------------------------
 runs:
-  summary: null
-  entry_points: []
-  # - call: <the function or command>
-  #   does: <one sentence>
-  #   cost: <wall-clock, honestly, on stated hardware>
+  summary: >-
+    ONE, and it builds a document. There is no library, no test suite and no
+    experiment runner in this repository; `pyproject.toml` and the Python CI gate
+    were deleted at instantiation (fc-001, fc-002). A session asking "what does
+    this repository do" is answered by this block in full.
+  entry_points:
+    - call: make -C report
+      does: >-
+        Compiles report/main.tex to report/main.pdf with latexmk and biber.
+        Builds from a clean checkout with a TeX installation alone.
+      cost: >-
+        NOT MEASURED HERE. The TeX install step in .github/workflows/report.yml
+        carries an inherited figure from the template — 43.7 s, 142 MB, 119
+        packages on a GitHub runner, first run — which is a measurement of the
+        APT INSTALL, not of the compile, and was made against the template's
+        package set rather than this one. Treat it as a prior.
+    - call: the claims-verification pass
+      does: >-
+        Not a command. A person, reading report/draft.md against cloned
+        checkouts, filling report/claims-verified.md. It is the only instrument
+        this repository has and it is not automatable — see od-003 for what
+        happened to the one part of it that was.
+      cost: unmeasured
 
 # ------------------------------------------------------------------------------
 # LAST MEASURED NUMBERS
@@ -258,6 +365,13 @@ runs:
 # docs/inherited-measurements.yaml with status `inherited`, and the new
 # measurement is added as its own entry.
 # ------------------------------------------------------------------------------
+# NOTHING HERE YET, AND ONLY ONE THING WILL EVER BE ELIGIBLE. This repository
+# runs nothing, so it measures nothing — except the tally of its own
+# claims-verification pass, which is produced here and is the one number it will
+# own. Every other figure it handles is `inherited` and stays that way, including
+# a figure re-read at source: re-reading resolves a citation, it does not
+# reproduce a measurement under this repository's conditions, because this
+# repository has none.
 measurements: []
 # - ids: [<measurement ids in docs/inherited-measurements.yaml>]
 #   commit: <the commit that produced them>
@@ -283,7 +397,95 @@ measurements: []
 #   impl   implementation. Local, reversible, no interface moves.
 #   infra  tooling, CI, layout. Reversible, affects no result.
 # ------------------------------------------------------------------------------
-open_decisions: []
+open_decisions:
+
+  - id: od-001
+    altitude: exp
+    status: open
+    title: The claims-verification pass over report/draft.md has not been run.
+    the_question: >-
+      Which of the draft's factual claims about the source project survive being
+      read at source, and at what rate. The draft's own status block declares
+      this open; §8.4 rests the document's claim to be evidence rather than a
+      closed loop on the pass having fired.
+    what_would_decide_it: >-
+      Clone the sources (gap-001), run the pass in report/claims-verified.md,
+      fill its count table. DECLARED IN ADVANCE, per the field's own rule: the
+      tally is recorded whatever it says, and a rate of 0 UNSUPPORTED with a
+      substantial UNDER-QUALIFIED count would REPRODUCE the instance's result
+      rather than contradict it. A pass that returns everything CONFIRMED is the
+      suspicious outcome, not the good one, and would prompt asking whether the
+      claims were selected to be safe.
+    depends_on: [gap-001]
+
+  - id: od-002
+    altitude: exp
+    status: open
+    title: mn-001 and mn-002 give different totals for the same verification pass.
+    the_question: >-
+      Is the instance's pass 22 claims or 18? Both figures are in circulation in
+      this repository, they agree on 3 corrected and 8 under-qualified, and they
+      disagree on the total and the confirmed count.
+    what_would_decide_it: >-
+      Open the instance's claims-verification file at 5f8e39f and count. THE
+      CRITERION IS DECLARED FIRST AND IS met-002: define "load-bearing" before
+      counting, not after seeing which definition reconciles the two. Record the
+      result as a NEW entry; supersede neither.
+    depends_on: [gap-001, met-002]
+
+  - id: od-003
+    altitude: infra
+    status: open
+    title: >-
+      The repeated-claim grep in report/claims-verified.md does not work on this
+      repository's prose.
+    the_question: >-
+      The template ships a mechanical check — extract every numeral, find the
+      repeated ones, read their occurrences side by side — and credits it with
+      the one rule-fires-in-the-wild event in the whole template. It is written
+      against `report/sections/*.tex` and `report/main.tex`. This repository's
+      prose is in `report/draft.md`, which will not be typeset until step 4, so
+      for the entire period the check is most needed IT POINTS AT FILES THAT ARE
+      EMPTY OR ABSENT. Run against draft.md as written it returns section numbers
+      as figures and its `uniq -c -f2` collapses the output to one line.
+    what_would_decide_it: >-
+      Rewrite the command against draft.md and verify it on a known answer:
+      it must surface "thirteen" and the mn-001/mn-002 pair, both of which are
+      known to repeat. A check that cannot find a defect already recorded in the
+      ledger is not yet a check. NOT AUTOMATED INTO CI — see fc-001's scope for
+      why a repetition count has no pass/fail threshold.
+    depends_on: []
+
+  - id: od-004
+    altitude: infra
+    status: open
+    title: Nothing verifies that the two ledgers are parseable YAML.
+    the_question: >-
+      docs/state.yaml and docs/inherited-measurements.yaml are the record, they
+      are hand-edited, and after fc-001 no automated check reads them at all.
+      A syntax error would be silent until someone tried to parse the file, and
+      this repository's whole argument is that a record which cannot be read
+      cannot be checked.
+    what_would_decide_it: >-
+      A ten-line workflow step running a YAML parser over both files. IT IS OPEN
+      RATHER THAN DONE FOR ONE REASON: it needs a YAML parser, PyYAML is not in
+      the standard library, and CLAUDE.md's working agreement says never add a
+      dependency without asking. The ask is this entry. Note that the risk is
+      already demonstrated locally — no YAML parser was available on this machine
+      without creating a throwaway environment.
+    depends_on: []
+
+  - id: od-005
+    altitude: impl
+    status: open
+    title: Section 8.6 of the draft is unwritten.
+    the_question: >-
+      "How did it feel" — recorded because the draft's status block assigns it to
+      the first author, and an unwritten section that is nobody's tracked
+      responsibility is indistinguishable from a section that was cut.
+    what_would_decide_it: The first author writing it, or deciding to cut it and saying so here.
+    depends_on: []
+
 # - id: od-0NN
 #   altitude: fw | exp | impl | infra
 #   status: open
@@ -338,7 +540,206 @@ open_decisions: []
 # information — the same argument that keeps a superseded measurement in
 # docs/inherited-measurements.yaml instead of editing its value.
 # ------------------------------------------------------------------------------
-foreclosures: []
+foreclosures:
+
+  # NOTE ON WHAT KIND OF EVIDENCE THESE REST ON. CLAUDE.md requires that a
+  # decision be recorded AFTER the thing it decides has been tried. These were:
+  # the deletions were made and the tree was read afterwards for what broke.
+  # That is a weaker trial than an experiment and it is named as such in each
+  # `rationale` — the evidence is "the reference dangles" or "the step cannot
+  # pass", both checkable from the tree, not "we measured it".
+
+  - id: fc-001
+    altitude: infra
+    closed: >-
+      The Python CI gate (.github/workflows/ci.yml): a two-interpreter matrix
+      running ruff, ruff format, mypy and pytest.
+    in_favour_of: >-
+      .github/workflows/report.yml alone. CI compiles the document and uploads
+      the PDF and the log; that is the entire automated surface.
+    rationale: >-
+      Every step in the workflow is inapplicable, and the first one FAILS rather
+      than passing vacuously: `pip install -e ".[dev]"` needs pyproject.toml,
+      which is gone (fc-002), so the job cannot start. Downstream, `ruff check
+      src tests` and `mypy` name directories that no longer exist and `pytest`
+      has no suite. The matrix's stated purpose — that 3.12 is the only
+      environment testing `requires-python = ">=3.12"` — is void once nothing
+      declares a Python requirement. A workflow retained here would be red on
+      every push for reasons unrelated to the report, and a check that fails for
+      the wrong reason is one people learn to override; the template argues
+      exactly this in report/figures/README.md against byte-diffing figures.
+    decided_by: The maintainer, on the instantiation specification; executed by Code.
+    scope: >-
+      THIS DOES NOT CLOSE AUTOMATED CHECKING GENERALLY, and two specific things
+      stay open. (1) od-004: a YAML-parse gate over the two ledgers is wanted and
+      is blocked only on the dependency question. (2) The repeated-claim check
+      (od-003) was considered for CI and DELIBERATELY LEFT MANUAL — repetition of
+      a figure is legal, so the check has no pass/fail threshold, only an
+      instruction to read occurrences side by side. Automating it would produce a
+      gate that fires on correct documents. It stops holding the moment any
+      executable code lands in this repository: a figure script would need the
+      lint and type gates back with it, and the .reference/ import guard too.
+    cost_to_reopen: >-
+      Low. Restore ci.yml and pyproject.toml together from `template` at 81a638e
+      and narrow the matrix to whatever the new code needs. They are one
+      decision, not two.
+    decided_in: The instantiation commit.
+
+  - id: fc-002
+    altitude: infra
+    closed: pyproject.toml.
+    in_favour_of: No Python packaging or tool configuration in the repository at all.
+    rationale: >-
+      The file's four jobs are packaging `src/research` (deleted), configuring
+      pytest (no suite), ruff (no code) and mypy (no code). The one condition
+      under which it would have earned its place — a figure generated from data —
+      does not hold and was checked rather than assumed: report/figures/ is
+      empty, no `make_*.py` exists, and every occurrence of the word "figure" in
+      report/draft.md means A NUMERAL, not a graphic. The document has no
+      plots. Keeping the file would have declared a Python project that does not
+      exist, which is the same defect as an untested claim carried forward.
+    decided_by: Code, from the tree; confirmed against the draft's own text.
+    scope: >-
+      Bounded by that check and by nothing else. IT STOPS HOLDING THE MOMENT ONE
+      GENERATED FIGURE IS WANTED — at which point pyproject.toml comes back with
+      the plotting dependency, and report/figures/README.md's rules (draw to
+      6.5in, assert the drawn numbers against this ledger, do not byte-diff the
+      PDF) come back into force. That README is retained for exactly this
+      contingency; see fc-005.
+    cost_to_reopen: Low. Restore from `template` and add the plotting dependency, having asked.
+    decided_in: The instantiation commit.
+
+  - id: fc-003
+    altitude: fw
+    closed: >-
+      src/research/, experiments/exp000_example/, and tests/test_scaffold.py.
+    in_favour_of: A repository containing documents and a build, and nothing executable.
+    rationale: >-
+      No library, no experiment, no measurement apparatus. The example experiment
+      teaches a five-file order that nothing here will follow. THE ONE PART THAT
+      NEEDED A SEPARATE ARGUMENT is tests/test_scaffold.py, which was described in
+      the specification as having one job — the spikes import ban — and in fact
+      had four: package import, the spikes ban, the .reference/ ban, and
+      "every experiment has a preregistration". Three lose their subject with
+      fc-003 and fc-004. THE FOURTH DOES NOT: the .reference/ guard protects a
+      convention this repository actively depends on, since the pinned checkouts
+      are how every claim gets verified. It was deleted anyway, because its
+      precondition is that executable code exists to be scanned, and there is
+      none — the guard would have passed by scanning an empty set, which is the
+      shape of a check that cannot fail. The convention now rests on a comment in
+      .gitignore and on nothing else. That is a real loss and it is recorded
+      here rather than absorbed.
+    decided_by: The maintainer, on the instantiation specification; the fourth-guard analysis by Code.
+    scope: >-
+      Does not close the .reference/ CONVENTION, which is retained and is
+      load-bearing. Stops holding the moment any .py file lands: restore the
+      .reference/ guard first, before the others.
+    cost_to_reopen: >-
+      Low for the guards — restore from `template` at 81a638e and rename PACKAGE.
+      Moderate for src/ and experiments/, but reopening those means this is no
+      longer a document-only repository, which is a different decision.
+    decided_in: The instantiation commit.
+
+  - id: fc-004
+    altitude: fw
+    closed: spikes/, its README, and its enforcement test.
+    in_favour_of: >-
+      No low-ceremony lane. Exploratory prose is a discarded draft section and
+      lives in report/.
+    rationale: >-
+      Two reasons, and the second is the one that decided it. FIRST, the lane has
+      nothing to be low-ceremony about: a spike is where you TRY something, and
+      the trigger is "a question written about twice WITHOUT BEING TESTED". This
+      repository tests nothing. SECOND, and this is the finding: §6 of
+      report/draft.md argues that a project with strong ceremony structurally
+      will not reach for its informal lane, evidenced by the instance shipping
+      spikes/ with rules and enforcement and using it zero times in thirteen
+      experiments. Instantiating the directory here would have produced a second
+      unused spikes/ that looked like a second data point and was really the
+      first one copied — and its emptiness would then have been cited as evidence
+      for the argument it was copied from. Declining to instantiate keeps the
+      instance's n at one.
+    decided_by: Code, from §6 of the draft; ratified by the specification's "almost certainly delete".
+    scope: >-
+      DOES NOT CLOSE THE FINDING, which stands and is preserved in
+      docs/workflow.md. Does not claim spikes/ is a bad idea in general — it
+      claims this repository is not a place where the question can be asked. It
+      stops holding if this repository ever runs anything.
+    cost_to_reopen: Low. Restore the directory and its README from `template`.
+    decided_in: The instantiation commit.
+
+  - id: fc-005
+    altitude: infra
+    closed: >-
+      Deleting docs/state.yaml on the grounds that a document-only project has no
+      experiments to sequence.
+    in_favour_of: Keeping it, with the experiment-shaped machinery filled rather than removed.
+    rationale: >-
+      The ledger's argument never mentioned experiments: it exists so a later
+      session can distinguish "we decided against this" from "nobody thought of
+      it". Editorial decisions have that property. THE EVIDENCE IS THIS FILE'S
+      OWN CONTENT — the instantiation task generated six foreclosures, five open
+      decisions and a stopping rule before any report work began, and every one
+      of fc-001..fc-006 is a deletion that would otherwise be invisible in a
+      tree that simply appears never to have had tests. A ledger that fills
+      during its own instantiation has demonstrated its use rather than asserted
+      it. The stopping rule, which the template calls its hardest-won required
+      field, was also easy to answer here and is now answered.
+    decided_by: Code, from the outcome of attempting the adaptation without one.
+    scope: >-
+      NAMES WHAT DID NOT TRANSFER RATHER THAN CLAIMING A CLEAN FIT.
+      `falsifier_verdicts` and `constraints` are empty and may stay empty: a
+      falsifier is declared before a run, and this repository's one instrument is
+      a reading. The `position.checking` procedure survives but is thinner, since
+      "derive it from the ledger and merged history" has a much smaller ledger to
+      derive from. If those two blocks are still empty when the report ships,
+      that is a finding about the template's generality and belongs in the record.
+    cost_to_reopen: >-
+      Moderate and asymmetric. Deleting it later is cheap; deleting it now would
+      have cost the six entries above, which could not be reconstructed once the
+      reasoning that produced them was gone.
+    decided_in: The instantiation commit.
+
+  - id: fc-006
+    altitude: fw
+    closed: >-
+      Deleting docs/inherited-measurements.yaml on the grounds that a report
+      containing only inherited figures is a category error for a ledger of
+      inherited figures.
+    in_favour_of: >-
+      Keeping it as the SPINE of the repository — the file the verification pass
+      resolves claims into.
+    rationale: >-
+      The premise is right and the conclusion inverts. Every figure in
+      report/draft.md is `inherited` by the file's own definition, which makes
+      this the file's ideal case rather than its edge case: a count in a
+      repository at a pinned SHA is exactly recheckable in a way a physical
+      measurement is not. THREE PIECES OF EVIDENCE, all checkable. (1)
+      report/claims-verified.md is retained, and item 4 of its "what each entry
+      records" cites `docs/inherited-measurements.yaml <id>` as the Source field
+      — deleting the ledger breaks the instrument. (2) Appendix A's closing
+      sentence, "Every claim these notes make about what happened can be checked
+      in the third", is a promise whose mechanism IS the `sources` block with its
+      pinned SHA; without it, "verifiable at source" is an assurance and not a
+      pointer. (3) The decisive one: reading the draft against the template
+      surfaced mn-001 and mn-002, two statements of the same figure that
+      disagree on the denominator, sitting in two files that have coexisted
+      without contradiction because prose cannot contradict prose. That is the
+      file's founding argument, demonstrated on this repository's own documents.
+    decided_by: Code, on the mn-001/mn-002 finding.
+    scope: >-
+      DOES NOT CLAIM THE SCHEMA FITS CLEANLY. `units`, `n`, `conditions` and
+      `provenance.environment` are shaped for physical measurement and read
+      awkwardly for a count of experiments; they are filled honestly rather than
+      deleted, and the file's header says so. Does not claim the ledger is
+      complete: it is seeded with what this task handled, and gap-002 records
+      that no census exists. `status: measured` remains reachable by exactly one
+      future value, this report's own claims tally.
+    cost_to_reopen: >-
+      High, and rising. Every id allocated here is citable from the report, and
+      the ids are permanent by the rule at the top of this file.
+    decided_in: The instantiation commit.
+
 # - id: fc-0NN
 #   altitude: fw | exp | impl | infra
 #   closed: <the option that is now closed>
@@ -357,6 +758,14 @@ foreclosures: []
 
 # ------------------------------------------------------------------------------
 # FALSIFIER VERDICTS
+#
+# EMPTY, AND THE EMPTINESS IS THE ENTRY. See fc-005's scope. A falsifier is
+# declared before a run, and this repository's only instrument is a person
+# reading a document against a checkout — od-001 carries a declared-in-advance
+# expectation, which is the nearest thing available and is deliberately NOT
+# called a falsifier here. If this block is still empty when the report ships,
+# that is a fact about how far the template's loop reaches into document work,
+# and it belongs in the record rather than being quietly tidied away.
 #
 # Every specification carries a falsifier (docs/workflow.md). A verdict that
 # lives only in a pull-request body is not in the tree and a cold session cannot
@@ -382,6 +791,11 @@ falsifier_verdicts: []
 #
 # Measured costs and impossibilities that bind future work regardless of what is
 # decided. Not decisions; consequences.
+#
+# EMPTY. Nothing here has measured a cost. The candidate — what the verification
+# pass costs to run — becomes a constraint the first time it is paid, and
+# recording it is worth doing, since the draft's §5 argues the whole method on a
+# cost/catch ratio and this repository will have a data point for it.
 # ------------------------------------------------------------------------------
 constraints: []
 # - id: cn-0NN

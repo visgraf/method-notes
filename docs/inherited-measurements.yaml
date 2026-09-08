@@ -22,9 +22,29 @@
 # measurement as its own entry and set the old one's `status` to `superseded`,
 # with `superseded_by`. The disagreement is the information.
 #
-# TEMPLATE. Schema and rules, no entries. The `methods` section below ships with
-# one worked example, and that example is the most expensive lesson in this
-# template — read it before writing your first experiment.
+# WHY THIS FILE IS THE SPINE OF A DOCUMENT-ONLY REPOSITORY, AND NOT A CATEGORY
+# ERROR. This repository runs nothing. It holds one report ABOUT another project,
+# which means EVERY figure in report/draft.md is `inherited` by the definition
+# above — measured elsewhere, under conditions this repository has not adopted,
+# a prior rather than a fact about this project. The template's own framing has
+# `inherited` as the awkward minority status carried alongside a project's real
+# measurements. Here it is the default and `measured` is the exception, and the
+# file is closer to its own ideal than it would be in a project with experiments:
+# a count in a repository at a pinned SHA is EXACTLY recheckable, in a way a
+# physical measurement under recreated conditions never is.
+#
+# The one thing this repository will ever measure is the tally of its own
+# claims-verification pass (report/claims-verified.md). That number, and nothing
+# else, may ever carry `status: measured`.
+#
+# WHAT IS AWKWARD ABOUT THE SCHEMA HERE, said plainly rather than worked around:
+# `units`, `n`, `conditions` and `provenance.environment` are shaped for a
+# physical measurement. For "thirteen experiments" the units are "experiments",
+# `n` is meaningless, and `environment` is null and always will be. They are
+# filled honestly below rather than deleted, because the fields that DO carry
+# weight here — `statement`, `value`, `provenance.source`, `status`, `notes` —
+# are the same fields, and forking the schema to tidy four of them would cost
+# more than the noise does.
 # ==============================================================================
 
 schema_version: 1
@@ -51,14 +71,60 @@ record:
 #
 # Note the distinction from `measured_at_sha` on an entry, which is the commit
 # the RUN was made at, as recorded by the source itself.
-sources: []
-# - key: <short name used in `source:` paths>
-#   repo: <host/org/name>
-#   sha: <full 40-character SHA>
-#   role: >-
-#     What it contributes. A source that contributes NO measurements still
-#     belongs here, with its absence recorded as a gap — "we read it and it had
-#     nothing" and "we never read it" are different facts.
+sources:
+
+  - key: instance
+    repo: visgraf/bio-3d-vision
+    sha: 5f8e39f84a235bf53ace5789e739f0d51377344a
+    role: >-
+      THE SUBJECT. Nearly every figure in report/draft.md is a claim about this
+      repository — thirteen experiments, their pre-registrations, runners, raw
+      results, verdicts and findings, two ledgers, a technical report and its
+      claims-verification pass. The draft calls it "the instance". Resolving a
+      figure means opening a file in a checkout of this repository at this SHA.
+    checkout_status: >-
+      NOT CLONED. No file in this repository has been resolved against it yet.
+      See gap-001, which is what makes that absence citable instead of merely
+      being the case.
+
+  - key: template
+    repo: visgraf/math-ai-method
+    sha: null
+    sha_short: 81a638e
+    role: >-
+      What this repository was instantiated FROM, and a subject of §7 of the
+      draft. Claims about what the template ships, and what it fixed relative to
+      the instance, are claims about this source and NOT about `instance`. See
+      the four-repository table in CLAUDE.md's domain invariants; conflating the
+      two is the specific error the template's own front page was caught making.
+    note: >-
+      `sha` IS NULL ON PURPOSE AND THIS ENTRY IS THEREFORE NOT YET COMPLIANT
+      with the rule above it, which requires a full 40-character SHA. The
+      instantiation was recorded to this session as the abbreviated `81a638e`
+      and nothing here can expand it without the repository. Recorded as an
+      abbreviation in its own field rather than written into `sha`, because a
+      7-character prefix in a field that promises 40 is the shape of a citation
+      that looks resolvable and is not. Expand it at the first clone.
+
+  - key: active-stereo
+    repo: visgraf/active-stereo
+    sha: null
+    role: >-
+      Predecessor. A full implementation with verified geometry and a decision
+      record, whose loop never ran. The draft cites it for two things: the
+      failure that motivated the low-ceremony lane, and the constitution clause
+      that was false and talked a reviewer out of verifying.
+    checkout_status: NOT CLONED. Contributes no resolved measurement. See gap-001.
+
+  - key: bioeye
+    repo: visgraf/bioeye
+    sha: null
+    role: >-
+      Predecessor. A thin vertical slice that closed the accumulation loop and
+      not the perception-action loop. Listed with NO measurements attributed to
+      it, which is a fact and not an oversight: "we read it and it had nothing"
+      and "we never read it" are different, and this is the second.
+    checkout_status: NOT CLONED. Contributes no resolved measurement. See gap-001.
 
 schema:
   id: Stable. Never reused, never renumbered. Cite this.
@@ -102,7 +168,83 @@ schema:
 # docs/state.yaml, which governs every id space in the record, and names the
 # assumption that makes sequential allocation safe.
 # ------------------------------------------------------------------------------
-values: []
+# THE PREFIX FOR THIS PROJECT IS `mn-` (method-notes).
+#
+# WHAT IS AND IS NOT HERE. This ledger is SEEDED, not complete. It holds the
+# figures this repository has actually had occasion to handle — which, so far,
+# means the pair below, found while adapting the template and recorded because
+# finding them is what settled the question of whether this file belongs here at
+# all. THE CENSUS OF EVERY FIGURE IN report/draft.md HAS NOT BEEN DONE. It is the
+# claims-verification pass's job, it is od-001, and its absence is gap-002.
+# Do not read a short `values` list as "the draft has few figures".
+values:
+
+  - id: mn-001
+    statement: >-
+      Claims checked in the claims-verification pass over the instance's
+      technical report, as stated by the TEMPLATE.
+    value: {checked: 22, confirmed: 10, corrected: 3, under_qualified: 8, unsupported: 0}
+    units: claims
+    n: null
+    conditions: >-
+      One verification pass, over the first draft of the technical report in
+      `instance`. The five verdicts are those in report/claims-verified.md.
+    provenance:
+      cited_as: >-
+        "22 claims were checked: 10 confirmed, 3 corrected, 8 under-qualified,
+        0 unsupported"
+      source: report/claims-verified.md, in this repository, carried verbatim from `template`
+      experiment: null
+      run_id: null
+      measured_at_sha: null
+      environment: null
+    status: inherited
+    notes: >-
+      TWO THINGS TO CARRY WITH THIS VALUE. First, the four stated verdicts sum to
+      21 and the total is 22; PARTIAL is a fifth verdict in the same table and is
+      not stated, so the sum is reconcilable by assuming exactly one PARTIAL —
+      AND THAT IS AN ASSUMPTION, not something the passage says. Second, it
+      disagrees with mn-002 on the total and on the confirmed count while
+      agreeing exactly on corrected (3) and under-qualified (8). Neither entry is
+      known to be wrong. Do not quote either without resolving them at source.
+
+  - id: mn-002
+    statement: >-
+      Claims checked in the claims-verification pass over the instance's
+      technical report, as stated by the DRAFT of this report.
+    value: {load_bearing: 18, stood_as_written: 7, wrong_on_the_figure: 3, true_only_in_condition: 8}
+    units: claims
+    n: null
+    conditions: >-
+      Same pass as mn-001, restricted by the qualifier "load-bearing", which is
+      met-002 and is nowhere defined.
+    provenance:
+      cited_as: >-
+        "Of eighteen load-bearing claims in the first draft of the project's
+        technical report, seven stood as written." (report/draft.md:870-871);
+        also "corrected eleven of eighteen claims" (report/draft.md:1219)
+      source: report/draft.md, in this repository
+      experiment: null
+      run_id: null
+      measured_at_sha: null
+      environment: null
+    status: inherited
+    notes: >-
+      THIS PAIR IS THE ARGUMENT FOR KEEPING THIS FILE, so it is worth stating
+      exactly. 18 = 7 + 3 + 8 and is internally consistent. Against mn-001 it
+      shares the 3 and the 8 and differs on the total (18 vs 22) and the
+      confirmed count (7 vs 10). THE RECONCILIATION THAT FITS: 22 claims were
+      checked, of which 18 were load-bearing; 10 confirmed overall, 7 confirmed
+      among the load-bearing. It fits every number. NEITHER PASSAGE SAYS IT.
+      That is precisely an UNDER-QUALIFIED defect — a figure true of the subset
+      it came from, carried into a sentence that does not name the subset —
+      occurring in the two documents that ship the remedy, about the pass that
+      invented the category. As prose in two files it could sit there
+      indefinitely, because a paragraph cannot contradict a paragraph. As two
+      entries with two values it is a disagreement a reader trips over.
+      DO NOT "FIX" THIS BY EDITING EITHER SENTENCE. Resolve it at source (od-002)
+      and add the resolution as a new entry.
+
 # - id: <prefix>-001
 #   statement: <one line>
 #   value: <scalar or mapping>
@@ -202,6 +344,65 @@ methods:
       first person to wonder finds the wondering already half done.
     status: examined_at_experiment_twelve
 
+  # --- THIS REPOSITORY'S OWN CARRIED METHODS ----------------------------------
+
+  - id: met-001
+    what: >-
+      The verdict taxonomy that scores every claim in this report:
+      CONFIRMED / CORRECTED / UNDER-QUALIFIED / UNSUPPORTED / PARTIAL, with
+      UNDER-QUALIFIED defined as "true in the band, arm, metric or stimulus it
+      came from, and unsupported as written".
+    kind: carried
+    from: >-
+      `template`, in report/claims-verified.md, which carried it from the
+      instance's own verification pass. It arrived with this repository at
+      instantiation and has never been examined here.
+    re_derived_here: >-
+      NO. Entered BEFORE first use rather than at it — the pass has not run yet.
+      That is STRICTER than the rule this section states and is not required by
+      it; it costs four lines and it is entered now because the whole lesson of
+      met-000 is that the cheap moment to write `kind: carried` is before anyone
+      has a reason to.
+    to_re_derive: >-
+      Nothing to derive; it is a taxonomy, not a quantity. What it needs is a
+      statement of the boundary between UNDER-QUALIFIED and CORRECTED, because
+      that boundary decides the headline number this repository will publish
+      about itself. A claim whose figure is right and whose scope is missing can
+      be scored either way by a reasonable reader, and mn-001's tally is a
+      3-and-8 split across exactly that line.
+    why_it_matters_here: >-
+      It passes the test at the top of this section: if this taxonomy changed,
+      the one number this repository will ever own — its own claims tally —
+      would change. It is therefore a method, and it governs everything.
+    status: carried_unexamined
+
+  - id: met-002
+    what: >-
+      The selection criterion "load-bearing", which decides WHICH claims in a
+      report get counted in the denominator of a verification tally.
+    kind: carried
+    from: >-
+      report/draft.md, which uses it in the sentence that carries the report's
+      central argument ("Of eighteen load-bearing claims ... seven stood as
+      written"). No definition accompanies it anywhere in this repository.
+    re_derived_here: >-
+      NO, AND IT IS ALREADY COSTING SOMETHING. This undefined criterion is the
+      most likely explanation of the mn-001 / mn-002 disagreement: 22 claims
+      checked against 18 "load-bearing" ones. An undefined selector on a
+      denominator is invisible, because a ratio quoted without it still reads as
+      a complete sentence.
+    to_re_derive: >-
+      Write down the rule that separates a load-bearing claim from a checked one,
+      BEFORE recounting anything. A criterion chosen after seeing which one
+      reconciles the two figures is the same defect as an unexamined carried
+      method with a different unit on it. Then apply it and record the count as a
+      new entry, superseding neither mn-001 nor mn-002.
+    what_the_entry_would_have_cost_on_day_one: >-
+      One line: `load-bearing: <the rule>`. The draft's strongest single
+      sentence — the asymmetry that §5 says justifies the whole method — rests on
+      this word.
+    status: carried_unexamined
+
 # ------------------------------------------------------------------------------
 # GAPS
 #
@@ -213,7 +414,45 @@ methods:
 # matter; a gap is closed only by a measurement, or by a foreclosure that says
 # in writing what is being given up.
 # ------------------------------------------------------------------------------
-gaps: []
+gaps:
+
+  - id: gap-001
+    statement: >-
+      No source repository has been cloned or read. Every `sources` entry is
+      marked NOT CLONED, and no figure in report/draft.md has been resolved to a
+      file and a line in the record it claims to come from.
+    why_it_is_load_bearing: >-
+      It bounds every factual claim the report makes. The draft's own status
+      block says its claims about the source project have not been through a
+      verification pass, and Appendix A's closing sentence — "Every claim these
+      notes make about what happened can be checked in the third" — is at present
+      a statement about what is POSSIBLE, not about what has been done. mn-001
+      and mn-002 cannot be reconciled while this gap is open. It is the single
+      gap that stands between this repository and its deliverable.
+    what_would_close_it: >-
+      Clone `visgraf/bio-3d-vision` at 5f8e39f into .reference/, and
+      `visgraf/math-ai-method` at the expanded SHA beside it, then run the pass
+      in report/claims-verified.md. Nothing here needs an instrument; it needs
+      two clones and a reading.
+
+  - id: gap-002
+    statement: >-
+      No census of the figures in report/draft.md has been taken. The number of
+      distinct factual claims in the document is unknown.
+    why_it_is_load_bearing: >-
+      It bounds the completeness of this ledger, and therefore how much a short
+      `values` list means. Two entries here are not evidence that the draft
+      contains two figures; they are evidence that two were handled. It also
+      bounds the repeated-claim check in report/claims-verified.md, which cannot
+      be run over a set nobody has enumerated — and that check is the one the
+      template records as having fired.
+    what_would_close_it: >-
+      The mechanical grep in report/claims-verified.md, run over draft.md, with
+      every hit triaged into a claim or discarded as a section number. NOTE THAT
+      THE SHIPPED COMMAND DOES NOT WORK AS WRITTEN on this document: run against
+      draft.md it returns section numbers ("4.1", "8.6") and its `uniq -f2`
+      field-counting collapses the result to a single line. See od-003.
+
 # - id: gap-001
 #   statement: <what was not measured>
 #   why_it_is_load_bearing: >-

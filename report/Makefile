@@ -1,11 +1,16 @@
 # The one command: `make -C report` (or `make` from inside report/).
 #
 # The document builds with a TeX installation alone. No language runtime is
-# required: report/figures/*.pdf are generated artifacts and are COMMITTED, so a
-# clean checkout compiles without running anything. See figures/README.md for why
-# they are committed and why nothing diffs their bytes.
+# required -- and in this repository none is available: there is no Python
+# package and no pyproject.toml (fc-002). Generated figures would be COMMITTED
+# rather than built here, so that a clean checkout compiles without running
+# anything; there are none today. See figures/README.md.
 #
-# `make figures` regenerates them and needs the project installed (pip install -e .).
+# `make figures` IS INERT TODAY: this document has no figures, and pyproject.toml
+# was deleted with the rest of the Python scaffolding (fc-002). The target is kept
+# because it degrades honestly -- it prints "nothing to regenerate" rather than
+# failing -- and because figures/README.md documents what has to come back before
+# it means anything again. If you restore it, restore pyproject.toml first.
 
 LATEXMK := latexmk
 
@@ -13,6 +18,9 @@ LATEXMK := latexmk
 
 all: main.pdf
 
+# NOTE: sections/ is empty and main.tex \inputs nothing from it yet -- the prose
+# lives in draft.md and is typeset at step 4 (docs/state.yaml). The wildcards
+# below match nothing today and are correct in advance rather than wrong later.
 main.pdf: main.tex $(wildcard sections/*.tex) $(wildcard figures/*.pdf) refs.bib
 	$(LATEXMK) -pdf main.tex
 

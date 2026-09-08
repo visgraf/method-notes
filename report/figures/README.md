@@ -1,50 +1,69 @@
 # report/figures/
 
-Empty. Generated figures land here and are **committed**, so the document builds
-from a clean checkout with a TeX installation alone and no language runtime.
+**Empty, and expected to stay that way.** This document has no graphics: every
+occurrence of the word "figure" in `report/draft.md` means *a numeral*, not a
+plot. That was checked, not assumed, and it is what decided `fc-002` — deleting
+`pyproject.toml`, whose one remaining justification would have been a figure
+generated from data.
 
-## Determinism, and its limit
+The directory is kept because `report/main.tex` sets `\graphicspath{{figures/}}`,
+and this file is kept because the rules below are the ones that come back with
+the first figure. They are not in force today. **Do not read them as describing a
+practice this repository performs.**
 
-**Two runs on one machine should be byte-identical.** Suppress the PDF
-`CreationDate`, pin any hash salt your plotting library uses for element ids, and
-select a non-interactive backend. That much is worth doing: it makes "did this
-figure change?" a question `git status` can answer.
+## If a figure is ever added, these come back with it
 
-**It does not extend across machines, and you must not build a check that
-assumes it does.**
+**Restore `pyproject.toml` first** (from the template at `81a638e`), having asked
+before adding the plotting dependency — `CLAUDE.md`'s working agreement, and the
+scope clause of `fc-002`. Restore the `.reference/` import guard from
+`tests/test_scaffold.py` with it, per `fc-003`: a figure script is the first
+executable code here, and it is the first thing that could read a pinned checkout
+from code instead of by eye.
 
-> *Measured, in the instance this template came from:* regenerating one figure on
-> Linux produced 103,146 bytes against the 110,709 committed from macOS — same
-> trajectory, same producer string, a font-embedding difference. Neither file was
-> wrong.
+**Commit the generated PDF.** That is what lets `.github/workflows/report.yml`
+build with a TeX installation alone and no language runtime, which is the
+property the whole report build currently rests on.
 
-**So a committed PDF is not a checksum.** Do not add a CI gate that diffs a
-committed figure's bytes: it would fail on the runner for a reason that has
-nothing to do with the figure, and a check that fails for the wrong reason is one
-people learn to override.
+**Do not add a CI gate that diffs a committed figure's bytes.** Two runs on one
+machine can be made byte-identical — suppress the PDF `CreationDate`, pin the
+plotting library's hash salt, select a non-interactive backend — and that much is
+worth doing, because it makes "did this figure change?" a question `git status`
+can answer.
+
+> *Inherited, from the template (`sha` unexpanded, see the `template` entry in
+> `docs/inherited-measurements.yaml`):* regenerating one figure on Linux produced
+> 103,146 bytes against the 110,709 committed from macOS — same trajectory, same
+> producer string, a font-embedding difference. Neither file was wrong.
+>
+> **This figure has not been re-measured here and never will be, since there is
+> no figure to regenerate.** It is a prior. If you add a figure and want the
+> determinism claim, measure it yourself and give it an `mn-` id.
+
+Determinism does not survive crossing machines, so a byte-diff gate would fail on
+the runner for a reason that has nothing to do with the figure — and a check that
+fails for the wrong reason is one people learn to override. The same argument
+kept the repeated-claim check manual; see `fc-001`'s scope.
 
 ## The check that travels
 
-**Regenerate and compare the DRAWN QUANTITIES.** Every `make_*.py` in this
-directory should:
-
-1. **print the numbers it drew**, so a reviewer can read them without opening the
-   PDF; and
-2. **assert them against the record** — the measurement ids in
-   `docs/inherited-measurements.yaml`, read as constants at the top of the script
-   with the id in a comment beside each.
-
-The second is the one that matters. A figure is a claim, and a figure whose
-numbers are recomputed at draw time and never checked is a claim that can drift
-away from the ledger it illustrates without anything noticing. The assertions
-are what make a figure fail.
+**Regenerate and compare the drawn quantities.** Every `make_*.py` should print
+the numbers it drew, and **assert them against `docs/inherited-measurements.yaml`
+by id**, read as constants at the top of the script with the id in a comment
+beside each. The second is the one that matters: a figure is a claim, and a
+figure whose numbers are recomputed at draw time and never checked can drift away
+from the ledger it illustrates without anything noticing.
 
 > *Why this is not paranoia:* a figure is regenerated far more often than it is
 > re-read, and it is re-read by people who already believe what it shows.
 
+**Note that this rule is the reason `docs/inherited-measurements.yaml` and a
+figure script are a package.** A figure asserting against ids is the only
+mechanism in the whole template that makes a drawing fail, and it needs the
+ledger that `fc-006` kept.
+
 ## Sizing
 
-Draw to **6.5 in wide**. That is `\textwidth` for `report/main.tex` — `article`
-at letterpaper with 1 in margins — so a figure included at `width=\textwidth` is
+Draw to **6.5 in wide** — `\textwidth` for `report/main.tex` (`article`,
+letterpaper, 1 in margins) — so a figure included at `width=\textwidth` is
 reproduced 1:1 and its type is never rescaled. Set the font size once, in a
 shared style module, rather than per script.

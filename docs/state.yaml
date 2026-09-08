@@ -420,7 +420,8 @@ open_decisions:
 
   - id: od-002
     altitude: exp
-    status: open
+    status: RESOLVED
+    resolved_at: 2026-09-08
     title: mn-001 and mn-002 give different totals for the same verification pass.
     the_question: >-
       Is the instance's pass 22 claims or 18? Both figures are in circulation in
@@ -432,6 +433,41 @@ open_decisions:
       counting, not after seeing which definition reconciles the two. Record the
       result as a NEW entry; supersede neither.
     depends_on: [gap-001, met-002]
+    resolution: >-
+      BOTH ENTRIES ARE CORRECT AND NEITHER IS SUPERSEDED. Read at source in
+      instance:report/claims-verified.md @5f8e39f, the FIRST of two passes
+      (verified there at d62693f) tallies 22 claims — CONFIRMED 10, CORRECTED 3,
+      UNDER-QUALIFIED 8, UNSUPPORTED 0, PARTIAL 1 — and then states, in its own
+      words, "Of the 18 substantive claims, 7 stand as written." The
+      reconciliation is exact and mechanical: claims 19-22 are BIBLIOGRAPHIC
+      CITATION checks under a "## Citations" heading, not claims about the
+      project. 22 minus those 4 is 18. The CONFIRMED list is 2, 4, 5, 8, 9, 17,
+      18, 20, 21, 22; strike the three citations (20, 21, 22) and exactly 7
+      remain. CORRECTED (6, 12, 16) and UNDER-QUALIFIED (1, 3, 7, 10, 11, 13,
+      14, 15) are all substantive, so 7 + 3 + 8 = 18 closes.
+    what_the_defect_actually_was: >-
+      NOT IN EITHER LEDGER ENTRY, AND NOT A CONTRADICTION. mn-001 reports the
+      pass's table; mn-002 reports its substantive subset. The defect was in
+      report/draft.md, whose sentence was accurate about the first pass and read
+      as describing the verification of the report — which ran to TWO passes.
+      Amended in this commit to name the pass and the subset, at both of the two
+      locations mn-002 cites, per the repeated-claim rule in
+      report/claims-verified.md that a corrected figure is fixed at every
+      occurrence in the same change.
+    met_002_now_answerable: >-
+      The source's word is "substantive", not "load-bearing", and it means
+      "about the project rather than about a bibliography". That is a narrower
+      and more checkable selector than the draft's word. See met-002, updated.
+    separate_item_NOT_closed_by_this: >-
+      The specification flagged mn-002's 21-of-22 arithmetic gap as a distinct
+      item and predicted this resolution would not close it. IT IS CLOSED, by
+      the same reading and independently of the denominator question: the
+      template's prose enumerates only four verdicts ("10 confirmed, 3
+      corrected, 8 under-qualified, 0 unsupported") against a stated total of
+      22, and the fifth, PARTIAL = 1, is claim 19 — Bajcsy 1988, whose page
+      range does not resolve across three sources. 10+3+8+0+1 = 22. The
+      template's sentence drops a verdict class rather than miscounting.
+      Recorded as mn-003.
 
   - id: od-003
     altitude: infra
@@ -477,7 +513,8 @@ open_decisions:
 
   - id: od-005
     altitude: impl
-    status: open
+    status: RESOLVED
+    resolved_at: 2026-09-08
     title: Section 8.6 of the draft is unwritten.
     the_question: >-
       "How did it feel" — recorded because the draft's status block assigns it to
@@ -485,6 +522,16 @@ open_decisions:
       responsibility is indistinguishable from a section that was cut.
     what_would_decide_it: The first author writing it, or deciding to cut it and saying so here.
     depends_on: []
+    resolution: >-
+      WRITTEN, AND MORE THAN WAS TRACKED. Section 8.6 "How did it feel" is at
+      report/draft.md:1258, and 8.7 "What I would tell a student starting now"
+      and 8.8 "Is this a good way to spend a career?" follow at :1272 and :1282.
+      All three are the first author's and are first-person. The entry was stale
+      because it tracked only the section that had been named to it; two more
+      arrived with it and nothing in the ledger was watching for them.
+      THE GENERAL POINT, worth more than this entry: an open decision that names
+      ONE artifact cannot notice when the work lands as three. The draft's status
+      block is corrected in this commit.
 
 # - id: od-0NN
 #   altitude: fw | exp | impl | infra

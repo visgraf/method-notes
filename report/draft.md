@@ -15,7 +15,8 @@
 > and §7 ships. Every figure in it is a claim to be checked at source before
 > typesetting, and the count of what survives that pass belongs in the record.
 >
-> Section 8.6 is to be written by the first author.
+> Sections 8.6, 8.7 and 8.8 are the first author's, written in the first person.
+> They make no checkable factual claims and are out of scope for that pass.
 
 ---
 
@@ -867,8 +868,10 @@ it is a real cost borne by whoever adopts the method.
 
 ## The asymmetry that justifies the whole thing
 
-One number carries the argument. Of eighteen load-bearing claims in the first
-draft of the project's technical report, **seven stood as written.**
+One number carries the argument. The **first** of the two verification passes
+over the project's technical report checked twenty-two claims, eighteen of them
+substantive and four bibliographic. Of those eighteen, **seven stood as
+written.**
 
 The other eleven were not fabrications. They were claims made by someone who had
 read the record, believed them, and would have published them. Three were wrong
@@ -1215,8 +1218,8 @@ The honest answer is: **both, in different parts, and the boundary is
 checkable.**
 
 The parts that are evidence are the ones where the method's mechanisms fired
-against this document. The claims pass ran on the technical report and corrected
-eleven of eighteen claims. The repeated-figure check fired on the template's own
+against this document. The first claims pass ran on the technical report and
+moved eleven of its eighteen substantive claims. The repeated-figure check fired on the template's own
 front page. A specification about this work was rejected on a false premise
 about which surface held which file. Those are not testimonials; they are
 recorded events with commits attached, and a reader can go and look.

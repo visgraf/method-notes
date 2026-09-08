@@ -83,13 +83,15 @@ sources:
       claims-verification pass. The draft calls it "the instance". Resolving a
       figure means opening a file in a checkout of this repository at this SHA.
     checkout_status: >-
-      NOT CLONED. No file in this repository has been resolved against it yet.
-      See gap-001, which is what makes that absence citable instead of merely
-      being the case.
+      CLONED 2026-09-08 into .reference/bio-3d-vision at
+      5f8e39f84a235bf53ace5789e739f0d51377344a (verified by rev-parse, not by
+      the clone succeeding). gap-001 is closed. Thirteen experiments confirmed
+      BY ENUMERATION of experiments/: exp001-exp005 and exp007-exp014, no
+      exp006.
 
   - key: template
     repo: visgraf/math-ai-method
-    sha: null
+    sha: 81a638ee3f650050164e09a42f5a0561af6caeef
     sha_short: 81a638e
     role: >-
       What this repository was instantiated FROM, and a subject of §7 of the
@@ -105,6 +107,9 @@ sources:
       abbreviation in its own field rather than written into `sha`, because a
       7-character prefix in a field that promises 40 is the shape of a citation
       that looks resolvable and is not. Expand it at the first clone.
+      EXPANDED 2026-09-08 on the first clone, as instructed. `sha_short` is kept
+      beside it so the abbreviation that circulated in the specification and in
+      README.md still resolves to something.
 
   - key: active-stereo
     repo: visgraf/active-stereo
@@ -114,7 +119,7 @@ sources:
       record, whose loop never ran. The draft cites it for two things: the
       failure that motivated the low-ceremony lane, and the constitution clause
       that was false and talked a reviewer out of verifying.
-    checkout_status: NOT CLONED. Contributes no resolved measurement. See gap-001.
+    checkout_status: CLONED 2026-09-08 (default branch; no SHA pinned). See gap-001.
 
   - key: bioeye
     repo: visgraf/bioeye
@@ -124,7 +129,7 @@ sources:
       not the perception-action loop. Listed with NO measurements attributed to
       it, which is a fact and not an oversight: "we read it and it had nothing"
       and "we never read it" are different, and this is the second.
-    checkout_status: NOT CLONED. Contributes no resolved measurement. See gap-001.
+    checkout_status: CLONED 2026-09-08 (default branch; no SHA pinned). See gap-001.
 
 schema:
   id: Stable. Never reused, never renumbered. Cite this.
@@ -199,14 +204,23 @@ values:
       measured_at_sha: null
       environment: null
     status: inherited
+    status_note: >-
+      RESOLVED AT SOURCE 2026-09-08 (od-002). Both former caveats are answered
+      and are kept below rather than deleted, because the disagreement is what
+      the entry was for.
     notes: >-
-      TWO THINGS TO CARRY WITH THIS VALUE. First, the four stated verdicts sum to
-      21 and the total is 22; PARTIAL is a fifth verdict in the same table and is
-      not stated, so the sum is reconcilable by assuming exactly one PARTIAL —
-      AND THAT IS AN ASSUMPTION, not something the passage says. Second, it
-      disagrees with mn-002 on the total and on the confirmed count while
-      agreeing exactly on corrected (3) and under-qualified (8). Neither entry is
-      known to be wrong. Do not quote either without resolving them at source.
+      TWO THINGS TO CARRY WITH THIS VALUE, BOTH NOW SETTLED. First, the four
+      stated verdicts sum to 21 against a total of 22; the assumption that
+      PARTIAL = 1 closes it WAS CORRECT and is now read at source — see mn-003.
+      Second, it appeared to disagree with mn-002; it does not. mn-001 is the
+      pass's full table, mn-002 its substantive subset, and claims 19-22 are the
+      four bibliographic citations that separate them. Both entries are correct
+      as written and NEITHER IS SUPERSEDED.
+      WHAT THIS ENTRY ACTUALLY CAUGHT, since that is the reusable part: not an
+      error in either number, but a MISSING SELECTOR in the prose that quoted
+      them. The ledger could not have told you which was right — it told you
+      that two things claiming to be the same number were not, which is the only
+      job it has.
 
   - id: mn-002
     statement: >-
@@ -244,6 +258,51 @@ values:
       entries with two values it is a disagreement a reader trips over.
       DO NOT "FIX" THIS BY EDITING EITHER SENTENCE. Resolve it at source (od-002)
       and add the resolution as a new entry.
+      RESOLVED 2026-09-08. The reconciliation above is the one that held, and it
+      was read at source rather than inferred: 22 minus the 4 bibliographic
+      citation checks (claims 19-22) is 18, and striking the 3 confirmed
+      citations from the CONFIRMED list of 10 leaves exactly 7. THE SOURCE'S OWN
+      WORD IS "substantive", NOT "load-bearing" — see met-002. The defect was in
+      report/draft.md's sentence, which was accurate about the FIRST of two
+      passes and read as describing the verification of the report; amended at
+      both cited locations in the same commit. This entry's value is unchanged
+      and correct.
+
+  - id: mn-003
+    statement: >-
+      The verdict class missing from the template's enumeration of the
+      instance's first-pass tally.
+    value: {partial: 1, claim: 19, total_reconciles_to: 22}
+    units: claims
+    n: null
+    conditions: >-
+      First pass only, verified in the source at d62693f. PARTIAL is defined in
+      the same table as "verified except for a named part".
+    provenance:
+      cited_as: >-
+        "**PARTIAL** | **1** | 19 (verified except its page range)" — the fifth
+        row of the first-pass count table.
+      source: >-
+        instance: report/claims-verified.md, count table and section "## Citations"
+        @5f8e39f84a235bf53ace5789e739f0d51377344a
+      experiment: null
+      run_id: null
+      measured_at_sha: d62693f
+      environment: null
+    status: inherited
+    notes: >-
+      CLOSES THE 21-OF-22 ARITHMETIC GAP recorded against mn-001, and does so
+      independently of the denominator question that od-002 settled. The
+      template's prose says "22 claims were checked: 10 confirmed, 3 corrected,
+      8 under-qualified, 0 unsupported" — four classes summing to 21 against a
+      stated total of 22. The source's table has five classes and the fifth is
+      PARTIAL = 1. 10+3+8+0+1 = 22.
+      THE DROPPED CLASS IS NOT INCIDENTAL. Claim 19 is Bajcsy 1988, PARTIAL
+      because its page range does not resolve — three variants appear across
+      otherwise reliable sources and the source's recommendation is to cite by
+      DOI and issue and "Do not pick one of the three". An enumeration that
+      drops PARTIAL drops the one verdict recording that a citation could not be
+      settled, which is precisely the class a reader most needs to see.
 
 # - id: <prefix>-001
 #   statement: <one line>
@@ -401,7 +460,21 @@ methods:
       One line: `load-bearing: <the rule>`. The draft's strongest single
       sentence — the asymmetry that §5 says justifies the whole method — rests on
       this word.
-    status: carried_unexamined
+    examined_2026_09_08: >-
+      EXAMINED AT SOURCE, AND THE WORD IS NOT THE SOURCE'S. The instance's pass
+      says "substantive", and its operative meaning is exact and checkable:
+      a claim about the project, as opposed to a bibliographic citation check.
+      The pass's 22 claims split 18 substantive / 4 citations at a heading
+      boundary ("## Citations"), so the selector is not a judgement call at all —
+      it is a section.
+      "LOAD-BEARING" IS THE DRAFT'S OWN COINAGE AND IT IS WEAKER THAN WHAT IT
+      REPLACED. It reads as "important", which is a judgement, where the source's
+      selector was structural. That substitution is the defect: not a wrong
+      number, a criterion that got vaguer in transit and took a denominator with
+      it. This is the same shape as met-000's carried statistical bar — a
+      criterion nobody had written down being read as something stricter or
+      looser than it was.
+    status: examined_at_the_first_claims_pass
 
 # ------------------------------------------------------------------------------
 # GAPS
@@ -417,6 +490,12 @@ methods:
 gaps:
 
   - id: gap-001
+    status: CLOSED 2026-09-08
+    closed_by: >-
+      All four sources cloned into .reference/ at the pinned SHAs (bio-3d-vision
+      at 5f8e39f, math-ai-method at 81a638e, active-stereo and bioeye at their
+      default branches, unpinned — see the note in `sources`). The
+      claims-verification pass in report/claims-verified.md was run against them.
     statement: >-
       No source repository has been cloned or read. Every `sources` entry is
       marked NOT CLONED, and no figure in report/draft.md has been resolved to a

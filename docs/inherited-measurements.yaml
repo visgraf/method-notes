@@ -631,6 +631,28 @@ gaps:
       commit: docs/workflow.md states that a specification is the only artifact
       of the loop that leaves no trace, and that no specification was ever
       committed in the instance.
+      PRECISION ADDED 2026-09-08, correcting this entry's own overstatement.
+      "No specification was ever COMMITTED" is true — no specification file
+      exists in the instance at 5f8e39f, and no filename matches spec, task,
+      brief, instruction or prompt. "No specification TEXT SURVIVES" would be
+      FALSE, and the difference is worth the lines. Three fragments survive,
+      quoted inside artifacts that were being committed anyway:
+      experiments/exp007_rendered_policy_sweep/preregistration.md:38 quotes it
+      directly — the specification says "six arms, one stimulus";
+      experiments/exp009_epipolar_cost/preregistration.md:19 quotes a clause,
+      "the specification says to compose rectification_rotation into
+      eye_camera_poses", and then argues it is wrong; and
+      experiments/exp007_rendered_policy_sweep/findings.md:46 records a reading
+      "which neither exp005 nor this specification stated".
+      THE PATTERN SHARPENS THE ARGUMENT RATHER THAN WEAKENING IT. Every
+      surviving fragment is text that an artifact was ARGUING WITH.
+      Specification text reaches the record only when a preregistration or a
+      findings file has to disagree with it in order to justify what it did
+      instead — that is, only when the specification was EXECUTED and produced
+      an artifact. A specification rejected before work begins produces no
+      artifact, so nothing is ever in a position to quote it. The survival
+      mechanism is parasitic on the work happening, which is precisely why it
+      cannot preserve a rejection.
       THE ASYMMETRY IS THE FINDING: the workflow records what work PRODUCED and
       has no channel for work it correctly PREVENTED — so the method's own
       strongest evidence is the kind it systematically destroys. state.yaml's

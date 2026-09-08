@@ -547,7 +547,34 @@ open_decisions:
 
   - id: od-004
     altitude: infra
-    status: open
+    status: RESOLVED
+    resolved_at: 2026-09-08
+    resolution: >-
+      CLOSED WITHOUT ADDING A DEPENDENCY, which was the only thing blocking it.
+      A `ledgers` job in .github/workflows/report.yml parses both files with
+      `ruby -ryaml` and fails the build if either does not load or does not come
+      back a mapping.
+      WHY RUBY AND NOT PYTHON, since the obvious choice was Python: YAML is not
+      in Python's standard library, PyYAML is not guaranteed on the runner, and
+      the check would therefore have needed a `pip install` — the ask this entry
+      was waiting on. Ruby ships Psych in its standard library and is
+      preinstalled on ubuntu-latest, so the check costs one command and no
+      install step. `YAML.load` rather than `safe_load_file`, which is Ruby 3.x
+      only; the ledgers contain no anchors or aliases, so the portable form is
+      both safe and version-independent.
+      A SEPARATE JOB RATHER THAN A STEP IN `build`, so a one-character YAML error
+      is not reported from behind a 44-second TeX install, and so it still runs
+      when the document fails to compile.
+      IT WAS WATCHED FAILING BEFORE IT WAS COMMITTED. An unclosed flow sequence
+      appended to each ledger in turn made it exit 1 and name the file, line and
+      column; the command was extracted from the workflow file itself and run,
+      rather than a hand-typed approximation of it. A check nobody has seen fail
+      is a check nobody knows can fail, which is CLAUDE.md's own standard and
+      §4.3's subject.
+      WHAT IT DOES NOT CHECK, so nobody reads it as more coverage than it is: it
+      tests that the files PARSE, not that any id is unique, that a `superseded`
+      entry names its successor, or that a cited id resolves. Those are real and
+      would each need a rule written down first.
     title: Nothing verifies that the two ledgers are parseable YAML.
     the_question: >-
       docs/state.yaml and docs/inherited-measurements.yaml are the record, they

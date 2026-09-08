@@ -5,11 +5,10 @@
 # could not even reach its first step, and a workflow that is red for reasons
 # unrelated to the report is one people learn to override.
 #
-# WHAT THAT COSTS, said here rather than left to be discovered: this is now the
-# whole automated surface. Nothing checks that docs/state.yaml and
-# docs/inherited-measurements.yaml are parseable YAML, and they are the record.
-# See od-004, which is open and blocked only on the question of adding a
-# dependency.
+# TWO JOBS NOW: `ledgers` parses the record, `build` compiles the document.
+# od-004 closed -- the gap that used to be recorded here, that nothing checked
+# whether docs/state.yaml and docs/inherited-measurements.yaml still parse, is
+# closed by the first job below.
 #
 # Triggers do not fire on literally every push, so a branch with an open pull
 # request is not built twice for the same commit. Every change in this repository
@@ -32,6 +31,48 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # The record, checked first because it is cheap and because a ledger that no
+  # longer parses is a worse failure than a document that no longer builds.
+  #
+  # A SEPARATE JOB, NOT A STEP IN `build`: it must not wait behind a 44-second
+  # TeX install to report a one-character YAML error, and it must still run when
+  # the document build fails.
+  #
+  # NO DEPENDENCY, WHICH IS WHY IT IS THIS AND NOT PYTHON. YAML is not in
+  # Python's standard library and PyYAML is not guaranteed on the runner, so the
+  # obvious version of this check would have to `pip install` something -- and
+  # CLAUDE.md's working agreement says never add a dependency without asking.
+  # Ruby ships Psych in its standard library and is preinstalled on
+  # ubuntu-latest, so this costs one `ruby -ryaml` and no install step at all.
+  # `YAML.load` rather than `safe_load_file`, which is Ruby 3.x only: these are
+  # our own files, they contain no anchors or aliases, and the portable form
+  # works on every Psych version.
+  #
+  # IT WAS TESTED BY BREAKING A LEDGER ON PURPOSE before it was committed --
+  # appending an unclosed flow sequence to docs/state.yaml made it exit 1 and
+  # name the file, line and column. A check nobody has watched fail is a check
+  # nobody knows can.
+  ledgers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ledgers parse
+        run: |
+          ruby -ryaml -e '
+            ok = true
+            ["docs/state.yaml", "docs/inherited-measurements.yaml"].each do |f|
+              begin
+                d = YAML.load(File.read(f))
+                raise "top level is #{d.class}, expected a mapping" unless d.is_a?(Hash)
+                puts "ok   #{f} (#{d.keys.size} top-level keys)"
+              rescue => e
+                warn "FAIL #{f}: #{e.message.split("\n").first}"
+                ok = false
+              end
+            end
+            exit(ok ? 0 : 1)'
+
   build:
     runs-on: ubuntu-latest
 

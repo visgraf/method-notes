@@ -18,18 +18,28 @@ types and review catch it. Here the characteristic failure is a **wrong belief**
 by a number that was computed correctly and means something else. No test
 catches that. Every rule below exists to prevent one.
 
-**FILL THIS IN, then delete this instruction.** One paragraph: what is being
-investigated, what the predecessors are if there are any, and — the part that
-does the work — **what failure this repository exists to not repeat.** Naming
-that failure is what makes clause 1 of the definition of done specific rather
-than pious.
+`method-notes` is a **document-only** repository. It holds one technical
+report — *Personal Notes on a Methodology for Research and Development in
+Applied Computational Mathematics* — its markdown draft, and the
+claims-verification pass over that draft. There is no library, no experiment,
+and no measurement apparatus here, and there is not going to be one.
 
-> *Example, from the instance this template came from:*
->
-> `bio-3d-vision` is a research project on active 3D vision — successor to
-> `visgraf/active-stereo` and `visgraf/bioeye`. The predecessors built good
-> components. Neither ever ran the loop those components were for. That is the
-> failure this repository exists to not repeat.
+The report is **about another project**: `visgraf/bio-3d-vision`, and behind it
+`visgraf/active-stereo` and `visgraf/bioeye`. It reports what a methodology cost
+and caught over five days of work in those repositories.
+
+**What failure this repository exists to not repeat.** The source project's own
+technical report went into its first draft with eighteen load-bearing claims and
+came out of verification with seven standing as written. Nothing in it was
+invented — every claim traced to something real in the record. Three were wrong
+on the figure and eight were true only in the band, arm or metric they came
+from. **This report is a document whose entire content is claims about that
+record, written by someone who has read it and believes them.** It is therefore
+exposed to exactly the failure it describes, at a higher rate than the document
+it describes, because it has no experiments of its own to be corrected by. Every
+number in `report/draft.md` is inherited and unverified until read at source.
+That is the failure this repository exists to not repeat, and §8.4 of the draft
+takes the recursion as a subject rather than a disclaimer.
 
 Nothing here is established yet. See `docs/state.yaml` for what actually runs.
 
@@ -76,71 +86,96 @@ it has been tried and settled, it is a **foreclosure**: `docs/state.yaml` under
 > `docs/adr/` and say what they hold that a foreclosure entry does not.
 
 **Every iteration regenerates the same artifact beside the previous one's** —
-same inputs, same seed, written next to its predecessor rather than over it. You
-compare against the last one by looking. An iteration that produces nothing to
-put beside the last is not an iteration.
+same inputs, written next to its predecessor rather than over it. You compare
+against the last one by looking. An iteration that produces nothing to put
+beside the last is not an iteration.
 > *Why:* overwriting is how a regression becomes invisible; a difference nobody
 > can see is a difference nobody reports.
+>
+> *What this means here, where the artifact is prose.* `report/draft.md` is
+> tracked, and it is typeset into `report/main.tex` in the same pull request, so
+> the two revisions sit side by side in the history and the sentence that changed
+> on its way into LaTeX is visible as a change rather than as a fact. A
+> verification pass regenerates the count table in `report/claims-verified.md`
+> beside the previous count, never over it. A second pass that overwrites the
+> first destroys the only evidence of whether the prose got better.
 
-**`spikes/` is where you try things.** Git-tracked, and that is the whole
-ceremony: no decision record, no findings entry, no definition of done, and
-no tests required.
-Nothing in `src/` or `experiments/` may import from it, and CI enforces that. A
-spike's only permitted output is **a decision or a deletion** — write what you
-learned into `docs/state.yaml` and delete it, or delete it. See
-`spikes/README.md`, and note the trigger there: **a question written about twice
-without being tested goes to a spike.**
-> *Why:* in the predecessor a step was written up twice and never started,
-> accumulating five open questions, because writing a document was the only
-> sanctioned response to not knowing; in the instance `spikes/` shipped on day
-> one with its rules and its enforcement test and was never used once.
+**`spikes/` is not part of this repository, and its absence was decided rather
+than defaulted.** The template ships a low-ceremony lane; this repository has no
+lane to be low-ceremony *about*, because it runs nothing. The exploratory work a
+spike would hold is a discarded draft section, and that already has a home in
+`report/`.
+> *Why the absence is recorded instead of silent:* the source instance shipped
+> `spikes/` on day one with its rules and its enforcement test and used it zero
+> times in thirteen experiments, and §6 of the draft argues that a project with
+> strong ceremony structurally will not reach for its informal lane.
+> Instantiating the directory here would have reproduced the exact failure the
+> report identifies, and its emptiness would then have been read as evidence for
+> the argument rather than as a consequence of it. See `fc-004` in
+> `docs/state.yaml`.
 
 ## Domain invariants
 
-**EMPTY ON PURPOSE. FILL IT IN, or delete it and record why.**
+This section holds the facts of this project's subject matter that a plausible
+sentence can violate without anything noticing. **The template's rule for what
+goes here — prefer to declare it at the place the value is produced — has no
+force in this repository, because no value is produced here.** There is no
+function with a docstring to carry a unit. Every number arrives from somewhere
+else already formed, which means this section is the *only* place these can live,
+and the *Where authority lives* section below is inert. That inversion is the
+main structural consequence of being document-only, and it makes this section
+load-bearing rather than supplementary.
 
-This is the section that does not generalise, and it is the section that does the
-most work. It holds the facts of *your* domain that a plausible sentence can
-violate without any test noticing: units, coordinate frames, sign conventions,
-what a positive number means, what the null hypothesis is, which quantities are
-commensurable, what "the same scene" means.
+**Four repositories, and claims about them are not interchangeable.**
 
-**The rule for what goes here:** an invariant belongs in this file only if it
-cannot be declared at the place the value is produced. Prefer the code — see
-*Where authority lives* below, which is not optional and which constrains this
-section.
+| | what it is | what claims about it look like |
+|---|---|---|
+| `visgraf/bioeye` | predecessor; closed the accumulation loop, not the perception–action loop | qualitative, mostly |
+| `visgraf/active-stereo` | predecessor; verified geometry, a decision record, the loop never ran | the low-ceremony-lane failure, the constitution clause that was false |
+| `visgraf/bio-3d-vision` | **the instance.** Thirteen experiments, two ledgers, a report and its verification pass | *every count in the draft* |
+| `visgraf/math-ai-method` | **the template**, which this repository was instantiated from | what it ships, what it fixed |
 
-<!-- YOUR DOMAIN INVARIANTS GO HERE. -->
+**The instance is not the template, and the sentence that conflates them is the
+one to watch.** A count about thirteen experiments is a fact about
+`bio-3d-vision`. A claim about what a rule fixes is a fact about
+`math-ai-method`. They are routinely stated in adjacent sentences, and the
+template's own front page has already been caught attributing an instance count
+wrongly — see `docs/spec-defects.md` §3. When a figure appears, the question is
+always *which repository is this true of*, and the answer belongs in the
+sentence.
 
----
+**Counts are taken from the set, never from the highest identifier.** The
+instance ran experiments `exp001`–`exp005` and `exp007`–`exp014`. That is
+**thirteen**, not fourteen: `exp006` was specified and deliberately not run.
+Any count of experiments, foreclosures, or ledger entries is computed by
+enumerating the things and counting them, and the enumeration goes in the entry
+in `docs/inherited-measurements.yaml` beside the number.
 
-<details>
-<summary><b>A filled example, from the instance this template came from.</b>
-Delete this block once yours is written.</summary>
+**A denominator is part of a figure, not context for it.** Two counts of the
+instance's verification pass are in circulation — *22 claims checked* and
+*eighteen load-bearing claims* — and they agree on 3 corrected and 8
+under-qualified while disagreeing on the total and on the confirmed count. They
+are reconcilable if "load-bearing" names a subset, and **neither passage says
+so.** Do not quote either figure without its denominator and the word that
+selects it. See `mn-001` and `mn-002` in `docs/inherited-measurements.yaml`;
+they are recorded as two entries precisely because prose cannot hold a
+disagreement and two data can.
 
-> **Two stimulus sources, and they are not peers.**
-> - *One rendered source:* Blender. When a result needs an image, it comes from
->   there. Adding a second renderer needs an ADR.
-> - *One analytic fixture:* closed-form, milliseconds, no monocular depth cues.
->   It is a **test fixture, not a scene family** — it exists so tests are fast and
->   exact. The moment a finding rests on it, it has been misused. Do not grow it
->   into a corpus; 42% of the predecessor's library was stimulus infrastructure.
->
-> **Depth is not one quantity.** The loop's estimator returns planar `z` in the
-> rectified frame *at the measuring fixation*, which is fixation-dependent, so
-> fusing it across fixations fuses different quantities. Convert to range from
-> the cyclopean origin before fusing.
+**`report/draft.md` is the prose of record; `report/main.tex` is a derivative.**
+When the two disagree about a number, the draft is not automatically right — but
+the disagreement is always a defect, and it is *the* defect this arrangement
+exists to expose. **The operation that silently produces a wrong number here is
+typesetting**: a qualifier dropped, a digit transposed, or a scope clause that
+did not survive being turned into a sentence is invisible in either document
+alone and obvious between them. Never edit one without diffing the other in the
+same pull request.
 
-**Note the shape of both.** Each names a thing that is easy to state wrongly and
-says which side is right. The second goes further and names **the operation that
-silently produces a wrong number if you get it backwards** — that clause is worth
-more than the rest of the entry, because it is the one that turns an invariant
-into something a reviewer can check a diff against.
-
-**Note also what is *not* in the example:** the units of any particular return
-value. Those are declared at the function that returns them, never here.
-
-</details>
+**Every figure in this report is `inherited` and none will ever be `measured`,
+with one exception.** The exception is the verification pass over this report's
+own claims: its tally is produced here, and it is the only number this
+repository will ever own. Do not let the exception widen — a figure recomputed
+by reading a source is still inherited, because the conditions it was produced
+under are still not this repository's.
 
 ## Definition of done
 
@@ -151,8 +186,17 @@ A task is done when all of these hold:
    > *Why this clause is first:* the predecessor's five conditions were all about
    > artifact quality, so a perfectly-tested component could be added to a loop
    > that had never run — and was.
-2. New behaviour has a test, and the suite passes.
-3. Units, frames and conventions are stated where the code states them (below).
+2. **Every claim it adds to the prose is traceable.** There is no test suite
+   here and clause 2 cannot be about one. Its replacement is the standard the
+   draft is held to: a new factual sentence names which repository it is true
+   of, and any figure in it has an entry in
+   `docs/inherited-measurements.yaml` — written at the same time, not later.
+   > *Why the substitution and not a deletion:* clause 2 existed so that new
+   > behaviour could not arrive unchecked. New prose is the only thing that
+   > arrives here, and the unchecked version of it is this project's entire
+   > failure mode.
+3. Conventions are stated in `## Domain invariants` above, because there is no
+   code to state them at. See the note there.
 4. `docs/state.yaml` is updated if any of it changed.
 5. The diff contains nothing that was not asked for.
 
@@ -161,6 +205,20 @@ it. What it is not is a default: if most tasks in a row are infrastructure, the
 project is not moving and that is worth saying out loud.
 
 ## Where authority lives
+
+**INERT IN THIS REPOSITORY, AND KEPT SO THAT ITS INERTNESS IS DELIBERATE.** The
+rule below is the template's best rule and it needs a function to attach to.
+There is none here. Authority over the facts in this project lives in the
+**pinned reference checkouts** named in `docs/inherited-measurements.yaml`: the
+source, not the sentence. The practical translation is that a number's authority
+is a file and a line in another repository at a stated SHA, and the ledger entry
+is the docstring's stand-in — with the important difference that a docstring sits
+beside the code it describes and can be checked against it in one glance, while a
+ledger entry can drift from its source silently. **That is a real weakening, not
+a clean substitution.** The claims-verification pass is what compensates for it,
+and it is the reason that pass is not optional here.
+
+The original rule, kept because it is what the substitution is measured against:
 
 **Units, frames and conventions are declared at the function that returns the
 value, in its docstring — not here.** This file does not restate them,
@@ -173,19 +231,25 @@ deliberately.
 > a governance file has nothing to fail against. A docstring beside the return
 > statement is checkable against the code under it.
 
-So: this file governs process. Code governs facts about code. When they
-disagree, the code is the finding and this file is the bug.
+So: this file governs process. In the template, code governs facts about code.
+Here, **the pinned sources govern facts about the world, and this file governs
+how a claim about them may be written.** When the prose and a source disagree,
+the source is the finding and the prose is the bug.
 
 ## Working agreement
 
-- **Branch.** `feat/…`, `fix/…`, `exp/…`, `docs/…`, `spike/…`. Never commit to
-  `main`.
+- **Branch.** `docs/…`, `report/…`, `fix/…`. Never commit to `main`. (`exp/…`
+  and `spike/…` are dropped: this repository has neither.)
 - **Never commit or push unless asked.** Never force-push or rewrite history.
   > *Why the asking is explicit:* a specification that names a branch but never
   > asks for a commit leaves the work sitting uncommitted and costs a round
   > trip. See `docs/spec-defects.md`.
-- **Never weaken, skip, or delete a failing test to get green**, and never move a
-  tolerance to make a number pass. A failing test is a result.
+- **Never soften a sentence to make a claim survive verification.** This is the
+  document-only form of *never weaken a failing test to get green*, and it is the
+  one that will actually be tempting here: the cheapest way to clear an
+  UNDER-QUALIFIED verdict is to blur the sentence until nothing can contradict
+  it. A claim that cannot fail is worth less than one that failed. Correct the
+  figure, add the condition, or drop the sentence.
 - **Never add a dependency without asking.**
 - **Say when a number is measured and when it is assumed.** An assumed input
   that goes unnamed is the defect; the assumption itself is not.
@@ -206,9 +270,13 @@ method, with its provenance.
 ## Commands
 
 ```bash
-pytest -q                  # suite
-ruff check src tests       # lint
-ruff format src tests      # format
-mypy src                   # types
 make -C report             # build the report PDF (needs a TeX installation)
 ```
+
+**That is the whole list, and it is one line.** No suite, no linter, no type
+checker — there is no code for them to run against, and `pyproject.toml` was
+deleted rather than kept as an empty promise. The build is the only automated
+check this repository has, and `.github/workflows/report.yml` is the only
+workflow. Everything else that could go wrong here goes wrong in prose, and the
+only instrument for that is `report/claims-verified.md`, run by a person against
+a pinned checkout.

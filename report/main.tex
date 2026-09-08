@@ -15,8 +15,11 @@
 % in the history side by side, so that the sentence which changed on its way into
 % LaTeX is visible as a change rather than as a fact.
 %
-% None ships here, deliberately -- an empty draft.md would be a file teaching
-% nothing. Create it with the first paragraph of real prose.
+% draft.md IS PRESENT AND IS THE PROSE OF RECORD. This .tex file is still the
+% scaffold: typesetting is step 4 in docs/state.yaml and is GATED ON THE
+% CLAIMS-VERIFICATION PASS (od-001) by the stopping rule. Do not typeset ahead of
+% the pass -- the whole value of the split is that claims are corrected while the
+% prose is still cheap to move.
 %
 % This is what made claim verification possible in the instance this template
 % came from. Two things follow from it, and they are the reason it is a practice
@@ -58,16 +61,24 @@
 
 \graphicspath{{figures/}}
 
-\title{TITLE}
+\title{Personal Notes on a Methodology for Research and Development\\
+       in Applied Computational Mathematics}
 
 % AUTHORSHIP IS A CLAIM LIKE ANY OTHER. If an AI collaborator did work that
 % appears here, say what it did and where, rather than leaving the reader to
 % infer it. The instance this template came from named its collaborator on the
 % byline with a footnote pointing at an appendix that described what each surface
 % actually did. Adopt that, or decide otherwise deliberately -- but decide.
+% Taken from report/draft.md, which names the collaborator on the byline with a
+% footnote, and devotes section 8.4 to the recursion rather than disclaiming it.
+% That is the deliberate decision this comment block asks for.
 \author{
-  AUTHOR \\
-  \normalsize AFFILIATION
+  Luiz Velho \\
+  \normalsize IMPA
+  \and
+  Claude \\
+  \normalsize Anthropic \\
+  \normalsize \textit{collaborator; see \S8.4}
 }
 
 \date{\today}

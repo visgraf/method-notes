@@ -1,13 +1,19 @@
-# Python
-__pycache__/
-*.pyc
-.venv/
-venv/
-.pytest_cache/
-.mypy_cache/
-*.egg-info/
-build/
-dist/
+# Reference clones, disposable. Pinned checkouts of the repositories this report
+# makes claims ABOUT are cloned here and read BY PEOPLE. This is the mechanism
+# the claims-verification pass runs against: every figure in report/draft.md is a
+# claim about `visgraf/bio-3d-vision` or its predecessors, and "verifiable at
+# source" means a checkout at the SHA pinned in docs/inherited-measurements.yaml.
+#
+# THE ENFORCEMENT THAT USED TO SIT BESIDE THIS IS GONE, and that is worth saying
+# rather than leaving to be discovered. The template guarded this directory with
+# a test asserting that no code reads from it. This repository has no code, so
+# the guard had nothing to guard and was deleted with the rest of the suite. The
+# convention survives on nobody's authority but this comment. If a figure script
+# ever lands here, restore the guard with it -- see report/figures/README.md.
+.reference/
+
+# LaTeX build artifacts are ignored in report/.gitignore, beside the build that
+# makes them.
 
 # macOS
 .DS_Store
@@ -16,11 +22,12 @@ dist/
 .vscode/
 .idea/
 
-# Reference clones, disposable. Pinned checkouts of the repositories this
-# project reads from are cloned here and read BY PEOPLE, never by code:
-# tests/test_scaffold.py enforces that. They are absent in CI, so any code path
-# that reached into one would pass locally and fail everywhere else.
-.reference/
-
-# Run artifacts
-results/
+# Python. Nothing in this repository is Python -- there is no package, no test
+# suite and no pyproject.toml. These stay because a one-off script written in
+# report/figures/ would otherwise drop caches into the tree, and because the
+# virtualenv left over from the template instantiation is still on disk.
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/

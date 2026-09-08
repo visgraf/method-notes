@@ -1,10 +1,19 @@
-# The report build. SEPARATE from ci.yml on purpose: that workflow is the code
-# gate and runs a two-version matrix, and there is no reason to install a TeX
-# distribution twice or to couple a prose change to the test suite.
+# The report build, and THE ONLY WORKFLOW IN THIS REPOSITORY. The template shipped
+# a second one, ci.yml -- a two-interpreter matrix running ruff, mypy and pytest
+# -- and it was deleted at instantiation (fc-001 in docs/state.yaml): this
+# repository has no library, no test suite and no pyproject.toml, so that job
+# could not even reach its first step, and a workflow that is red for reasons
+# unrelated to the report is one people learn to override.
 #
-# Triggers mirror ci.yml rather than firing on literally every push, so a branch
-# with an open pull request is not built twice for the same commit. Every change
-# in this repository reaches main through a PR, so this covers every change.
+# WHAT THAT COSTS, said here rather than left to be discovered: this is now the
+# whole automated surface. Nothing checks that docs/state.yaml and
+# docs/inherited-measurements.yaml are parseable YAML, and they are the record.
+# See od-004, which is open and blocked only on the question of adding a
+# dependency.
+#
+# Triggers do not fire on literally every push, so a branch with an open pull
+# request is not built twice for the same commit. Every change in this repository
+# reaches main through a PR, so this covers every change.
 #
 # WHY THE REPORT IS COMPILED IN CI AT ALL. The report is where a measurement
 # becomes a claim, and a document that only ever builds on the author's machine
@@ -59,10 +68,10 @@ jobs:
             biber \
             latexmk
 
-      # No language runtime step, and that is the point: report/figures/*.pdf are
-      # committed, so the document compiles from a clean checkout with a TeX
-      # installation alone. See report/figures/README.md for why the figures are
-      # committed rather than regenerated here.
+      # No language runtime step, and that is the point -- doubly so here, where
+      # there is no language runtime to install. Generated figures would be
+      # committed rather than built on the runner; there are none today. See
+      # report/figures/README.md.
       - name: Build
         run: make -C report
 

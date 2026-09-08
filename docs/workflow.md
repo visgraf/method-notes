@@ -65,9 +65,18 @@ full of pre-registered experiments with falsifiers and provenance, a scratch
 directory with no rules and a briefing with no verdict both start to feel like
 things you would have to apologise for. The ceremony is worth keeping. The cost
 of it is that the two cheapest instruments in the toolkit go untouched, so if
-you want them used, **trigger them** — see the spike trigger in
-`spikes/README.md`, and note that it exists precisely because "we added the
+you want them used, **trigger them** — the template's trigger was *a question
+written about twice without being tested goes to a spike*, which fires on an
+observable rather than on a mood, and it exists precisely because "we added the
 directory" turned out not to be enough.
+
+> **This repository has no `spikes/`, and the paragraph above is why it does
+> not.** The finding stands; the directory was not instantiated. Reproducing a
+> lane that the argument above predicts will go unused — in a repository with
+> nothing to be informal about — would have manufactured a second data point
+> that was really the first one copied. Recorded as `fc-004` in
+> `docs/state.yaml`. The Cowork row keeps its obituary unchanged, because that
+> surface is still available and still unused.
 
 ## What a specification is
 

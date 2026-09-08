@@ -1,0 +1,67 @@
+\section{The setting}
+
+\subsection{Three surfaces}
+
+The work is divided across three AI surfaces with different access and different jobs. The division is not about capability --- the same model underlies them --- but about \textbf{what each one can see and what it can change}, which turns out to determine what each is good for.
+
+\textbf{Chat} holds no repository. It derives, argues, designs experiments, reviews results, and writes the specifications the other surface executes. Its distinguishing property is that it can be wrong for free: a claim attacked here costs a paragraph, and the same claim attacked after implementation costs a refactor.
+
+\textbf{Code} lives inside the working tree. It reads and writes files, runs the suite, inspects diffs, drives git, opens pull requests. It builds what Chat specified and reports what it did, what it measured, and what it could not do.
+
+\textbf{Cowork} connects a result to everything else --- cross-experiment synthesis, literature sweeps, briefings, decks. It is the surface for work that spans many files and many sessions without living in any one of them.
+
+One principle makes this a workflow rather than three parallel conversations:
+
+\begin{quote}
+\textbf{Every handoff between surfaces is a versioned artifact in the repository, never chat context.}
+\end{quote}
+
+Context does not survive a session. A repository does. That single rule is what makes the arrangement reproducible, and it has a corollary that took a while to appreciate: \textbf{clearing a session is a test of the methodology.} If clearing feels risky --- if you think \textit{but it knows things that aren't written down} --- that reluctance is a defect report on the artifacts, not a reason to keep the context.
+
+\subsection{The four-station loop}
+
+One task travels a fixed circuit.
+
+\textbf{User} sets the goal and holds the authority. Adjudicates escalations, and is the only station that can change what the project is for.
+
+\textbf{Chat} writes a specification.
+
+\textbf{User relays it, verbatim.} This looks like ceremony and is not. It is the only review a specification gets before work is spent on it, and the cheapest point at which a specification asking for the wrong thing can be stopped. A specification that could go straight from Chat to Code has skipped its only gate.
+
+\textbf{Code} does the work and reports back.
+
+\textbf{Chat verifies in-repo} --- clones the branch, runs what needs running, reads the claimed line --- and returns one of three verdicts: \textit{advance}, \textit{retry}, or \textit{escalate}.
+
+Two properties of that circuit matter more than its shape.
+
+\textbf{Chat never edits the repository, but it does hold the files.} The clone is a separate checkout, outside the working tree, which Chat reads and runs and never commits to. This is the reviewer's seat: it can check everything and change nothing. The predecessor project's constitution had explicitly ruled it out --- \textit{Chat holds excerpts by construction, so "Chat verifies Code's numbers" would rot into a formality} --- and that premise was simply false. The seat existed and the workflow had talked the reviewer out of occupying it.
+
+\textbf{Escalation is expected, not exceptional.} It is how the loop discovers that a specification was mis-aimed, which happens often and should. A stretch of tasks with no escalations means either the specifications are unusually good or the reviewer is not looking hard enough, and the second is more likely.
+
+\subsection{The toolchain, and what each part is for}
+
+Not a tutorial, but the choices carry weight and the reasons are worth stating.
+
+\textbf{GitHub is the autonomy mechanism, not storage.} Pull requests are a gate that cannot be bypassed; branch protection is what makes \textit{never commit to main} structural rather than a request. Continuous integration means a rule about testing is enforced by a machine rather than by memory.
+
+\textbf{The repository is the memory.} Every durable thing --- decisions, measurements, position, the plan and its amendments --- lives in files that a cold session reads on arrival. Nothing load-bearing lives in a conversation.
+
+\textbf{Two ledgers carry what the code cannot.} A decision ledger, recording each foreclosed possibility with the evidence that closed it, its stated limits, and the cost of reopening it. A measurement ledger, recording each figure with the commit that produced it, the environment it was measured in, and its status --- measured here, inherited from earlier work, or a recorded gap. Both are written by the surface that holds the files and read by the surface that does not.
+
+\textbf{Everything is forward-only.} Corrections appear as amendments, never as edits. Where a conclusion was drawn and later qualified, both appear, with the evidence that moved between them. This is not tidiness; \S4.8 argues the pair is more informative than either half.
+
+\subsection{What was not used}
+
+Two components were designed into the method and never exercised. Both need describing before their absence means anything.
+
+\textbf{Cowork} is the surface for work that spans many artifacts and no single session. The concrete jobs: sweeping the literature and reporting where a result sits relative to it; synthesising across experiments that were each designed to answer their own question, looking for the pattern none of them was testing; turning a directory of results into a briefing or a deck; reconciling what a roadmap intended against what actually merged. Where Chat holds an argument and Code holds a working tree, Cowork holds \textbf{the accumulated body of work} --- and it is the only one of the three that can be handed a task and left to run.
+
+In this project every one of those jobs was done by Chat inside the conversation, or by hand, or not at all. The cross-experiment synthesis in particular --- noticing that four separate experiments were saying the same thing at different levels --- happened in a chat window and had to be written down afterwards from recollection, which is precisely the failure the method is built to prevent.
+
+\textbf{\texttt{spikes/}} is a lane inside the repository with different rules from everywhere else. Git-tracked, so a thing tried can be pointed at. No decision record, no findings entry, no definition of done, no tests required. One hard constraint --- nothing in the library or the experiments may import from it, enforced by a test that runs in CI --- and one permitted output: \textbf{a decision or a deletion.} Either it taught you something, which goes into the ledger and the spike is deleted, or it did not, and the spike is deleted. Directories that sit there deciding nothing are the failure mode the lane has.
+
+It exists because of a specific thing that went wrong in the predecessor project. A step was written up twice and never started, accumulating five declared items, four of them open questions, because the constitution had exactly one standard --- plan, decision record, findings, tests, definition of done --- and that standard is right for library code and far too expensive for exploration. When a question is open and the only sanctioned move is to write about it, \textbf{uncertainty turns into documents.} The spike lane was invented so that \textit{try it and look} would be a legal move.
+
+It shipped on day one, with its rules, its enforcement test and its README. It was used zero times.
+
+Both are the informal parts of a formal method, and that they are the two that went unused is the subject of \S6. I do not think it is a coincidence.

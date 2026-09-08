@@ -1,15 +1,25 @@
-% Bibliography. One rule that is not a style preference:
+% Bibliography. EMPTY OF ENTRIES, deliberately -- report/draft.md cites no
+% published work. Checked rather than assumed: no author name, no "et al.", no
+% year-in-parentheses appears anywhere in the draft. The four repositories in
+% Appendix A are named in prose, not cited, and biblatex is commented out in
+% main.tex accordingly.
+%
+% One rule that is not a style preference, kept for when this file is wanted:
 %
 % CITE A REPOSITORY AT A COMMIT, NEVER AT A BRANCH. A citation to `main` is a
 % citation to whatever `main` says on the day it is read, which makes it
 % unverifiable in exactly the way this project's whole record is arranged
-% against. The @software entry below is the shape; delete it once you have a
-% real one.
-
-@software{example-repository,
-  author  = {Author, An},
-  title   = {A repository this report depends on},
-  year    = {2026},
-  url     = {https://github.com/org/name},
-  note    = {Commit \texttt{0000000000000000000000000000000000000000}}
-}
+% against.
+%
+% WHAT BELONGS HERE IF CITATIONS ARE ADDED: four @software entries, one per
+% repository in Appendix A, each at the SHA recorded in
+% docs/inherited-measurements.yaml --
+%
+%   visgraf/bio-3d-vision   5f8e39f84a235bf53ace5789e739f0d51377344a
+%   visgraf/math-ai-method  81a638ee3f650050164e09a42f5a0561af6caeef
+%   visgraf/active-stereo   3f7a263011d9c5c53a4733957ac34cd28c2e85ba
+%   visgraf/bioeye          e90817018e629ce1cd23af0c9e8bc4a6aa15daff
+%
+% They are not written in because the draft does not cite them, and adding a
+% bibliography a document does not reference is the same defect as a check that
+% cannot fail.

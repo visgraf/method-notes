@@ -1,0 +1,181 @@
+\section{How it goes wrong, and how you know when it's going right}
+
+Seven failure modes. Each is a way a research project acquires a wrong belief, each was observed in this project rather than anticipated, and each has a mechanism that either held or did not. The section ends with the harder question: what it looks like when the method is working.
+
+\subsection{Fluent wrong claims}
+
+The characteristic failure, and the one everything else is downstream of.
+
+A language model produces confident, well-formed, internally consistent statements. When it is right, that fluency is the point. When it is wrong, the fluency is the problem: nothing in the surface of the claim distinguishes the two, and the reader's only defence is to check.
+
+\textbf{What it looked like.} The conversational surface asserted false things at a rate of roughly one per day. Not hallucinated citations or invented functions --- those are easy to catch. The failures were subtler and more dangerous:
+
+A background claim that a confidence failure had been \textit{replicated} across two stimulus families, when the record showed the two families disagreeing in sign. The claim was plausible, it was about the project's own prior work, and it was the motivating premise of an entire section.
+
+A statistic described as \textit{frozen} across a run when it drifted by a small amount that mattered.
+
+A foreclosure asserted to be settled by an experiment that had measured something else entirely --- the identifier resolved, the entry existed, and it said a different thing.
+
+A count of experiments taken from the highest identifier rather than from the set, because one had been specified and deliberately not run.
+
+Every one of these is the same shape: \textbf{a claim that would survive any reading and fails only against its source.}
+
+\textbf{The mechanism.} Three parts, and they work together.
+
+\textit{Non-ratification.} The surface that does not hold the files may not settle a numeric question. It states where to check, never what the number is. A specification says \textit{verify before recording}, and a number arriving in a report is a hypothesis with a pointer until someone opens the file.
+
+\textit{Verification at source.} The reviewing surface clones the branch and reads the line. Not the diff, not the excerpt, not the summary --- the line. A reviewer working from excerpts can only check that a report is internally consistent, which is the one thing a wrong report is most likely to be.
+
+\textit{A claims pass on any document making factual assertions.} Before the project's technical report was typeset, every load-bearing claim in it was checked at source and marked confirmed, corrected, under-qualified, or unsupported. Of the eighteen substantive claims in the first pass, seven stood as written.
+
+\textbf{Did it hold?} Yes, and the numbers are the argument. Three claims wrong on the figure, eight true only in the band or arm they came from, none unsupported --- all caught before typesetting. The category that mattered most was not the outright errors but the \textbf{under-qualified} ones: claims right in the condition they were measured under and misleading without it. Those typeset cleanly and read as more general than they are, and there were nearly three times as many of them as of outright mistakes.
+
+\textbf{Where it did not hold.} Verification runs per passage; repetition crosses passages. The same ratio was verified correctly in one section and left without its qualifying condition in another, because a careful reading of each passage structurally cannot notice that a figure appears twice. The fix is mechanical rather than attentional --- grep for repeated figures across the document --- and it was added afterwards, which is to say the failure was found by having it happen.
+
+\subsection{Stale state}
+
+A specification is written from a snapshot and executed later, against a repository that other work has moved. The specification is not wrong when written and not right when run, and nothing in it marks the difference.
+
+\textbf{What it looked like.} Specifications drafted against a commit that had advanced by the time they were sent --- twice, once trivially and once not. The serious instance had a premise about which arms of an experiment re-estimated a parameter, and it was false; the entire question the specification posed depended on it, and the work would have measured something other than what it claimed.
+
+The general form is worth stating because it is not obvious: \textbf{facts do not expire, they just get old.} A statement learned in a conversation stays available with undiminished confidence long after it stops being true, and a long-running thread accumulates true-once assertions at a steady rate while confidence in them stays flat.
+
+\textbf{The mechanism.} Every specification names, explicitly and at the top, the repository state it assumes --- the commit, what is tracked, what does not yet exist, the SHAs of any reference checkout. \textbf{The executing surface's first action is to verify those assumptions and reject the task if any is false.}
+
+An assumption stated is an assumption that can fail loudly. An assumption unstated fails quietly and much later.
+
+\textbf{Did it hold?} Three specifications were rejected on false assumptions, each correctly, each before any work was spent. That is the mechanism working exactly as designed, and it is the clearest case in the project of a rule paying for itself: the rejections cost a round trip each, and the cheapest of them would otherwise have cost an experiment.
+
+It also generalises past its origin. The rule was written for repository state, and what it actually enforces is that \textbf{the surface with the files gets to overrule the surface with the memory} --- which is the same asymmetry as \S4.1's, arriving from a different direction.
+
+\subsection{Work that cannot fail}
+
+The deepest failure mode, and the hardest to see, because everything about it looks like success.
+
+A test whose assertion is satisfied by construction. A criterion no sample size can resolve. An acceptance check written after the code it accepts. In each case the apparatus runs, reports green, and establishes nothing --- and because it reports green, nobody looks.
+
+\textbf{What it looked like.} The clearest instance was a statistical criterion inherited from earlier work: a difference counted as real if it exceeded the seed-to-seed spread. That is a defensible question --- \textit{is this effect larger than the variation between scenes} --- but it is not a test of whether an effect exists, and it has a property nobody noticed for ten experiments: \textbf{the spread is a sample standard deviation, so it does not shrink with more samples.} Adding seeds refines the estimate of the spread and moves the threshold nowhere. No number of seeds could ever resolve anything.
+
+That was discovered only when a specification asked, for a different reason, \textit{how many seeds would settle this?} --- a question that cannot be answered without inspecting the criterion. Ten experiments had reported verdicts against it, and every one of their null results had been read as evidence of absence when the criterion could not have produced anything else.
+
+Smaller instances recur throughout. An acceptance test that would have passed on a scene where the geometry made the quantity identically zero. A calibration render whose three surfaces occluded each other, so a check written for three measured one --- and the render succeeded silently. A falsifier that could only fire at a fixation where the effect it tested was structurally absent.
+
+\textbf{The mechanism.} Pre-registration with a falsifier, and a specific definition of one.
+
+Not a success criterion. A \textbf{falsifier for the specification itself}: a statement of what result would mean this specification asked the wrong question. It names a result, a threshold, and the conclusion that the task --- not the worker --- was mis-aimed. It is reported against whichever way it comes out, including when it does not fire.
+
+The rule that follows: \textbf{a specification with no falsifier cannot fail, and by the method's own standard it does not carry.}
+
+\textbf{Did it hold?} Partly, and the partial failure is instructive. Falsifiers caught a great deal --- including several cases where the second clause fired and an experiment was found to have asked the wrong question. But three times the actual outcome fell outside \textit{every direction the falsifier had enumerated}: an intervention that actively harmed rather than merely failing to help; an effect that shrank rather than staying flat or growing; a result that reframed the question rather than answering it.
+
+The pattern in those misses is consistent. \textbf{The falsifiers were written for the null and the confirmation, and the informative outcome was the reversal.} After the third occurrence the practice changed: enumerate all four directions --- persists, shrinks, grows, reverses --- and report which occurred. That is a small change and it is the single most useful thing the project learned about writing them.
+
+\subsection{Inherited assumptions}
+
+Numbers and methods carried in from earlier work acquire, silently, the authority of things decided here. Nobody decides to promote them. They simply arrive without a marker, get cited, and after a few citations there is no way to tell them apart from what was measured.
+
+\textbf{What it looked like.} This project inherited a great deal from two predecessors: forty-one measurements, a body of geometry, a matcher, a stimulus, and a set of parameter values. The measurements were handled from the second day --- every one marked \texttt{inherited}, meaning \textit{a prior awaiting re-test, not an established fact}, with the repository and commit it came from. That discipline worked. Inherited figures were cited as inherited, and when one was contradicted the contradiction was legible.
+
+The methods were not handled at all, and nothing in the apparatus noticed. A statistical criterion, a set of band thresholds, a search window, an inhibition radius, a foveal width, the parameters of a validity test --- all carried across, all used, none marked. Thirteen carried constants and criteria, ten of them carried in from elsewhere, \textbf{eight never examined by anyone in this project} --- and one of the eight was the criterion in \S4.3 that governed ten experiments before its properties were checked.
+
+The asymmetry is the finding. The same repository that would not let a \textit{number} cross without provenance let a \textit{criterion} cross unmarked --- and the criterion determined how every number was read.
+
+\textbf{The mechanism.} Extend the inherited marker to methods, with the same three fields: what was carried, from where, and whether it has been re-derived here. Then one rule that the project learned the expensive way:
+
+\begin{quote}
+\textbf{A carried method gets its entry at first use, not at first suspicion.}
+\end{quote}
+
+\textbf{Did it hold?} It was not in place when it was needed. Applied to numbers on day one and to methods at experiment twelve, by which point the damage was done and required a re-analysis of every recorded verdict. That re-analysis is the reason the failure is well documented rather than well hidden.
+
+The template that came out of this project ships the methods section pre-populated with the rule and this failure as its worked example. That is the only honest form: a rule presented without the thing that motivated it gets simplified away by the next person to read it.
+
+\subsection{Knowledge that lives only in a conversation}
+
+The methodology's foundational rule is that every handoff is a versioned artifact and never chat context. The failure mode is what happens when something important slips past it --- and the thing about this failure is that \textbf{you cannot detect it from inside the conversation}, because there the knowledge is present and load-bearing and feels like part of the project.
+
+\textbf{What it looked like.} An eighteen-step plan, with stages, altitudes, and two recorded amendments, existed in a chat window and nowhere else. It had shaped every specification for a day --- seven merged pull requests --- before anyone wrote it down. Nobody noticed, because both parties to the conversation could see it.
+
+It was found the moment a session was cleared. The fresh session was asked to record the plan, searched the repository, the git history including commit bodies, and both reference checkouts, found six of eighteen steps inferable from side-references in old prompts and none of the stage groupings, and \textbf{refused to invent the rest.} Its stated reason was that the state file is the one document a cold session trusts without checking, and fabricated content carrying that authority would be the same defect in the place it does most damage.
+
+That refusal was the detector. Nothing else in the project would have caught it.
+
+A second instance in the same shape, smaller and sharper: a decision was taken in conversation and then recorded in the repository as \textit{complete}, citing an experiment identifier that resolved to an entry about something else. The claim entered the durable record wearing a citation that did not support it, and it sat next to a verdict in the same file explicitly saying the opposite.
+
+\textbf{The mechanism.} The repository is the memory, and \textbf{clearing a session is the test of that claim.} If clearing feels risky, the reluctance is a defect report on the artifacts.
+
+There is a subtler corollary the second instance forced. A record that distinguishes \textit{what is established} from \textit{what is intended} has a boundary, and a claim can cross it. The project's state file was eventually split into a \textbf{position} half --- derivable from the ledger, verifiable, cannot be wrong without the ledger being wrong --- and a \textbf{plan} half, marked as intent supplied from outside the repository and not established by it. The failure was a claim that entered through the plan half and was recorded in the position half, \textbf{losing its warning without losing its origin.} Splitting the file created the boundary that made the error invisible.
+
+\textbf{Did it hold?} The rule held; the enforcement arrived late. Both instances were caught, one by a cold session and one by a reviewer reading the file, and both are in the record with their corrections. What the project did not have --- and what the template now ships --- is any check that runs \textit{before} something load-bearing goes unwritten. Clearing the session is a good detector and an expensive one, because by then the work has already been done under the unwritten assumption.
+
+\subsection{The instrument you authored}
+
+This one is not about AI collaboration. It belongs here anyway, for a reason worth stating: \textbf{it was the failure that consumed the most effort, it is invisible to every mechanism described so far, and it is going to be common} --- because AI collaboration makes synthetic experiments dramatically cheaper to build, and cheap instruments get less scrutiny than expensive ones.
+
+\textbf{What it looked like.} The project's synthetic stimulus followed a standard construction: generate a texture, warp it by the ground-truth field to produce the second view. The warp has a defect at depth discontinuities, where adjacent output samples draw from widely separated input regions, and the second image acquires a stretched patch of real texture with no consistent correspondence.
+
+The obvious criticism of such a stimulus is that it lacks the hard cases that real data has. The measured problem was worse and had the opposite sign. The artefact was \textbf{harder than the real thing it stood in for, and it passed the validity test built to catch exactly that class of failure} --- self-consistent enough to be accepted, wrong enough to poison the estimate, and concentrated in precisely the region where the scientific question lived. Rendering the same geometry physically, the synthetic fixture was roughly twenty times worse in the tail. Two fifths of the valid measured pixels, four fifths of the total \textit{squared} error.
+
+Three of thirteen experiments went to establishing this. Conclusions already drawn had to be re-read. And the obvious correction --- restrict the analysis to the clean region --- was itself wrong, because the contaminated band was also the only band where the question was live: excluding it did not isolate clean measurement, it isolated easy measurement.
+
+\textbf{The mechanism.} There isn't a clean one, which is why this subsection is shorter on remedy than the others. What the project arrived at:
+
+\begin{quote}
+\textbf{A stimulus is an instrument, and must be characterised before it is used to measure.}
+\end{quote}
+
+Characterised in the specific sense of an unfamiliar sensor: what are its failure modes, where do they fall, and do they coincide with the regime you care about. The last clause is the load-bearing one, and the expectation should be that \textbf{they do} --- because the regime you care about is usually the hardest thing to synthesise, and therefore where the synthesis cuts its corners.
+
+\textbf{Did it hold?} It was learned rather than applied, at a cost of roughly a quarter of the project's experiments. That said, the cost bought a durable result: the fixture's operating range is now measured, and every experiment afterwards was sized against it.
+
+The generalisation is uncomfortable and I think correct. \textbf{In simulation-based science the instrument is authored by the same hand as the hypothesis.} Real data can be difficult, biased, or insufficient; it is not written by someone who wants a particular answer. That is not an argument against synthetic stimuli, which offer dense ground truth no capture provides. It is an argument that they deserve the scrutiny given to an unfamiliar instrument, and that the scrutiny should be budgeted in advance rather than discovered.
+
+\subsection{Momentum}
+
+The last failure mode is the only one with no artifact to point at, because it consists of not looking.
+
+\textbf{What it looks like.} A method that is working stops being questioned, and it stops being questioned \textit{precisely because it is working.} Each clean iteration lowers the felt need for the next one to be examined. Verdicts land, falsifiers report, the ledger grows, and somewhere in the middle of that the frame within which all of it is being measured stops being a question anybody asks.
+
+This project had two clear instances. The statistical criterion of \S4.3 went ten experiments without examination during the stretch where results were arriving cleanly --- the criterion was not questioned \textit{because nothing was going wrong}. And a positive result, one experiment old and underpowered in its most important band, created immediate pressure to build on it rather than to consolidate; the consolidation, when it eventually happened, found the criterion defect that changed how every null in the project read.
+
+\textbf{The mechanism.} A devil's advocate pass: argue the case against the whole approach, not against its details. Not the specification's falsifier, which asks whether a task was well-posed, but one level up --- \textit{what result would mean this stage should not continue.}
+
+Two triggers, either party may call it. A stage boundary, where the next commitment is largest and least paid for. And \textbf{a run of clean iterations}, which is the counterintuitive one and the one that matters: a run of failures gets scrutiny for free.
+
+Two properties keep it from decaying. It must be \textbf{occasional} --- a per-iteration requirement would generate a devil's advocate pass on a routine commit, the pass would be pro forma, and a check that always fires is a check nobody reads, which is \S4.3's failure in a new costume. And it must \textbf{not be announced in advance}: a pass labelled as an exercise argues knowing it is an exercise, which is a weaker thing. The best instance in this project came from a provocation I could not distinguish from a position --- and being unable to tell is what made it work.
+
+\textbf{Did it hold?} It was agreed in conversation and never written into the workflow, which by the method's own standard means it did not exist. It ran twice anyway, informally, and both times produced something. That is the least satisfying verdict in this section: a mechanism that worked when used and was never made structural, left depending on someone having a good instinct on a given afternoon.
+
+\subsection{The signatures of good work}
+
+Everything so far has been failure, and there is a reason for that: \textbf{failure is easy to write about because it hurts.} A wrong claim announces itself once you check it. A stale premise gets rejected. A criterion that cannot resolve anything can be shown, arithmetically, to be unable to.
+
+Recognising the method \textit{working} is a genuinely harder problem, and it is the more important one. A good result and a lucky one look identical from outside. A project can produce clean verdicts for a month on a broken criterion --- this one did --- and every artifact along the way looks like evidence of health.
+
+So the two sides of the coin are not symmetric. \textbf{Failure is detected; success has to be recognised.} The first has mechanisms; the second has only signatures --- and if you cannot read them, you cannot tell a working method from a comfortable one.
+
+Here is the transition, and it is the thing I would most want a reader to take from these notes.
+
+\begin{quote}
+\textbf{Every signature of the method working is an event that felt, at the time, like something going wrong.}
+\end{quote}
+
+A result nobody wanted. A falsifier that fired in a direction nobody enumerated. A collaborator refusing to proceed. A correction to a claim already published internally. Each of those arrives as friction --- as a delay, an inconvenience, a thing that has to be gone back over. And each of them is the system doing the only job it exists to do.
+
+That inversion is not a nice framing; it is the practical content of the whole method. If your instinct treats those moments as costs, you will optimise them away, and what remains will be a fast, fluent, unfalsifiable practice that feels excellent. \textbf{The discipline is learning to feel the friction as the product.}
+
+Five signatures, each observed here.
+
+\textbf{A result nobody wanted.} The strongest indicator and the least comfortable. Foveal weighting --- the biologically motivated mechanism at the centre of the framework --- lost on every seed. The one positive result decomposed to show the system's value was that it \textit{saw more}, not that it \textit{estimated better}. The statistical criterion turned out not to test what everyone had read it as testing. None of these was hoped for. \textbf{A method that only ever confirms is not a method}, and the surest sign of one is a project whose results all point the way its author was already facing.
+
+\textbf{An outcome outside every direction the falsifier enumerated.} Three times: an intervention that harmed rather than merely failing; an effect that shrank rather than growing; a result that reframed the question. Each omission recorded beside the result. A falsifier that always fires in one of its stated directions is probably not testing anything --- it is checking that reality is one of the two shapes you imagined, and reality is under no obligation.
+
+\textbf{A control invented that nobody asked for.} A specification asked whether a geometric operation was accurate. The test that came back also asserted that \textit{not} performing it must be ten times worse --- because a number is only a result when the alternative is measured beside it. That pattern then recurred three more times, unprompted. \textbf{A collaborator adding the control you forgot is the clearest evidence that a standard has been internalised rather than complied with}, and it is the difference between a rule that is followed and a rule that is understood.
+
+\textbf{Someone stopping rather than inferring.} A cold session refused to write down a plan it could not find, and said why: fabricated content in the one file a cold session trusts would be the same defect in the place it does most damage. Another declined to commit because permission had not been given, at the cost of a round trip. Both were mildly inconvenient. Both were the constitution working on exactly the case where inferring would have been easier --- which is the only case where a constitution is worth anything.
+
+\textbf{A correction that makes the claim narrower and more interesting.} A background section asserted that a confidence failure had been replicated across stimulus families; the record showed the families disagreeing in sign. The corrected claim was narrower, and it was a \textit{better} motivation than replication would have been, because a failure that appears on real imagery and not on synthetic dots poses a sharper question than one that appears everywhere. \textbf{When a correction improves the argument, the record is doing what it exists for.}
+
+\textbf{How to cherish it: keep the wrong version beside the right one.} Not as ritual honesty --- because the pair carries information neither half does. That a verification pass recommended a figure read off a rounded table, and a second pass corrected it from the underlying rows, is a finding \textit{about verification}: the escalation from summary to source is what made the difference, and it is reusable. Erase the first version and you keep a correct number and lose the lesson.
+
+This is why the record is forward-only. Corrections are amendments, never edits. The history of a claim being wrong and then right is more valuable than the claim.

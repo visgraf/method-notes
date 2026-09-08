@@ -1,0 +1,33 @@
+\section{What this is, and what it is not}
+
+\subsection{Not a tutorial}
+
+The major labs have documented their platforms thoroughly, and the open-source community has covered the patterns for building software with AI assistance more thoroughly still. A fourth account of how to prompt, how to structure a session, how to wire a tool into an editor, would be noise. Nothing in these notes attempts it.
+
+The volume of that material is itself intimidating, particularly for researchers whose background is not computer engineering, in a field moving fast enough that specialists struggle to keep up. But the problem is not really volume, and a document whose contribution is \textit{translation for scientists} would be solving the wrong thing.
+
+\subsection{What is actually missing}
+
+Almost all of that material is about \textbf{building software}. Research is a different activity, with a different characteristic failure, and the practices that make AI collaboration safe for the first are insufficient for the second.
+
+In software, the failure is a \textbf{bug}. The artifact does the wrong thing. It crashes, or returns the wrong value, or corrupts a file --- and an entire apparatus exists to catch exactly that: tests, types, continuous integration, code review, staged rollout. The failure announces itself, and the discipline is built around making it announce itself sooner.
+
+In research, the failure is a \textbf{wrong belief}. A claim that is well-formed, plausible, internally consistent, and supported by a number that was computed correctly and means something else. It does not crash. It passes every test, because it is not a defect in an artifact --- it is a defect in what someone concluded from one. It propagates into the next experiment as a premise, into the next decision as evidence, and into the paper as a result.
+
+No test catches that. Type checking does not catch it, code review does not catch it, and a green CI badge is entirely compatible with it.
+
+This distinction is the whole subject of these notes. When a collaborator can produce fluent, confident, wrong claims faster than you can check them, \textbf{epistemic hygiene stops being a virtue and becomes the binding constraint on the practice.} Everything that follows --- pre-registered falsifiers, refusing to ratify a number without reading it at source, marking every carried figure as a prior rather than a fact, a ledger of what was ruled out and why --- exists to prevent a wrong belief. None of it appears in a guide about building software with AI, because none of those guides is trying to prevent one.
+
+\subsection{The register}
+
+These are personal notes. One researcher, one field, one project, five days of intensive work, and a methodology that has been run exactly once. Everything here is a case study, and the sample size is one.
+
+That should be said before anything else, because the temptation in this genre is to write as though a practice that worked for you is a practice. What is offered is narrower and, I hope, more useful: an account specific enough to be checked, with the failures left in. The project it came from is public. Every claim in these notes about what happened there can be verified against a record that was kept for exactly that reason.
+
+Where the method failed, it says so --- and it failed in ways that turned out to be more useful than its successes. That claim is the argument of these notes rather than an apology at the end of them.
+
+\subsection{A note on scope}
+
+The title says \textit{Applied Computational Mathematics} because that is where I work. Nothing in the method depends on it.
+
+What it requires is a repository, an experiment that can be pre-registered, and a claim that can be checked at its source. That is most of empirical computational science, and probably a good deal beyond it. The narrower title is honesty about the sample rather than a claim about the boundary.

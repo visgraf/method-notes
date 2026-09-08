@@ -621,8 +621,22 @@ gaps:
   - id: gap-004
     statement: >-
       The method has no channel for a specification that was correctly rejected
-      before work was spent. Six claims in the pass are UNSUPPORTED and four of
-      them are unrecordable BY CONSTRUCTION, not merely unrecorded.
+      before work was spent. Six claims in the pass are UNSUPPORTED and most of
+      them are unrecordable rather than merely unrecorded.
+      TWO COUNTS ARE IN CIRCULATION AND BOTH ARE RIGHT, which is the mn-001 /
+      mn-002 situation again and is recorded the same way rather than resolved
+      by picking one. FOUR are unrecordable BY CONSTRUCTION — the workflow
+      guarantees no artifact: claims 17 and 20 live in specifications, which are
+      never committed; 12 is a rate over conversational turns; 25 is a cleared
+      session's search. FIVE "describe an event the workflow guarantees will
+      leave no trace", which is the selector §6's subsection uses, and it admits
+      claim 45 as well: the afternoons a foreclosure cost were events, and
+      nothing in the method logs duration.
+      THE ODD ONE OUT UNDER EITHER SELECTOR IS CLAIM 38 — "about a third of the
+      original was domain-specific". It is not an event at all; it is a
+      proportion of a document that still exists, so it is unsupported but
+      MEASURABLE, and it is the only one of the six a successor could close by
+      going and looking.
     why_it_is_load_bearing: >-
       It bounds §4.2 and §5 of the draft, which rest on "three specifications
       were rejected on false assumptions" (claim 17) and call the rejections

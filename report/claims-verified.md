@@ -241,8 +241,21 @@ pattern is a property of first-order reports rather than of prose in general.
 **Six claims are UNSUPPORTED — not contradicted, unestablishable.** The
 specification predicted what this would mean: §4.5's failure occurring in the
 document that describes it. It is that, and it is sharper than that, because
-**the unsupported claims are not scattered. Every one of them is about an event
+**the unsupported claims are not scattered. Five of the six are about an event
 the workflow guarantees will leave no artifact.**
+
+> **Two counts, both right, recorded rather than reconciled away.** *Four* are
+> unrecordable **by construction** — the workflow guarantees no artifact
+> (claims 17 and 20 live in specifications, which are never committed; 12 is a
+> rate over conversational turns; 25 is a cleared session's search). *Five*
+> "describe an event the workflow guarantees will leave no trace", the selector
+> §6's *The method destroys its own best evidence* uses, which also admits claim
+> 45: the afternoons a foreclosure cost were events, and nothing logs duration.
+> **Claim 38 is the odd one out under either selector** — not an event at all,
+> but a proportion of a document that still exists, so it is unsupported and
+> *measurable*, and the only one of the six a successor could close by looking.
+> This is `mn-001`/`mn-002` again: two numbers, two selectors, neither wrong.
+> See `gap-004`.
 
 | claim | what it asserts | why no record exists |
 |---|---|---|
@@ -546,6 +559,51 @@ does not yet reach, the rejections. Recorded as `od-006`.
 
 ### 47. "Nine thousand lines of ledger, written by one collaborator, read by one human, in five days"
 **CONFIRMED** on the count (claim 32); "five days" carries claim 1's qualifier.
+
+---
+
+# Addendum — §6, *The method destroys its own best evidence*
+
+**Added after the first pass and checked before it was inserted**, because new
+prose making factual claims is what this document exists to catch. Verified at
+the same pinned SHAs. Five checkable claims, all CONFIRMED — so the tally in
+`mn-004` is unchanged and these are numbered separately as A1–A5.
+
+### A1. "§4.2 describes three specifications rejected on false assumptions about repository state… and calls this *the clearest case in the project of a rule paying for itself*"
+**CONFIRMED.** `report/draft.md` §4.2: "Three specifications were rejected on
+false assumptions, each correctly, each before any work was spent… it is the
+clearest case in the project of a rule paying for itself." Quoted accurately.
+
+### A2. "That claim came back from the verification pass **unsupported**"
+**CONFIRMED.** Claim 17 of this document, UNSUPPORTED.
+
+### A3. "It is the only artifact in the loop that is never committed."
+**CONFIRMED, and this is the claim the specification flagged as the stop
+condition.** Re-checked at `instance` @`5f8e39f`: no committed file is a
+specification, and no tracked filename matches *spec*, *task*, *brief*,
+*instruction*, *relay* or *prompt* — zero hits.
+- **Note what this sentence does NOT say.** An earlier draft of this section was
+  reported to assert that *no specification text survives anywhere*, which is
+  **false**: three fragments survive, quoted inside artifacts that were being
+  committed anyway (`exp007/preregistration.md:38`, `exp009/preregistration.md:19`,
+  `exp007/findings.md:46`). The supplied text says "never committed", which is
+  the true and weaker claim. **The distinction is load-bearing and the section
+  gets it right.**
+
+### A4. "One rejection survives in the record, and only incidentally: it reshaped a decision that was taken anyway… That fragment is not even a stale-state rejection"
+**CONFIRMED on all three parts.** `instance: docs/state.yaml` — the `fc-012`
+entry reads "THAT VERSION WAS REJECTED BECAUSE IT MAKES AZIMUTH AND VERGENCE
+INERT, and the rejection is the reason this entry exists in the form it does."
+`fc-012` was taken (rectifying in the camera), so the decision stands. And the
+rejection was on a geometry defect, not on a false assumption about repository
+state — so it is not of §4.2's class.
+
+### A5. "Five of the six unsupported claims in this document have that shape."
+**CONFIRMED under the selector the sentence states** — "describes an event the
+workflow guarantees will leave no trace" admits 12, 17, 20, 25 and 45, and
+excludes 38, which is a proportion of a document rather than an event. See the
+two-count note under falsifier 3: a stricter selector gives four, and both are
+recorded rather than reconciled away.
 
 ---
 

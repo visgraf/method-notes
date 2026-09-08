@@ -26,6 +26,10 @@
 > `gap-004` and `od-006`. Read §4.2's rejection count and §4.5's cold-session
 > search as recollection, not record.
 >
+> §6's *The method destroys its own best evidence* was written after that pass
+> and its five checkable claims were verified before insertion — all confirmed,
+> recorded as A1–A5.
+>
 > Sections 8.6, 8.7 and 8.8 are the first author's, written in the first person.
 > They make no checkable factual claims and are out of scope for that pass.
 
@@ -944,6 +948,64 @@ never chat context — that means it did not exist. A mechanism designed to catc
 the failure of a method going unquestioned was itself never subjected to the
 method. If the sessions had been cleared, it would have vanished without trace,
 and nobody would have known to miss it.
+
+## The method destroys its own best evidence
+
+The three failures above are ordinary: rules that arrived after the thing they
+were built for. This one is different in kind, because it cannot be fixed
+retroactively at all.
+
+§4.2 describes three specifications rejected on false assumptions about
+repository state, each caught before any work was spent, and calls this *the
+clearest case in the project of a rule paying for itself.* That claim came back
+from the verification pass **unsupported** — not contradicted, but not
+establishable from any record.
+
+The reason is structural. A specification is written on one surface, relayed by
+a human, and executed on another. **It is the only artifact in the loop that is
+never committed.** The work it produces lands in a branch; the specification
+itself lives in a chat window and a paste buffer. So a specification that was
+*executed* leaves a commit behind, and a specification that was *rejected*
+leaves nothing at all — no branch, no diff, no entry, because the whole point of
+the rejection is that no work was done.
+
+Five of the six unsupported claims in this document have that shape. Each
+describes an event the workflow guarantees will leave no trace. One rejection
+survives in the record, and only incidentally: it reshaped a decision that was
+taken anyway, so the decision's entry carries a fragment of it. That fragment is
+not even a stale-state rejection, which is the class §4.2's claim was about.
+
+The finding is worse than a gap in the record.
+
+> **The method logs what work produced and has no channel for work it correctly
+> prevented.** Its most valuable events are the ones where a rule stopped
+> something before it existed — and those are precisely the events that leave
+> nothing behind.
+
+This inverts a claim made twice elsewhere in these notes. §5 argues that the
+costs and the catches are the same list read twice, and that a wrong belief
+costs everything downstream of it. Both are true. But the catches that produce
+an artifact are the ones where something *was* built and then corrected, and the
+catches that produce nothing are the ones where the rule worked earliest and
+cheapest. **The record is therefore biased toward the expensive saves and blind
+to the cheap ones** — which means it systematically understates the value of the
+mechanisms that fire first.
+
+And there is no repairing this project's record. The three rejections happened;
+the specifications that were rejected are gone; nothing can be reconstructed
+that would not be reconstruction. This is the only failure in these notes with
+no remedy available to the project that suffered it.
+
+For a successor the fix is trivial and should have been obvious: **commit the
+specification alongside the branch it produces, and commit a rejected one too,
+with the assumption that was false.** A rejected specification is a small file
+recording that a rule fired, what it caught, and what it cost — which is exactly
+the evidence this section is unable to supply.
+
+That it was not obvious is worth sitting with. The method's foundational rule is
+that every handoff is a versioned artifact and never chat context. The
+specification **is the handoff.** It is the one thing the rule was most clearly
+about, and it was the one thing the rule was never applied to.
 
 ## And now the one that matters
 

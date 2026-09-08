@@ -10,10 +10,16 @@
 ---
 
 > **Draft status.** This document was drafted on the conversational surface and
-> assembled by hand. Its factual claims about the source project have **not**
-> been through a claims-verification pass — which is the practice §4.1 describes
-> and §7 ships. Every figure in it is a claim to be checked at source before
-> typesetting, and the count of what survives that pass belongs in the record.
+> assembled by hand. Its factual claims about the source project have now been
+> through **one** claims-verification pass — the practice §4.1 describes and §7
+> ships — covering §§1–8.5, resolved against pinned checkouts of the
+> repositories it makes claims about.
+>
+> **42 claims: 22 confirmed, 5 corrected, 8 under-qualified, 6 unsupported, 1
+> partial** (`mn-004`). **The corrections have not been applied to this prose.**
+> Every verdict, with its source and a proposed replacement sentence, is in
+> `report/claims-verified.md`; the sentences stand as drafted until the first
+> author decides on each. Do not typeset before that.
 >
 > Sections 8.6, 8.7 and 8.8 are the first author's, written in the first person.
 > They make no checkable factual claims and are out of scope for that pass.

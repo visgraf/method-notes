@@ -1,10 +1,16 @@
-# Claim verification — NOT YET RUN
+# Claim verification — FIRST PASS, RUN 2026-09-08
 
-**This pass is open (`od-001`) and blocked on `gap-001`.** No claim in
-`report/draft.md` has been resolved to a source. The tables below are empty
-because nothing has been checked, not because everything passed.
+**Verified at `9b58d1a`** against checkouts cloned into `.reference/`:
+`instance` = `visgraf/bio-3d-vision` @ `5f8e39f`, `template` =
+`visgraf/math-ai-method` @ `81a638e`, plus `active-stereo` and `bioeye` at their
+default branches (unpinned — recorded as a limit, see *What this pass did not
+do*).
 
-**Verified at `<commit>`** against **cloned checkouts in `.reference/`, at the
+**Scope: §§1–8.5.** Sections 8.6–8.8 are the first author's, first-person, and
+make no checkable factual claims; they are out of scope and were not read for
+claims. `gap-001` and `od-001` are closed by this pass.
+
+**Superseded header, kept for the record —** *"Verified at `<commit>`"* against **cloned checkouts in `.reference/`, at the
 SHAs pinned in `docs/inherited-measurements.yaml`** — principally
 `visgraf/bio-3d-vision` at `5f8e39f`, and `visgraf/math-ai-method` for claims
 about the template — plus `docs/state.yaml` and
@@ -186,63 +192,443 @@ documents that define the category.
 
 ## The count
 
-**Empty because the pass has not run.** When it does, this table is the one
-number this repository will ever own — `status: measured` in
-`docs/inherited-measurements.yaml` is reachable by this value and by nothing
-else. Record it beside the previous count rather than over it if the pass is
-ever run twice.
-
-Fill this in. It is a measurement about the drafting process and it is the reason
-the pass is worth its cost — a tally that is 0 UNSUPPORTED and 8
-UNDER-QUALIFIED says something specific and actionable about how the prose is
-going wrong, which "we checked it" does not.
-
 | verdict | n | claims |
 |---|---|---|
-| **CONFIRMED** |  |  |
-| **CORRECTED** |  |  |
-| **UNDER-QUALIFIED** |  |  |
-| **UNSUPPORTED** |  |  |
-| **PARTIAL** |  |  |
-| total |  |  |
+| **CONFIRMED** | **22** | 2, 3, 4, 6, 7, 8, 9, 10, 15, 18, 19, 23, 28, 32, 33, 36, 39, 40, 42, 43, 44, 47 |
+| **CORRECTED** | **5** | 22, 24, 26, 29, 41 |
+| **UNDER-QUALIFIED** | **8** | 1, 5, 11, 14, 21, 27, 31, 46 |
+| **UNSUPPORTED** | **6** | 12, 17, 20, 25, 38, 45 |
+| **PARTIAL** | **1** | 13 |
+| total | **42** | |
 
-**The recurring defect, in one sentence:** _____
+**The recurring defect, in one sentence:** *a figure lifted correctly from the
+record and re-attached to the wrong noun* — iterations read as days, gaps closed
+read as gaps open, a criterion experiment counted as a stimulus experiment.
+
+**This is not the defect the source pass found, and the difference is
+structural.** The instance's own first pass reported scope-and-metric as its
+recurring failure: a correct number quoted without the band it came from. That
+is a *first-order* defect — the defect of a report standing next to its own
+measurements. This document is second-order: it restates figures that were
+already condensed once, and its characteristic error is therefore
+**transcription**, not scope. Three of the five corrections are the same shape —
+the source says "twice in seven iterations" and the draft says "for a week"
+(claim 24); the record shows numbers marked from day one and the draft says day
+two (claim 22); a commit says "close four cold-start gaps" and the draft says
+"four remain open" (claim 41). In each case the number survived and the noun
+attached to it did not.
+
+### On falsifier 2 — it fires, and neither offered explanation is the right one
+
+The specification said: *if UNDER-QUALIFIED does not substantially outnumber
+CORRECTED, either this draft is unusually well-scoped or the category is being
+applied too loosely.* The ratio here is **8 : 5 = 1.6 : 1**, against the
+instance's **8 : 3 = 2.7 : 1**. It does not substantially outnumber, so the
+falsifier fires.
+
+**I do not think either branch is the explanation, and I think the category was
+applied correctly.** UNDER-QUALIFIED is not depressed — 8 is the same absolute
+count the source pass found. **CORRECTED is elevated**, from 3 to 5, and the
+reason is the second-order structure above: a document that quotes a report
+inherits a class of error a report cannot make, because a report is written
+beside its measurements and this one is written from a reading of them. If that
+is right, the prediction is testable and worth recording: **a third-order
+document would show more corrections still**, and the UNDER-QUALIFIED-dominates
+pattern is a property of first-order reports rather than of prose in general.
+
+### On falsifier 3 — it fires hardest, and the pattern is not random
+
+**Six claims are UNSUPPORTED — not contradicted, unestablishable.** The
+specification predicted what this would mean: §4.5's failure occurring in the
+document that describes it. It is that, and it is sharper than that, because
+**the unsupported claims are not scattered. Every one of them is about an event
+the workflow guarantees will leave no artifact.**
+
+| claim | what it asserts | why no record exists |
+|---|---|---|
+| 12 | false claims "at a rate of roughly one per day" | a rate over conversations; nothing counts them |
+| 17 | "three specifications were rejected on false assumptions" | **specifications are never committed** — `docs/workflow.md` says so explicitly: the loop's central artifact is "the only one that leaves no trace in the repository" |
+| 20 | "three times" an outcome fell outside every enumerated falsifier direction | the misses are in specifications, not verdicts |
+| 25 | a cold session "found six of eighteen steps inferable… and refused to invent the rest" | the search happened in a cleared session |
+| 38 | "about a third of the original was domain-specific" | no measurement of the original's composition |
+| 45 | "most of these thirteen cost an afternoon each" | no per-decision time record |
+
+**A rejected specification is the strongest evidence the method has and the only
+kind it systematically destroys.** Claim 17 is the sharpest case: §4.2 calls the
+rejections "the clearest case in the project of a rule paying for itself", and a
+rejection that stops work before it starts produces no branch, no commit and no
+verdict. The one rejection that *is* in the record survived only because it
+changed the shape of a foreclosure that was taken anyway (`fc-012`), and it was
+not a stale-state rejection at all.
+
+**This is a finding about the method, not only about the draft.** The workflow
+records what work *produced*; it has no channel for work that was correctly
+prevented. `docs/state.yaml`'s `falsifier_verdicts` block exists to keep the
+falsifier after the specification evaporates — the same argument extends, and
+does not yet reach, the rejections. Recorded as `od-006`.
 
 ---
 
-## <Section name>
+## §1 Register
 
-### 1. "<the sentence, quoted from the report>"
+### 1. "One researcher, one field, one project, five days of intensive work"
+**UNDER-QUALIFIED — five *working* days spanning eight calendar days.**
+- The instance's commits fall on five distinct dates: 2026-08-29, 08-30, 08-31, 09-01 and **09-05**. First commit 08-29 09:56, last 09-05.
+- Source: `git log` over `instance` @5f8e39f.
+- "Five days of intensive work" (§1) is right. **"Thirteen experiments over five days" (§3:304) and "Thirteen experiments in five days" (§8.1:1138) read as elapsed time and the elapsed time is eight days**, with a four-day gap before the last.
+- The figure recurs at :72, :304, :810, :1115, :1138, :1257 and is consistent in every one — it is the *noun* that varies, not the number.
 
-**VERDICT.** <The correct figure, if it moved.>
+**Proposed:** "five working days" wherever the sentence is about elapsed time.
 
-- Comparison: <what against what, on which metric>
-- Arms / conditions: <...>
-- `n`, budget, stimulus: <...>
-- Source: `docs/inherited-measurements.yaml` <id>; `<source key>: <path> @<sha>`
+---
 
-<Any caveat the source attaches, quoted.>
+## §2 The setting
 
-**Proposed:** "<the replacement sentence>"
+### 2. The predecessor's constitution ruled out in-repo verification — *"Chat holds excerpts by construction, so 'Chat verifies Code's numbers' would rot into a formality"*
+**CONFIRMED, verbatim, including the attribution.**
+- Source: `active-stereo: CLAUDE.md:141` (§5, "The handoff contract"). Quoted word for word.
+- The draft attributes it to "the predecessor project's constitution". Correct. **This is the attribution the template itself had to fix once** — `template` commit `2b6d482` records correcting it from bio-3d-vision to active-stereo — and the draft has it right.
 
-<!-- Repeat per claim, grouped by report section. -->
+### 3. Cowork was used zero times
+**CONFIRMED.** `template: docs/workflow.md` surfaces table — "**no. Not once in five days.**" No artifact in `instance` is attributable to it.
+
+### 4. `spikes/` shipped on the first day with rules, README and a CI-enforced constraint, and was used zero times in thirteen experiments
+**CONFIRMED, on all four parts.**
+- Shipped `2026-08-29 11:45` (`9fb4ef8`), the project's first day.
+- `instance: tests/test_scaffold.py:54` — `test_governed_trees_do_not_import_spikes`.
+- **`git log --diff-filter=A -- spikes/` returns exactly one path ever added: `spikes/README.md`.** No spike was ever created.
+
+### 5. In the predecessor "a step was written up twice and never started, accumulating five open questions"
+**UNDER-QUALIFIED — written up twice and never started is exact; four of the five are open questions.**
+- Step 6 has a lab-notebook preamble (`active-stereo: docs/lab-notebook/2026-08-25-step-6-preamble.md`) and a block in `docs/plans/fixation-migration.md:214` — **two write-ups**.
+- Never started: the only step-6 commits are `2e0a148` (the preamble) and its merge `3f7a263`, **which is the repository's HEAD**. The predecessor's last act was writing up a step it never began.
+- The block is headed "*Declared open questions*" and carries five lettered items **a–e**. Item **b** states: "**The static-path guard is not an open question.** … it has a specified fix and must not be reopened as a choice."
+
+**Proposed:** "accumulating five declared items, four of them open questions".
+
+---
+
+## §3 The project
+
+### 6. "Thirteen experiments"
+**CONFIRMED by enumeration**, not by highest identifier: `exp001`–`exp005` and `exp007`–`exp014` in `instance: experiments/`. No `exp006`; `am-004` records it as specified and deliberately not run.
+
+### 7. "each pre-registered before its runner existed"
+**CONFIRMED** on the three spot-checked (exp001, exp010, exp013): `preregistration.md` is added in an earlier commit than `run.py` in every case (exp001 13:58 vs 14:50; exp010 15:08 vs 15:22; exp013 19:43 vs 20:01).
+
+### 8. "Roughly four thousand lines of library code against a slightly larger volume of tests"
+**CONFIRMED, and unusually precisely.** `src/` = **4,363** lines; `tests/` = **4,416**. Tests exceed library by 1.2% — "slightly larger" is exact.
+
+### 9. "Thirteen foreclosed decisions"
+**CONFIRMED.** `instance: docs/state.yaml` `foreclosures` — 13 entries.
+
+### 10. "Eighty-seven measurements taken in the project and forty-one inherited"
+**CONFIRMED.** `instance: docs/inherited-measurements.yaml` `measurements` — 139 entries: **87 `measured`, 41 `inherited`, 11 `gap`.**
+- *Caveat the source attaches and the sentence drops:* the ledger's third status. Eleven recorded gaps are measurements deliberately **not** made, and the ledger argues their absence is as citable as a number. A reader totalling 87 + 41 = 128 will not find the other 11.
+
+### 11. "Four of the thirteen experiments turned out to be about the instrument rather than the framework"
+**UNDER-QUALIFIED — the source's phrase is "the instrument *or the criterion*", and the second half is the half that matters.**
+- The four are exp004, exp005, exp008 and **exp012**. exp012 is the re-analysis of `met-001`, the inherited statistical bar — **a criterion, not an instrument**.
+- Source: `instance: report/claims-verified.md` claim 29, which marks exactly this compression **CORRECTED** in the instance's own second pass: "*Three about the stimulus, one about the criterion.*" `instance: report/draft.md:315` states it correctly.
+- The draft's "instrument" is closer than the Abstract's "stimulus" that the source corrected, and still drops the criterion.
+
+**Proposed:** "about the instrument or the criterion rather than the framework".
+
+---
+
+## §4.1 Fluent wrong claims
+
+### 12. "The conversational surface asserted false things at a rate of roughly one per day"
+**UNSUPPORTED.** Four instances are named and three trace to the record (claim 13). **Nothing counts assertions, and no denominator exists**: the rate is over conversational turns, which are not retained. Four named instances over five working days is *consistent with* the claim and does not establish it.
+
+### 13. The four named false claims
+**PARTIAL — three of four trace to the record; the fourth does not.**
+- *"a confidence failure replicated across two stimulus families, when the record showed the two families disagreeing in sign"* — **CONFIRMED**. `instance: report/claims-verified.md` claim 16, CORRECTED, and its own summary says claim 16 "**inverts the finding**".
+- *"a foreclosure asserted to be settled by an experiment that had measured something else entirely"* — **CONFIRMED**. `template: docs/workflow.md` records it: a completed step read "Decide the plant", the id resolved, and the foreclosure decided the disparity search window; "none of its eleven fields mentioned a plant".
+- *"a count of experiments taken from the highest identifier rather than from the set"* — **CONFIRMED**. `template: docs/spec-defects.md` §3, and `template` commit `931f6d3`.
+- *"a statistic described as frozen across a run when it drifted by a small amount that mattered"* — **not located.** No entry in either ledger, and no commit body, matches. Not marked unsupported on its own because the other three establish the pattern; recorded so it is not read as verified.
+
+### 14. "Of eighteen claims in the first draft, seven stood as written." (§4.1:391)
+**UNDER-QUALIFIED — and this is the third location of a figure corrected in two others.**
+- The figures are right (see `mn-001`, `mn-002`, and `od-002`'s resolution): 22 claims checked, 18 substantive, 7 of the 18 stood.
+- **This sentence names neither the pass nor the subset**, and the instance ran **two** passes. It says "eighteen claims", not "eighteen substantive claims", and "the first draft" rather than the first pass.
+- **The same figure was amended at :870 and :1219 in commit `9b58d1a` and NOT here**, because the specification limited prose edits to od-002's sentence. That leaves the document internally inconsistent, which the repeated-claim rule in this file exists to prevent. **It is the single most important item for the maintainer.**
+
+**Proposed:** "Of the eighteen substantive claims in the first pass, seven stood as written."
+
+### 15. "Nearly three times as many under-qualified as outright mistakes"
+**CONFIRMED.** 8 UNDER-QUALIFIED against 3 CORRECTED in the instance's first pass = 2.67 : 1. "Nearly three times" rounds in the direction that stays true.
+
+---
+
+## §4.2 Stale state
+
+### 16. *(merged into claim 17)*
+
+### 17. "Three specifications were rejected on false assumptions/premises" — §4.2:433 and §5:806; and "specifications drafted against a commit that had advanced — twice" §4.2:412
+**UNSUPPORTED, and structurally so. This is the pass's most important finding.**
+- **One** rejection is in the record: `instance: docs/state.yaml` records at two points that the `fc-012` rectification specification "WAS REJECTED BECAUSE IT MAKES AZIMUTH AND VERGENCE INERT". Both mentions are the same event.
+- **That rejection was not on a false assumption about repository state.** It was rejected on a geometry defect — composed alone, rectification makes azimuth and vergence inert and a closed loop would re-render an identical image after every saccade. It is §4.3's failure mode, not §4.2's.
+- **No record of the other two can exist.** `docs/workflow.md`: a specification is "the only [artifact] that leaves no trace in the repository… In the instance this template came from, no specification was ever committed." A specification rejected *before any work was spent* produces no branch and no commit by construction.
+- The `fc-012` rejection survived only because it changed the shape of a foreclosure that was taken anyway.
+
+**This is a gap in the method, not only in the draft.** See `od-006`.
+
+---
+
+## §4.3 Work that cannot fail
+
+### 18. "A property nobody noticed for ten experiments" / "governed ten experiments"
+**CONFIRMED, and the ten are enumerable.** `instance` `met-001.re_derived_here`: "Used unexamined in exp001, exp002, exp003, exp004, exp005, exp007, exp008, exp009, exp010 and exp011 — every comparison this repository has ever scored." Exactly ten. Recurs at :460, :524, :662, :819, :826, :904, :1089, :1169 and is consistent throughout.
+
+### 19. "The spread is a sample standard deviation, so it does not shrink with more samples… No number of seeds could ever resolve anything"
+**CONFIRMED.** `met-001`: "exp011 was the first iteration to notice it is a SAMPLE STANDARD DEVIATION and not a standard error, and exp012 is the first to measure what that costs: **45 of 96 nulls (46.9%)** read differently under the other bar (bio-074)."
+
+### 20. "Three times the actual outcome fell outside every direction the falsifier had enumerated"
+**UNSUPPORTED.** The remedy is confirmed — the four-direction enumeration with "**(d) REVERSES DIRECTION**" appears in `exp007/preregistration.md:116` and `exp011/preregistration.md:119`, so the practice demonstrably changed. **The count of three is not recorded anywhere**: the misses are properties of specifications, which are not committed. Same structural cause as claim 17.
+
+---
+
+## §4.4 Inherited assumptions
+
+### 21. "Thirteen carried methods, eight of which had never been examined"
+**UNDER-QUALIFIED — both numbers are right and the word joining them is not.**
+- The `methods` section holds **13 entries**, of which **10** are `kind: carried`; 2 are `choice` and 1 is `measurement`.
+- **Exactly 8** carry `status: never_examined` — and `template` commit `f135d43`'s subject says so independently: "*exp012: one foreclosure moved, and **eight constants were never examined***".
+- **One of the eight (`met-002`) is `kind: choice`** — a value this project chose deliberately and said why — so it is not a carried method. The set of thirteen is "methods", not "carried methods".
+
+**Proposed:** "Thirteen carried constants and criteria, ten of them carried in from elsewhere, eight never examined by anyone in this project."
+
+### 22. "Applied to numbers on day two and to methods at experiment twelve" (§4.4:534, repeated §6:899)
+**CORRECTED. Numbers were marked on day ONE, not day two.**
+- `instance: docs/inherited-measurements.yaml` was created at **2026-08-29 11:45** (`9fb4ef8`), one hour forty-nine minutes after the repository's initial stub (09:56) — **and it already contained 42 entries carrying `status: inherited`.**
+- The methods half is confirmed: `methods:` first appears at `f135d43`, **2026-08-31 17:45**, in the exp012 commit. `met-001.status` = `examined_at_exp012`.
+- **The error runs against the draft's own interest.** The asymmetry it is describing is *worse* than stated — one day versus experiment twelve, not two days — so the correction strengthens the finding. The same "day two" appears in `template: CLAUDE.md`, so it is inherited rather than invented here.
+
+**Proposed:** "Applied to numbers on day one and to methods at experiment twelve."
+
+---
+
+## §4.5 Knowledge that lives only in a conversation
+
+### 23. "An eighteen-step plan, with stages, altitudes, and two recorded amendments, existed in a chat window and nowhere else"
+**CONFIRMED on every element, at the moment of the event.** At `19d2723`, the commit that first wrote the plan into the repository: **18 steps** across **5 stages**, altitude tags present (`fw`, `geom`, `infra`), and **exactly two amendments** — `am-001`, `am-002`. The commit message says so: "Eighteen steps in five stages, with altitude tags, statuses, and the two amendments taken so far."
+- *Note for any future quotation:* the ledger now carries **nine** amendments at `5f8e39f`. The claim is correct **because it is scoped to the moment**, and would be wrong as a statement about the file today.
+
+### 24. "It had shaped every specification for a week"
+**CORRECTED. For one day — nine and a half hours, and seven merged pull requests.**
+- The repository's first commit is `e3a17cf`, **2026-08-29 09:56**. The plan was recorded at `19d2723`, **2026-08-29 19:34 — the same day.**
+- Pull requests #1–#7 were merged in between, so the plan governed **seven iterations**, not seven days.
+- **The likely origin of the error is in the record itself**: `sequence.plan.amended` reads "**twice in seven iterations**", and `19d2723`'s own message repeats "eighteen steps amended twice in seven iterations". *Iterations became days.* That is claim 31's error in a different unit and this pass's recurring defect in its purest form.
+
+**Proposed:** "It had shaped every specification for a day — seven merged pull requests — before anyone wrote it down."
+
+### 25. The cold session "searched the repository, the git history including commit bodies, and both reference checkouts, found six of eighteen steps inferable from side-references in old prompts and none of the stage groupings, and refused to invent the rest"
+**UNSUPPORTED.**
+- No occurrence of "six", "inferable", "side-reference" or any equivalent appears in `instance`'s tree or in any commit body.
+- The nearest recorded figure points the other way: at `19d2723` the **position** half lists **eight** completed steps with evidence (1–4, 7–10) plus two deferred — but that is derived from the foreclosure ledger, which is a different operation from reconstructing the plan.
+- **The refusal is the load-bearing part of the anecdote and there is no artifact for it.** §4.5's own thesis is that knowledge living only in a conversation cannot be detected from inside it; its central example is knowledge that lived only in a conversation.
+
+---
+
+## §4.6 The instrument you authored
+
+### 26. "The synthetic fixture was an order of magnitude worse in the tail"
+**CORRECTED → 22.7× at p90.**
+| AT band | fixture | render | ratio |
+|---|---|---|---|
+| median | 0.02050 | 0.01248 | 1.64× |
+| **p90** | **1.49626** | **0.06580** | **22.7×** |
+- Source: `instance: experiments/exp004_scene_model_check/findings.md`, falsifier 2; 8 seeds, policy A′, 18 fixations, AT = within 10 px of a depth discontinuity.
+- **The draft is already better than the sentence the source corrected.** The instance's claim 12 was CORRECTED for saying "roughly an order of magnitude" *unscoped*; the draft adds "**in the tail**", which is the p90 scope the source demanded. What remains is the figure: 22.7× is more than twice "an order of magnitude".
+- *Caveat the source attaches:* "the 48× that appears in `docs/state.yaml` is `diff / bar`, a distinguishability multiple, and **must not be read as an error ratio**."
+
+**Proposed:** "roughly twenty times worse in the tail".
+
+### 27. "Two fifths of the measured pixels, four fifths of the total error"
+**UNDER-QUALIFIED — the denominator was carried across correctly and the word "squared" was not.**
+- Measured: AT pixels are **38.23%** of the **53,098 valid measured pixels** and carry **82.27% of total squared error**. Source: `instance: experiments/exp005_stratified_reanalysis/preregistration.md:35` — measured **before** the run.
+- The instance's claim 13 was UNDER-QUALIFIED on **two** grounds: the denominator was "the image" (wrong — over the image AT is 26.4%), and the error is **squared**. **The draft fixes the first and drops the second.** Half a correction travelled.
+- *Do not conflate with `bio-007`*, a different statement about the same fixture: the worst 5% of valid pixels carry 80.9% of squared error. Two different pixel sets, both landing near four fifths.
+
+**Proposed:** "two fifths of the valid measured pixels, four fifths of the total *squared* error".
+
+### 28. "It passed the validity test built to catch exactly that class of failure"
+**CONFIRMED — and more precisely worded than the sentence the source corrected.**
+- The instance's claim 14 was UNDER-QUALIFIED for saying "passes left–right consistency", because LR is one of two conjuncts in `valid = (distinct > 0.10) & agree` (`src/bio3dvision/matching.py:102-104`) and was never isolated.
+- The draft says "the validity test", which is the conjunction — the source's own proposed repair. Measured: **78.5%** of AT pixels marked valid, **21.7%** of those wrong by more than 2 px.
+
+### 29. "Four of thirteen experiments went to establishing this" (:620) and "roughly a third of the project's experiments" (:638)
+**CORRECTED → three.**
+- "This" is the fixture artefact. Per `instance: report/claims-verified.md` claim 29, the four are exp004, exp005, exp008 and exp012, and **exp012 is the criterion re-analysis, not a stimulus experiment**: "Three about the stimulus, one about the criterion."
+- **This is the sharper form of claim 11.** In §3 the sentence says "about the instrument", which merely drops a disjunct; here the four are attributed *to the fixture finding specifically*, which is the error the source corrected.
+- Consequently "roughly a third" (4/13 = 31%) becomes **3/13 = 23%**, closer to a quarter.
+
+**Proposed:** "Three of thirteen experiments went to establishing this… at a cost of roughly a quarter of the project's experiments."
+
+---
+
+## §5 What it cost, and what it caught
+
+### 31. "Two of thirteen iterations produced no new science"
+**UNDER-QUALIFIED — the units do not match.**
+- The two are the claims-verification pass and the re-scoring. **The re-scoring is exp012, one of the thirteen experiments; the claims pass is not an experiment at all**, so the numerator mixes an experiment with a non-experiment while the denominator counts experiments.
+- The project's own unit of iteration is the merged pull request: **30** of them at `5f8e39f`. On that denominator the ratio is 2 of 30.
+- "Thirteen" carries three different referents across the draft — experiments (:329, :620, :941), foreclosures (:307, :1187) and iterations (:798). The first two happen to coincide at 13; the third does not.
+
+**Proposed:** "Two of thirteen experiments' worth of effort produced no new science" — or state the iteration denominator.
+
+### 32. "Nine thousand lines of ledger in five days" (:810, repeated §8.5:1256)
+**CONFIRMED.** `docs/state.yaml` 4,054 + `docs/inherited-measurements.yaml` 5,190 = **9,244 lines**. "Nine thousand" rounds down, which is the direction that stays true. ("Five days" carries claim 1's qualifier.)
+
+### 33. "The verification iteration found three wrong figures and eight claims true only in the condition they were measured under"
+**CONFIRMED.** First pass: CORRECTED 3 (claims 6, 12, 16); UNDER-QUALIFIED 8 (1, 3, 7, 10, 11, 13, 14, 15).
+
+---
+
+## §6 Where the method failed
+
+### 36. "The same two errors recurred: bundling a bounded task with an unbounded one, and naming a branch without asking for a commit"
+**CONFIRMED.** `template: docs/spec-defects.md` §1 and §2, and its own header: "The list below opens with the two observed in the instance this template came from."
+
+### 37. "Used zero times in thirteen experiments" — both components
+**CONFIRMED.** See claims 3 and 4.
+
+---
+
+## §7 The template
+
+### 38. "About a third of the original was domain-specific"
+**UNSUPPORTED.** `template: CLAUDE.md` does carry an empty `## Domain invariants` section with a filled example beside it, exactly as described. **The proportion is not measured anywhere**, and the instance's CLAUDE.md is not partitioned in a way that makes "a third" checkable without a judgement about which paragraphs count as domain-specific.
+
+### 39. "An experiment exemplar. Five empty files in the order they are written, pre-registration first, with a short note on why the order is load-bearing"
+**CONFIRMED.** `template: experiments/exp000_example/` holds six files: the five exemplar files plus `README.md`, whose line 3 reads "Five files, and **the order they are written in is the whole point**" and which carries a section headed "Why the order is load-bearing".
+
+### 40. "A list of specification defects… seeded with the two that recurred"
+**CONFIRMED.** The file carries three entries at `81a638e`, and says so itself: it "opens with the two observed in the instance", the third being the count defect found in the template's own prose. "Seeded with" is accurate about origin.
+
+### 41. "That audit found several gaps, most of which were closed. **Four remain open** and are recorded in the repository rather than fixed"
+**CORRECTED. The four in the record are four gaps CLOSED, not four left open.**
+- `template` commit `2b6d482`: "**docs: close four cold-start gaps** and carry the draft/typeset practice — Five fixes from the cold-start audit."
+- `template` commit `a2ce623`: "docs: **close the two gaps these fixes opened**."
+- **No record of four open gaps exists.** `README.md`'s "What this template does not do" carries **three** bullets, and they are stated limitations rather than audit findings.
+- The gap the draft calls "the largest" is real (claim 42) — but it is argued in the draft, not recorded in the template.
+
+**Proposed:** either "four gaps were closed and the audit's residue is argued in §7 rather than recorded", or record the four in the template and cite them.
+
+### 42. The framework/implementation distinction "is defined in the template by an example from a layered software architecture"
+**CONFIRMED.** `template: docs/state.yaml:279` defines altitude `fw` as "Changes the shape of the thing: **interfaces between layers**, what a type means, what the project is committed to." A project without layers has no test for the distinction.
+
+### 43. The repeated-figure check fired on the template's own front page
+**CONFIRMED in every particular**, from `template` commit `931f6d3`:
+- "The source instance has THIRTEEN experiments, not fourteen… **The count had been taken from the highest identifier rather than from the set.**"
+- "**CORRECTED IN BOTH PLACES IT APPEARED.** README.md carried it, and a test docstring had picked it up and repeated it — so fixing the source alone would have left one standing."
+- "Then ran the template's own repeated-claim grep **over the whole tree**" — confirming the draft's "the tree-wide search found it; a re-reading would not have".
+- The same commit independently confirms that "45 of 96 nulls, ten experiments, five days" are consistent across their occurrences in the template.
+
+---
+
+## §8 Reflection (8.1–8.5)
+
+### 44. "A ledger of thirteen foreclosed possibilities, each with the evidence that closed it, the conditions under which it holds, and the cost of reopening it"
+**CONFIRMED.** 13 foreclosures; the schema carries `rationale`, `scope` and `cost_to_reopen`, and `scope` is a required field.
+
+### 45. "Most of these thirteen cost an afternoon each"
+**UNSUPPORTED.** No per-decision time is recorded anywhere. The commit timeline shows several experiments completed within a few hours (exp001 pre-registered 13:58, findings 14:54), which is *consistent with* the claim for some, and no record establishes it for "most".
+
+### 46. "The low-ceremony lane went unused in two consecutive projects under different conditions"
+**UNDER-QUALIFIED — the lane existed in one of the two.**
+- `active-stereo` has **no `spikes/` directory** and never did. Its failure was the *absence* of a lane: a step written up twice and never started (claim 5).
+- §6 states this correctly — the lane "was built as a fix for exactly this failure, in the previous project" and "was carried into the new repository on day one". §8.5 compresses that into the lane going unused twice, which asserts it existed twice.
+- **The underlying argument survives**: the *behaviour* — not reaching for informal work — did recur across both projects. That is the claim §8.5 needs and not the one it makes.
+
+**Proposed:** "informal exploration went undone in two consecutive projects — in the first because there was no lane, in the second although there was."
+
+### 47. "Nine thousand lines of ledger, written by one collaborator, read by one human, in five days"
+**CONFIRMED** on the count (claim 32); "five days" carries claim 1's qualifier.
 
 ---
 
 # Resolutions
 
-Record what was actually changed, separately from what was flagged. Two lists,
-and both are needed:
-
 ## What resolved
 
 | claim | was | resolution |
 |---|---|---|
-|  |  |  |
+| 14 (partial) | "eighteen load-bearing claims… seven stood" at :870 and :1219, naming neither pass nor subset | Amended in `9b58d1a` to name the first pass and the substantive subset. **:391 was left standing** — see below. |
+| — | `od-005`: section 8.6 unwritten | 8.6, 8.7 and 8.8 are written; the draft's status block corrected in `9b58d1a`. |
+| — | `od-002`: mn-001 and mn-002 disagree | Both correct; different denominators. Resolved at source, `mn-003` added for the dropped PARTIAL. |
+| — | `gap-001`: no source cloned | Closed. Four checkouts in `.reference/`. |
 
 ## What is still flagged and was not corrected
 
-Claims raised and left standing, with whose call it is. **Record these even when
-— especially when — the decision is to leave them.** A flag that is dropped
-silently is indistinguishable from a flag that was addressed, and the difference
-is the whole value of the pass.
+**Every claim above with a verdict other than CONFIRMED is in this list.** The
+specification reserved prose corrections to the maintainer; this pass's output
+is the record. Ordered by what it would cost to leave.
+
+| # | claim | verdict | whose call |
+|---|---|---|---|
+| **14** | "Of eighteen claims… seven stood" (§4.1:391) | UNDER-QUALIFIED | **Maintainer — urgent.** The same figure was amended at :870 and :1219 and not here, so the document now states it two ways. This is the repeated-claim defect, currently live, in the document that ships the check. |
+| 17 | "three specifications were rejected" (§4.2, §5) | UNSUPPORTED | Maintainer. Either soften to the one recorded rejection, or accept that the strongest evidence for §4.2 is unrecorded and say so. |
+| 24 | "shaped every specification for a week" | CORRECTED → one day | Maintainer. |
+| 22 | "numbers on day two" (§4.4, §6) | CORRECTED → day one | Maintainer. Two locations. |
+| 41 | "four remain open" (§7) | CORRECTED | Maintainer. |
+| 29 | "four of thirteen went to establishing this" (§4.6) | CORRECTED → three | Maintainer. Two locations (:620, :638). |
+| 26 | "an order of magnitude worse in the tail" | CORRECTED → 22.7× | Maintainer. |
+| 11 | "about the instrument" (§3) | UNDER-QUALIFIED | Maintainer. Related to 29. |
+| 27 | "four fifths of the total error" | UNDER-QUALIFIED | Maintainer — one word, "squared". |
+| 21 | "thirteen carried methods" | UNDER-QUALIFIED | Maintainer. |
+| 31 | "two of thirteen iterations" | UNDER-QUALIFIED | Maintainer. |
+| 46 | "unused in two consecutive projects" | UNDER-QUALIFIED | Maintainer. |
+| 1 | "five days" | UNDER-QUALIFIED | Maintainer — affects six locations. |
+| 5 | "five open questions" | UNDER-QUALIFIED | Maintainer. |
+| 12, 20, 25, 38, 45 | the remaining unsupported claims | UNSUPPORTED | **Maintainer, and see `od-006`.** Four of the five are unrecordable by construction, not merely unrecorded. |
+
+---
+
+# The repeated-figure check, as run — and the fix for `od-003`
+
+**The shipped command does not work on this document, exactly as `od-003`
+predicted.** Run over `report/draft.md` it returns a single line — `52 1023:7` —
+because `uniq -c -f2` skips *whitespace*-separated fields while `sort -t:` has
+just ordered colon-separated ones, so every record collapses into one group. It
+also matches only numerals, and this document spells its figures out.
+
+**What was run instead**, and what `od-003` should adopt:
+
+```sh
+# Repeated-figure check for prose that spells its numbers out.
+#   1. words as well as numerals;
+#   2. group on the VALUE with awk, not `uniq -f2`;
+#   3. -H so the field offsets hold for one file as well as many;
+#   4. drop bare decimals -- in markdown they are section numbers, not claims.
+for f in "$@"; do
+  grep -onHE '\b([0-9]+(\.[0-9]+)?(×|x|:1|%|-fold)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|eighteen|twenty-two|forty-one|eighty-seven|thousand)\b' "$f" \
+  | grep -vE ':[0-9]+\.[0-9]+$'
+done | awk -F: '{n[$3]=n[$3]" "$2} END {for (v in n) {c=split(n[v],a," "); if (c>1) printf "%3d  %-12s lines:%s\n", c, v, n[v]}}' | sort -rn
+```
+
+**It was validated against a known answer before being trusted**, which the
+shipped one never was: it had to surface the `mn-001`/`mn-002` pair, and it does
+— "eighteen" at seven locations and "twenty-two" at two.
+
+**What it found that a per-passage reading did not:**
+
+1. **"eighteen" carries two unrelated figures** — eighteen claims (:391, :872, :882, :1222) and an eighteen-**step plan** (:554, :561). A reader meeting the second after the first has to notice the noun changed.
+2. **"thirteen" carries three** — experiments, foreclosures, and iterations (:798). The first two coincide at 13 by accident; the third does not, which is claim 31.
+3. **Claim 14's third location.** :391 is in §4.1 and the other occurrences are in §5 and §8.4 — three sections apart. This is precisely the structural blind spot: at :391 the reader has not yet read §5, and by §5 the §4.1 sentence is already behind them.
+
+**Its limit, stated so it is not over-trusted:** the word list is enumerated, so a
+figure written as a word not on the list is missed. The list covers every
+spelled-out figure this draft uses; it will need extending for the next document,
+and that is a maintenance cost, not a one-time fix.
+
+---
+
+# What this pass did not do
+
+- **No prose was written and no `.tex` file was touched.** The two amendments in `9b58d1a` were made before this pass, under the specification's explicit exception, and are recorded as claim 14's partial resolution.
+- **`active-stereo` and `bioeye` are unpinned.** They were cloned at their default branches, not at a recorded SHA, because none is pinned in `docs/inherited-measurements.yaml`. Claims 2, 5 and 46 rest on them. `active-stereo`'s HEAD is `3f7a263` and `bioeye`'s is `e908170`; **pin them before quoting those claims**, or a later reader is citing whatever `main` says the day they read it.
+- **Nothing was re-run.** Every figure above is read from a committed artifact or computed from `git log` over a pinned checkout.
+- **§§8.6–8.8 were not read for claims**, per the specification's scope.
+- **Claim 13's fourth instance was not located**, and is recorded as PARTIAL rather than silently dropped.

@@ -304,6 +304,54 @@ values:
       drops PARTIAL drops the one verdict recording that a citation could not be
       settled, which is precisely the class a reader most needs to see.
 
+  - id: mn-004
+    statement: >-
+      The first claims-verification pass over report/draft.md, sections 1 to 8.5.
+    value:
+      claims_checked: 42
+      confirmed: 22
+      corrected: 5
+      under_qualified: 8
+      unsupported: 6
+      partial: 1
+    units: claims
+    n: >-
+      Sections 1 through 8.5 of report/draft.md. Sections 8.6-8.8 are the first
+      author's, first-person, and out of scope; they were not read for claims.
+    conditions: >-
+      Resolved against .reference/ checkouts: bio-3d-vision @5f8e39f and
+      math-ai-method @81a638e, both pinned and verified by rev-parse;
+      active-stereo @3f7a263 and bioeye @e908170, both UNPINNED default branches
+      — claims 2, 5 and 46 rest on those two and are bounded by gap-003.
+      Verdict taxonomy is met-001, carried and unexamined.
+      Repeated figures counted once, with all locations named, per the rule in
+      report/claims-verified.md.
+    provenance:
+      cited_as: The count table in report/claims-verified.md
+      source: report/claims-verified.md, in this repository
+      experiment: null
+      run_id: null
+      measured_at_sha: 9b58d1a
+      environment: null
+    status: measured
+    notes: >-
+      THE ONLY `measured` ENTRY THIS REPOSITORY WILL EVER HAVE, and the reason
+      the status was kept reachable. Everything else it handles is inherited.
+      THE HEADLINE IS NOT THE PASS RATE. It is that the recurring defect DIFFERS
+      IN KIND from the one the instance's own pass found. The instance reported
+      scope-and-metric — a correct number quoted without its band. This document
+      is second-order, restating figures already condensed once, and its
+      characteristic error is TRANSCRIPTION: iterations read as days (claim 24),
+      gaps closed read as gaps open (claim 41), a criterion experiment counted as
+      a stimulus experiment (claim 29). The number survives; the noun attached to
+      it does not.
+      FALSIFIER 2 FIRED. Under-qualified does not substantially outnumber
+      corrected here — 8:5, against the instance's 8:3. Under-qualified is NOT
+      depressed (8 in both); corrected is elevated, which is the second-order
+      structure above. The prediction this generates, recorded before anyone
+      tests it: a third-order document should show more corrections still.
+      FALSIFIER 3 FIRED HARDEST, and see gap-004.
+
 # - id: <prefix>-001
 #   statement: <one line>
 #   value: <scalar or mapping>
@@ -531,6 +579,47 @@ gaps:
       THE SHIPPED COMMAND DOES NOT WORK AS WRITTEN on this document: run against
       draft.md it returns section numbers ("4.1", "8.6") and its `uniq -f2`
       field-counting collapses the result to a single line. See od-003.
+
+  - id: gap-003
+    statement: >-
+      active-stereo and bioeye are cloned at their default branches, not at a
+      pinned SHA. No SHA for either is recorded in `sources`.
+    why_it_is_load_bearing: >-
+      Claims 2, 5 and 46 in report/claims-verified.md rest entirely on
+      active-stereo, and claim 2 is a VERBATIM QUOTATION checked to the line
+      (CLAUDE.md:141). A line number against an unpinned branch is a citation to
+      whatever main says the day it is read — the exact failure the `sources`
+      block's own comment warns about. The claims are verified; their citations
+      are not durable.
+    what_would_close_it: >-
+      Record active-stereo @3f7a263 and bioeye @e908170 in `sources` and re-check
+      the three claims against those SHAs. Cheap, and it must happen before the
+      draft is typeset.
+
+  - id: gap-004
+    statement: >-
+      The method has no channel for a specification that was correctly rejected
+      before work was spent. Six claims in the pass are UNSUPPORTED and four of
+      them are unrecordable BY CONSTRUCTION, not merely unrecorded.
+    why_it_is_load_bearing: >-
+      It bounds §4.2 and §5 of the draft, which rest on "three specifications
+      were rejected on false assumptions" (claim 17) and call the rejections
+      "the clearest case in the project of a rule paying for itself". A
+      rejection that stops work before it starts produces no branch and no
+      commit: docs/workflow.md states that a specification is the only artifact
+      of the loop that leaves no trace, and that no specification was ever
+      committed in the instance.
+      THE ASYMMETRY IS THE FINDING: the workflow records what work PRODUCED and
+      has no channel for work it correctly PREVENTED — so the method's own
+      strongest evidence is the kind it systematically destroys. state.yaml's
+      `falsifier_verdicts` block exists to keep the falsifier after the
+      specification evaporates; the same argument extends to rejections and has
+      not been extended. See od-006.
+    what_would_close_it: >-
+      A `rejections` block, written at the moment a specification is rejected,
+      carrying the assumption that was false and what it would have cost. It
+      cannot be backfilled — the four instances behind claims 17 and 20 are
+      already gone.
 
 # - id: gap-001
 #   statement: <what was not measured>

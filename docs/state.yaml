@@ -206,10 +206,17 @@ sequence:
       RECORD EACH RUN HERE, INCLUDING THE ONES THAT FAIL, and keep the previous
       record beside the correction rather than overwriting it. The defect is
       worth more than the fix.
-    complete: [1]
+    complete: [1, 2]
     deferred: []            # - {step: <n>, until: <condition>}
-    next: 2
+    next: 3
     evidence:
+      2: >-
+        report/claims-verified.md, and mn-004 in
+        docs/inherited-measurements.yaml. Read against clause (1): step 2's
+        title is "Clone the sources at their pinned SHAs and run the
+        claims-verification pass over report/draft.md", and the file records 42
+        resolved claims each citing a source by key, path and SHA. The clone
+        half is qualified — two of the four sources are unpinned, gap-003.
       1: >-
         fc-001 through fc-006 in this file, and the adaptation commit that
         carries them. Read against clause (1) above: step 1's title is "Adapt the
@@ -281,8 +288,8 @@ sequence:
               Clone the sources at their pinned SHAs and run the
               claims-verification pass over report/draft.md
             altitude: exp
-            status: next
-            outcome: null
+            status: complete
+            outcome: mn-004; report/claims-verified.md; gap-003, gap-004, od-006
           - n: 3
             title: Reconcile mn-001 against mn-002 and define "load-bearing" (met-002)
             altitude: exp
@@ -372,7 +379,27 @@ runs:
 # a figure re-read at source: re-reading resolves a citation, it does not
 # reproduce a measurement under this repository's conditions, because this
 # repository has none.
-measurements: []
+measurements:
+  - ids: [mn-004]
+    commit: 9b58d1a
+    what: >-
+      The first claims-verification pass over report/draft.md sections 1-8.5,
+      resolved against pinned checkouts of bio-3d-vision (5f8e39f) and
+      math-ai-method (81a638e) and unpinned clones of the two predecessors.
+      42 claims, one entry per figure with all its locations named.
+    where: docs/inherited-measurements.yaml, status "measured"
+    headline: >-
+      22 confirmed, 5 corrected, 8 under-qualified, 6 unsupported, 1 partial.
+      The recurring defect is TRANSCRIPTION, not scope — a figure lifted
+      correctly from the record and re-attached to the wrong noun.
+    caveat: >-
+      NOT A GENERAL STATEMENT ABOUT THE DRAFT. Sections 8.6-8.8 are excluded and
+      were not read for claims. Three claims rest on UNPINNED checkouts
+      (gap-003). The verdict taxonomy that produced this split is met-001,
+      carried and never examined here, and the boundary it turns on —
+      CORRECTED against UNDER-QUALIFIED — is the one met-001 says is undefined.
+      A different reasonable boundary moves the 5 and the 8.
+
 # - ids: [<measurement ids in docs/inherited-measurements.yaml>]
 #   commit: <the commit that produced them>
 #   what: <one paragraph: what was measured>
@@ -401,7 +428,16 @@ open_decisions:
 
   - id: od-001
     altitude: exp
-    status: open
+    status: RESOLVED
+    resolved_at: 2026-09-08
+    resolution: >-
+      RUN. 42 claims in sections 1-8.5: 22 confirmed, 5 corrected, 8
+      under-qualified, 6 unsupported, 1 partial. Recorded as mn-004 — the only
+      `measured` entry this repository has or will have. The declared-in-advance
+      expectation held in one direction and not the other: the pass did NOT
+      return everything confirmed (the outcome this entry named as suspicious),
+      and it did NOT reproduce the instance's 0-unsupported result. Six
+      unsupported is the finding, and gap-004 says why they cluster.
     title: The claims-verification pass over report/draft.md has not been run.
     the_question: >-
       Which of the draft's factual claims about the source project survive being
@@ -471,7 +507,24 @@ open_decisions:
 
   - id: od-003
     altitude: infra
-    status: open
+    status: RESOLVED
+    resolved_at: 2026-09-08
+    resolution: >-
+      FIXED AND VALIDATED. The replacement is in report/claims-verified.md under
+      "The repeated-figure check, as run". Four changes: match spelled-out words
+      as well as numerals; group on the value with awk instead of `uniq -c -f2`,
+      which counts whitespace fields and collapsed the whole output to one line;
+      pass -H so field offsets hold for a single file; drop bare decimals, which
+      in markdown are section numbers rather than claims.
+      VALIDATED AGAINST A KNOWN ANSWER BEFORE BEING TRUSTED, which the shipped
+      command never was — it had to surface the mn-001/mn-002 pair and does.
+      IT EARNED ITS PLACE ON THE FIRST RUN: it found a third location of the
+      eighteen-claims figure (draft.md:391) that a per-passage reading missed and
+      that the two amended locations left inconsistent, and it found that
+      "thirteen" carries three different referents and "eighteen" two.
+      ITS LIMIT, recorded so it is not over-trusted: the word list is enumerated,
+      so a figure spelled as a word not on the list is missed. Extending it is a
+      per-document maintenance cost, not a one-time fix.
     title: >-
       The repeated-claim grep in report/claims-verified.md does not work on this
       repository's prose.
@@ -510,6 +563,29 @@ open_decisions:
       already demonstrated locally — no YAML parser was available on this machine
       without creating a throwaway environment.
     depends_on: []
+
+  - id: od-006
+    altitude: fw
+    status: open
+    title: >-
+      The method has no channel for a specification that was correctly rejected.
+    the_question: >-
+      Should the record carry rejected specifications, and in what form? Six
+      claims in the first claims pass are UNSUPPORTED, and four of them describe
+      events the workflow guarantees leave no artifact — rejections, falsifier
+      misses, and a cold session's search. The draft calls the rejections "the
+      clearest case in the project of a rule paying for itself"; nothing can
+      check that.
+    what_would_decide_it: >-
+      DECLARED BEFORE THE FACT, since this is exactly the trap met-002 fell into:
+      the test is whether the next specification rejected in this repository
+      produces a durable entry naming the false assumption and what it would have
+      cost. If three consecutive rejections pass without an entry, the block is
+      ceremony and should be removed rather than left to look like coverage.
+      NOTE THE BACKFILL IS IMPOSSIBLE. The four instances behind claims 17 and 20
+      are already gone. Anything reconstructed now would be recollection wearing
+      a record's authority, which is claim 25's defect.
+    depends_on: [gap-004]
 
   - id: od-005
     altitude: impl

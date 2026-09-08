@@ -1,0 +1,110 @@
+% The report. This is where a measurement becomes a claim, which is the step at
+% which this project's characteristic failure -- a wrong belief -- actually
+% happens. Every number that reaches this document has left the record that
+% carried its conditions with it. See claims-verified.md, beside this file, for
+% the pass that checks it back against source, and read that file's header
+% BEFORE writing prose rather than after.
+%
+% PROSE IS DRAFTED IN MARKDOWN, COMMITTED, AND TYPESET SEPARATELY, WITH BOTH
+% COMMITTED SO THE TRANSLATION IS DIFFABLE. Keep draft.md beside this file.
+%
+% draft.md IS TRACKED. Not a scratch file, not gitignored, not kept on one
+% machine -- committed, and committed in the same pull request as the .tex it was
+% typeset into. UNTRACKED, THE DIFF HAS NOTHING TO COMPARE AGAINST AND THE
+% PRACTICE IS DECORATIVE: the whole value is that two revisions of the prose sit
+% in the history side by side, so that the sentence which changed on its way into
+% LaTeX is visible as a change rather than as a fact.
+%
+% None ships here, deliberately -- an empty draft.md would be a file teaching
+% nothing. Create it with the first paragraph of real prose.
+%
+% This is what made claim verification possible in the instance this template
+% came from. Two things follow from it, and they are the reason it is a practice
+% rather than a preference:
+%
+%   1. Claims are checked against the record while the prose is still CHEAP TO
+%      MOVE. A paragraph that has to be re-typeset to be corrected is a paragraph
+%      whose correction gets argued about.
+%   2. THE DIFF BETWEEN DRAFT AND TYPESET OUTPUT IS WHERE A MANGLED NUMBER SHOWS.
+%      A figure that changes in translation -- a dropped qualifier, a transposed
+%      digit, a scope clause that did not survive being turned into a sentence --
+%      is invisible in either document alone and obvious between them.
+%
+% Build:  make -C report        (or: latexmk -pdf main.tex, from this directory)
+%
+% IT COMPILES AS SHIPPED, deliberately: a scaffold whose build is broken on day
+% one teaches you to ignore the build.
+
+\documentclass[11pt]{article}
+
+% Standard margins, stated rather than defaulted, because figures are sized
+% against \textwidth. At letterpaper with 1 in margins \textwidth is exactly
+% 6.5 in, which is the width report/figures/README.md asks figure scripts to draw
+% to, so a figure included at width=\textwidth is reproduced 1:1 and its type is
+% not rescaled.
+\usepackage[letterpaper,margin=1in]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+% biblatex + biber, not bibtex. biblatex is what carries per-entry provenance
+% notes -- including a software entry pinned to a COMMIT rather than to a branch,
+% which is the only citation form that means anything for a repository.
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\addbibresource{refs.bib}
+
+\graphicspath{{figures/}}
+
+\title{TITLE}
+
+% AUTHORSHIP IS A CLAIM LIKE ANY OTHER. If an AI collaborator did work that
+% appears here, say what it did and where, rather than leaving the reader to
+% infer it. The instance this template came from named its collaborator on the
+% byline with a footnote pointing at an appendix that described what each surface
+% actually did. Adopt that, or decide otherwise deliberately -- but decide.
+\author{
+  AUTHOR \\
+  \normalsize AFFILIATION
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+REPLACE THIS. Write the abstract last, and then verify it first: in the instance
+this template came from, the abstract was where a correctly-measured ratio lost
+the one condition that bounded it, because the abstract is the passage furthest
+from the record and the one most rewarded for compression.
+\end{abstract}
+
+% Sections live in sections/ and are \input here. The directory ships empty; add
+% files and uncomment. Keeping them separate is what lets a verification pass
+% cite a claim by file and line.
+%
+% \input{sections/introduction}
+% \input{sections/background}
+% \input{sections/findings}
+% \input{sections/conclusion}
+
+\section{Placeholder}
+This document compiles with no sections so that the build is green from the
+first commit. Delete this section when the first real one lands.
+
+% Keeps the bibliography non-empty so a fresh clone builds with no warnings.
+% Delete it with the placeholder entry in refs.bib -- a scaffold that warns on
+% day one teaches you to read past warnings, which is a habit worth not having
+% in a repository where the build is part of the evidence.
+\nocite{example-repository}
+
+\section{References}
+\printbibliography[heading=none]
+
+\appendix
+% \input{sections/appendix}
+
+\end{document}

@@ -1,0 +1,392 @@
+# ==============================================================================
+# STATE — written by Code, read by Chat. Never the reverse.
+#
+# Chat does not edit this file. That is what keeps it a report of what is true
+# rather than a record of what was intended. It is the only durable channel from
+# Code back to Chat, and it is why a Chat session can start without a briefing.
+#
+# Update it in the same commit as the change it describes. If it disagrees with
+# the repository, the repository is right and this file is a bug.
+#
+# TEMPLATE. Every block below carries its schema and its rules and NO ENTRIES.
+# The headers are the part that generalises; delete none of them. Fill the lists.
+# ==============================================================================
+
+schema_version: 1
+updated_at: null          # ISO date. Set it when you first write an entry.
+
+# ------------------------------------------------------------------------------
+# HOW IDS ARE ALLOCATED
+#
+# Seven id spaces are in use across this file and
+# docs/inherited-measurements.yaml: fc- (foreclosures), od- (open decisions),
+# fv- (falsifier verdicts), cn- (constraints), am- (amendments), met- (carried
+# methods), gap- (recorded absences), plus one project prefix for measurements.
+#
+# THE RULE: sequential per kind, allocated by Code at the moment the entry is
+# written, NEVER REUSED AND NEVER RENUMBERED. An id that has been cited anywhere
+# — a findings file, a report, a commit message, another entry — is permanent
+# even if the entry it names is later superseded, corrected or found to be wrong.
+# Renumbering is what turns a citation into a lie.
+#
+# THE DIVISION THAT MAKES THAT POSSIBLE, since Chat also writes about ids:
+# CHAT'S SPECIFICATIONS REFER TO THE KIND, NEVER TO A NUMBER. A specification
+# says "record this as a foreclosure, at altitude fw" — it does not say "record
+# this as fc-014". CODE ALLOCATES THE NUMBER AT WRITE TIME, because Code is the
+# station holding the file and can see what the last one was.
+#
+# That is not etiquette. It is what keeps allocation serialised through a single
+# writer: a number chosen by the station that cannot see the ledger is a number
+# chosen against a stale view of it, and two specifications drafted the same
+# afternoon would choose the same one. It is also THE ASSUMPTION THAT BREAKS
+# FIRST if a second writing agent appears — before any of the merge machinery
+# below is reached, two Codes writing at once collide on the next number.
+#
+# THE ASSUMPTION THAT MAKES IT WORK, NAMED SO YOU CAN CHECK IT AGAINST YOUR OWN
+# SETUP: in the instance this template came from, ONE agent wrote the ledger and
+# ONE human merged every change, so allocation was effectively serialised and two
+# branches could not claim fc-014 at the same time. Nothing enforced that; the
+# shape of the project did.
+#
+# THIS FILE IS APPEND-MOSTLY AND IT IS THE CHANNEL OF RECORD, so a collision here
+# is a merge conflict in the one place the project cannot afford one. If you will
+# have more than one writing agent, or long-lived parallel branches, DECIDE HOW
+# IDS ARE ALLOCATED BEFORE YOU HAVE TWO BRANCHES OPEN — not after the first
+# conflict. Workable answers include a reserved range per branch, allocation at
+# merge time rather than write time, or ids that are not sequential at all
+# (a short hash, a date-stamp). Each costs something; pick deliberately and
+# record the choice as a foreclosure.
+# ------------------------------------------------------------------------------
+
+# PROVENANCE, NOT A STALENESS TEST. This names the repository state the file
+# describes — the same role `measured_at_sha` plays on a measurement. It
+# NECESSARILY LAGS the commit that carries it, because no commit can name the
+# merge that contains it, and that lag is not staleness. Do not compare it
+# against HEAD and conclude anything.
+#
+# In the instance this template came from, this field first carried the comment
+# "so a reader can tell a stale state file from a current one", which invited
+# exactly that comparison and would have fired after every merge. A check that
+# always fires is one a cold session learns to skip. Staleness is tested per
+# half in `sequence`, and each half gets the test it can actually pass.
+updated_by_commit: null   # the repository state this file describes
+
+# ------------------------------------------------------------------------------
+# SEQUENCE — where this project is, and what it plans next
+#
+# TWO HALVES, AND THEY HAVE DIFFERENT STANDING. `position` is established: it is
+# derivable from the foreclosure ledger and the merged history, and it cannot be
+# wrong without the ledger being wrong. `plan` is INTENT, supplied from the Chat
+# surface, and is not established by anything in this repository.
+#
+# The distinction is the same one docs/inherited-measurements.yaml draws between
+# `measured` and `inherited`, and for the same reason: a future session should
+# treat the plan half as a prior, not as a fact.
+#
+# WHY THE SPLIT EXISTS. This block was originally specified as "position, not
+# intent", as one list. That was wrong: a plan amended twice in seven iterations
+# and expected to be amended again is not position. Worse, the two decayed
+# together — the instance's centrepiece step still read `planned` while the code
+# it described was running, and a cold session deriving its position from the
+# intent half would have taken the project's whole purpose as unstarted.
+#
+# Nothing normative lives here. Invariants are in CLAUDE.md, decisions in
+# `foreclosures`, measurements in docs/inherited-measurements.yaml. This block
+# exists so a session starting cold knows where it is.
+# ------------------------------------------------------------------------------
+sequence:
+
+  # --- STOPPING RULE: required, and empty is a legal answer --------------------
+  #
+  # REQUIRED. Fill it with "none yet" rather than deleting it, so that its
+  # absence is visible instead of merely being the case.
+  #
+  # WHY IT IS A REQUIRED FIELD AND NOT ADVICE. The instance this template came
+  # from ran for five days with no stopping rule and no budget. It was flagged in
+  # its first week and never fixed, and nothing in the repository made the
+  # omission legible: an absent stopping rule looks exactly like a project that
+  # has not needed one yet. A field that must be filled turns "we never decided"
+  # into a sentence somebody has to type.
+  #
+  # A stopping rule is a statement about the PROJECT, not about a task. It names
+  # a condition on which the work stops or changes shape, decided in advance of
+  # the evidence that would trigger it — which is the same reason a falsifier is
+  # declared before the run. Any of these is a legitimate form:
+  #   - a budget: iterations, wall-clock, or compute, with what happens at the end
+  #   - a result: "if the effect is indistinguishable at N seeds, the branch closes"
+  #   - a gate: "the loop must run before any further instrument work"
+  #   - "none yet", with the date it was last considered
+  stopping_rule:
+    rule: none yet
+    decided_at: null        # commit or date. `null` while `rule` is "none yet".
+    last_considered: null   # ISO date. Bump it even when the answer is unchanged.
+    note: >-
+      REPLACE THIS. If the answer stays "none yet" for more than a few
+      iterations, that is itself a finding about the project and belongs in the
+      record, not in this comment.
+
+  staleness:
+    note: >-
+      NO SINGLE RULE, BECAUSE THE TWO HALVES GO STALE DIFFERENTLY. Each half
+      carries the check it can actually pass; see `position.checking` and
+      `plan.staleness`. A rule that fires on every merge is a rule a cold session
+      learns to skip, which is the failure this arrangement replaced.
+
+  # --- POSITION: established, derivable from the ledger and merged history -----
+  position:
+    standing: >-
+      Established. Every entry below is derivable from `foreclosures`, the
+      measurement record, and the merged history. It cannot be wrong without one
+      of those being wrong.
+    checking: >-
+      DERIVE IT, DO NOT TRUST IT. This half has no timestamp and needs none: it
+      claims to be derivable, so the check is to derive it. Three questions, each
+      with a definite answer from the repository alone:
+        (1) for every step in `complete`, does the entry named in `evidence`
+            EXIST, and does that entry, READ IN FULL, ACTUALLY DECIDE WHAT THE
+            STEP'S TITLE NAMES. Both halves are required and the second is the
+            one that bites: an id that resolves is not an id that agrees. If the
+            step is "Decide X", find the sentence in the named entry that decides
+            X. If there is no such sentence, the claim is unearned and this check
+            has failed, however well-formed the reference is;
+        (2) is `next` the lowest-numbered step that is neither complete nor
+            deferred;
+        (3) does every id referenced anywhere in this block resolve — in
+            `foreclosures`, `open_decisions`, `falsifier_verdicts`, or
+            docs/inherited-measurements.yaml — counting an id this block names as
+            CLOSED and redirects as resolving through its redirect, not as
+            dangling.
+      If all three hold, this half is current, whatever the date says. If one
+      fails, the ledger and this block disagree and THE LEDGER IS RIGHT.
+    why_clause_1_is_worded_that_way: >-
+      IT WAS WEAKER ONCE AND PASSED ON A FALSE CLAIM. In the instance, clause (1)
+      asked whether the entry named in `evidence` "still says what is claimed
+      here", and that was applied against the citation's own words rather than
+      against the step's title. A completed step read "Decide the plant" with a
+      foreclosure id beside it; the id resolved, the sentence describing it was
+      true, and the foreclosure decided the disparity search window instead —
+      none of its eleven fields mentioned a plant. The check recorded three
+      passes on a claim the ledger contradicted, and it was caught four
+      iterations later by a cold session's arrival audit, which is not where it
+      should have been caught. A check that passes on a false claim is the same
+      shape as a claim that cannot fail.
+    checking_run: >-
+      RECORD EACH RUN HERE, INCLUDING THE ONES THAT FAIL, and keep the previous
+      record beside the correction rather than overwriting it. The defect is
+      worth more than the fix.
+    complete: []            # step numbers
+    deferred: []            # - {step: <n>, until: <condition>}
+    next: null              # the lowest step that is neither complete nor deferred
+    evidence: {}            # <step n>: <file, id, or commit that establishes it>
+    out_of_sequence: []
+    # out_of_sequence holds work that was really done and is not one of the
+    # numbered steps. Entries are {what, note}. IT IS NOT A REMAINDER BIN: its
+    # job is that a cold session finding a verdict id or a measurement id in this
+    # file always has a step to attach it to. Anything that produced an id and
+    # is not attributable to a numbered step goes here, or the id is orphaned.
+
+  # --- PLAN: intent, from Chat, NOT established here ---------------------------
+  plan:
+    source: chat
+    standing: >-
+      NOT ESTABLISHED IN THIS REPOSITORY. Supplied from the Chat surface, where
+      it lives as a document in the maintainer's hands. Nothing here measures or
+      pins it. Treat it as a prior, exactly as an `inherited` entry in
+      docs/inherited-measurements.yaml is treated — usable, and an assumption
+      whenever it is relied on.
+    amended: null           # how many times, and over how many iterations
+    staleness:
+      last_amended_commit: null
+      rule: >-
+        STALE IF AN AMENDMENT HAS BEEN TAKEN SINCE `last_amended_commit` AND IS
+        NOT RECORDED BELOW. This half is the one that can rot silently — it is
+        not derivable from anything here, so nothing in the repository
+        contradicts it when it goes wrong.
+        The marker is the last commit that CHANGED THE PLAN, not the last merge.
+        Merges that do not touch the plan do not make it stale, which is why this
+        will not fire spuriously — and why, unlike a rule keyed to the last
+        merge, it can be passed.
+      checking: >-
+        Two steps, because this file changes for many reasons and only some of
+        them are amendments.
+          (1) `git log <last_amended_commit>..main -- docs/state.yaml` lists
+              commits that touched the file at all. Most will not have touched
+              the plan.
+          (2) For any that did, compare `sequence.plan` between the two
+              revisions. ONLY a change to a step, a stage, or `amendments` bumps
+              `last_amended_commit`.
+        One clause is not answerable from the repository at all: whether the
+        maintainer has taken an amendment that was never recorded here. No marker
+        can close that, and it is exactly what `source: chat` is warning about.
+    stages: []
+    # - stage: <n>
+    #   name: <short name>
+    #   steps:
+    #     - n: <step number>
+    #       title: <what it does>
+    #       altitude: fw | exp | impl | infra    # see open_decisions below
+    #       status: planned | next | complete | deferred
+    #       outcome: <the id or artifact it produced, once complete>
+    amendments: []
+    # An amendment is recorded, never applied silently. Fields that earn their
+    # place: {id, moved, from, to, origin, reason}. `origin` matters — an
+    # amendment from the Chat surface and one forced by a measurement have
+    # different standing, and only the second is derivable from this repository.
+    # WHERE A CLAIM IN THIS FILE TURNS OUT TO BE FALSE, CORRECT IT IN PLACE AND
+    # KEEP THE FALSE VERSION BESIDE THE CORRECTION. The history is forward-only.
+
+# ------------------------------------------------------------------------------
+# WHAT RUNS
+#
+# The entry points a session can actually invoke, with their cost. This block is
+# what stops "what does this repository do" from being answered by reading src/.
+# ------------------------------------------------------------------------------
+runs:
+  summary: null
+  entry_points: []
+  # - call: <the function or command>
+  #   does: <one sentence>
+  #   cost: <wall-clock, honestly, on stated hardware>
+
+# ------------------------------------------------------------------------------
+# LAST MEASURED NUMBERS
+#
+# Measurements made BY THIS REPOSITORY, each with the commit that produced it.
+# Inherited priors are not measurements and do not belong here. Values enter
+# this list only when a run in THIS repository produced them. An inherited
+# number is never promoted here without a re-measurement — it stays in
+# docs/inherited-measurements.yaml with status `inherited`, and the new
+# measurement is added as its own entry.
+# ------------------------------------------------------------------------------
+measurements: []
+# - ids: [<measurement ids in docs/inherited-measurements.yaml>]
+#   commit: <the commit that produced them>
+#   what: <one paragraph: what was measured>
+#   where: docs/inherited-measurements.yaml, status "measured"
+#   headline: <the numbers, in a sentence a report could quote>
+#   caveat: <the scope. THIS FIELD IS NOT OPTIONAL — see the header of
+#            report/claims-verified.md for what happens when it is dropped
+#            somewhere between here and the prose.>
+
+# ------------------------------------------------------------------------------
+# OPEN DECISIONS
+#
+# Questions this repository has not answered. A question that has not been tried
+# is not an ADR and not a foreclosure; it lives here until something decides it.
+#
+# altitude — how far the decision reaches, and therefore how expensive it is to
+# get wrong:
+#   fw     framework. Changes the shape of the thing: interfaces between layers,
+#          what a type means, what the project is committed to. Expensive to
+#          reverse; reversing it invalidates work built on top.
+#   exp    experiment design. What gets measured, against what falsifier.
+#   impl   implementation. Local, reversible, no interface moves.
+#   infra  tooling, CI, layout. Reversible, affects no result.
+# ------------------------------------------------------------------------------
+open_decisions: []
+# - id: od-0NN
+#   altitude: fw | exp | impl | infra
+#   status: open
+#   title: <one line>
+#   the_question: <what would have to be true either way>
+#   what_would_decide_it: >-
+#     The measurement, the run, or the spike that settles it. DECLARE THE METRIC
+#     AND THE THRESHOLD HERE, BEFORE THE RESULT EXISTS. A criterion chosen after
+#     seeing which one makes the result look best is the same defect as an
+#     unexamined carried method, with a different unit on it.
+#   depends_on: []
+
+# ------------------------------------------------------------------------------
+# FORECLOSURE LEDGER
+#
+# Options this repository has closed, and what reopening one would cost. Recorded
+# so that a later session can tell "we decided against this" from "nobody thought
+# of it" — the two look identical in a codebase and are not the same thing.
+#
+# HOW TO REOPEN ONE: ANNOTATE, NEVER REVERSE.
+#
+# `cost_to_reopen` names a price; this names the procedure. Where new evidence
+# bears on a closed decision, ANNOTATE THE ENTRY with what was found and what a
+# PRE-REGISTERED RE-TEST WOULD NEED, and LEAVE THE CLOSURE STANDING until that
+# test is run.
+#
+# WHY: a foreclosure reversed on a re-analysis that did not pre-register the
+# reversal is the same defect as a foreclosure closed on evidence that does not
+# bear on it. Both substitute a number that was not asked for in advance for one
+# that was. The asymmetry is deliberate — closing needs a pre-registered result,
+# and so does re-opening.
+#
+# TWO OBSERVED FORMS, both from the instance:
+#
+#   AMENDED IN PLACE, when an entry overstated what had been measured. A
+#   falsifier verdict was first written as `did_not_fire / ADDITIVE`; the
+#   measurement did not bear on the falsifier at all — it priced building a
+#   component, where the falsifier asked whether an interface was invasive — and
+#   it was corrected in place to `DEFERRED / UNANSWERED`, with an `amended` field
+#   recording what the original said. A foreclosure carrying the same
+#   overstatement was corrected in the same commit. NOT A REVERSAL: nothing was
+#   decided differently, a claim was withdrawn to what the evidence supported.
+#
+#   ANNOTATED, when a later re-analysis moved a comparison an entry rested on.
+#   A re-analysis that moved eleven comparisons annotated four foreclosures and
+#   reversed none — one stood and was strengthened, one gained a note on where
+#   its evidence comes from AND what a pre-registered re-test would need, two
+#   were untouched. Every closure stood.
+#
+# Both forms are additive. Neither deletes what was there, because the
+# disagreement between what was believed and what is now known is the
+# information — the same argument that keeps a superseded measurement in
+# docs/inherited-measurements.yaml instead of editing its value.
+# ------------------------------------------------------------------------------
+foreclosures: []
+# - id: fc-0NN
+#   altitude: fw | exp | impl | infra
+#   closed: <the option that is now closed>
+#   in_favour_of: <what was taken instead>
+#   rationale: <the evidence, cited by id. Not the argument — the evidence.>
+#   decided_by: <who or what. "The maintainer, on <id>" and "exp0NN" differ.>
+#   scope: >-
+#     WHAT THIS DOES NOT CLOSE, and under what conditions it stops holding.
+#     REQUIRED. A foreclosure without a stated scope gets read as general, and
+#     that is the single most common way a correct measurement becomes a wrong
+#     belief: the number was right, the conditions it was measured under were
+#     dropped, and by the time it reaches a report it has become a property of
+#     the framework.
+#   cost_to_reopen: <low | moderate | high, and what specifically must be redone>
+#   decided_in: <the experiment, file, or commit>
+
+# ------------------------------------------------------------------------------
+# FALSIFIER VERDICTS
+#
+# Every specification carries a falsifier (docs/workflow.md). A verdict that
+# lives only in a pull-request body is not in the tree and a cold session cannot
+# read it — and by this repository's own argument, a verdict with no durable
+# record cannot be checked, which is the same defect as a specification with no
+# falsifier. They are recorded here, with the numbers, whichever way they came
+# out, INCLUDING THE ONES THAT DID NOT FIRE.
+# ------------------------------------------------------------------------------
+falsifier_verdicts: []
+# - id: fv-0NN
+#   from: <the specification or experiment that declared it>
+#   falsifier: <the statement, quoted as declared, before the run>
+#   fired: true | false
+#   detail: <the numbers, against the declared threshold>
+#   consequence: >-
+#     What follows. A falsifier that fired and changed nothing, and one that did
+#     not fire and changed nothing, are different records and both are worth
+#     making. Say which.
+#   verified_at_commit: <commit>
+
+# ------------------------------------------------------------------------------
+# STANDING CONSTRAINTS
+#
+# Measured costs and impossibilities that bind future work regardless of what is
+# decided. Not decisions; consequences.
+# ------------------------------------------------------------------------------
+constraints: []
+# - id: cn-0NN
+#   from: <the experiment and falsifier that produced it>
+#   statement: <what is now known to be impossible or to cost what it costs>
+#   evidence: <the numbers>
+#   binds: <who, and when. A constraint that binds nobody yet says so.>
+#   caveat: <where the evidence is weaker than the statement sounds>

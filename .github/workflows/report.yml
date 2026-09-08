@@ -1,0 +1,78 @@
+# The report build. SEPARATE from ci.yml on purpose: that workflow is the code
+# gate and runs a two-version matrix, and there is no reason to install a TeX
+# distribution twice or to couple a prose change to the test suite.
+#
+# Triggers mirror ci.yml rather than firing on literally every push, so a branch
+# with an open pull request is not built twice for the same commit. Every change
+# in this repository reaches main through a PR, so this covers every change.
+#
+# WHY THE REPORT IS COMPILED IN CI AT ALL. The report is where a measurement
+# becomes a claim, and a document that only ever builds on the author's machine
+# is a document whose provenance nobody else can check. Compiling it on a clean
+# runner is what makes "this PDF was produced from this commit" a testable
+# sentence rather than an assurance.
+name: Report
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # DERIVE THIS PACKAGE SET FROM main.log, DO NOT GUESS IT. The list below
+      # covers what report/main.tex loads as shipped: article, geometry,
+      # graphicx, booktabs, hyperref, lmodern, biblatex. When you add a package
+      # to the document, read the new requirement out of the log and add it here.
+      # Nothing here needs texlive-latex-extra, which is the large one, and
+      # nothing needs texlive-full.
+      #
+      # MEASURED in the instance this template came from, on the first run of
+      # this workflow: 43.7 s, 142 MB, 119 packages. That is not slow, so the
+      # path filter on `report/**` that was held in reserve was never applied.
+      # Re-measure before you assume it still holds for your package set.
+      #
+      # `lmodern` is listed explicitly and is NOT redundant with
+      # texlive-fonts-recommended: that package ships the Latin Modern font
+      # files, but lmodern.sty lives in Debian's `lmodern` package, and
+      # --no-install-recommends stops it arriving as a recommend. The first run
+      # of this workflow failed on exactly that -- `! LaTeX Error: File
+      # 'lmodern.sty' not found` -- which a full local TeX installation could not
+      # have caught, because it has everything.
+      - name: Install TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-recommended \
+            texlive-fonts-recommended \
+            texlive-bibtex-extra \
+            lmodern \
+            biber \
+            latexmk
+
+      # No language runtime step, and that is the point: report/figures/*.pdf are
+      # committed, so the document compiles from a clean checkout with a TeX
+      # installation alone. See report/figures/README.md for why the figures are
+      # committed rather than regenerated here.
+      - name: Build
+        run: make -C report
+
+      - name: Upload PDF
+        # `always()` so a failed build still hands back the log to read.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-pdf
+          path: |
+            report/main.pdf
+            report/main.log
+          if-no-files-found: error

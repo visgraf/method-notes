@@ -1,0 +1,222 @@
+# ==============================================================================
+# MEASUREMENTS — inherited priors, this project's own numbers, carried methods,
+# and gaps.
+#
+# Read `status` on every entry. There are three kinds of value:
+#
+#   inherited  Measured elsewhere, under conditions this project has not
+#              adopted. A PRIOR, not a fact about this project. Using one
+#              without re-measuring is an assumption; say so when you do.
+#   measured   Produced by a run IN THIS REPOSITORY. These are facts about this
+#              project, and they are the only entries that are.
+#   gap        A measurement that was NOT made, and whose absence is
+#              load-bearing. It has no value. It is here so the absence is as
+#              citable as a number, and so nobody rediscovers it by assuming it
+#              away.
+#
+# WHY THIS FILE EXISTS AND A DOCUMENT DOES NOT. Prose cannot be contradicted and
+# therefore cannot carry. A datum with provenance can be contradicted by a future
+# measurement, so it can.
+#
+# WHEN YOU RE-MEASURE ONE OF THESE, DO NOT EDIT ITS VALUE. Add the new
+# measurement as its own entry and set the old one's `status` to `superseded`,
+# with `superseded_by`. The disagreement is the information.
+#
+# TEMPLATE. Schema and rules, no entries. The `methods` section below ships with
+# one worked example, and that example is the most expensive lesson in this
+# template — read it before writing your first experiment.
+# ==============================================================================
+
+schema_version: 1
+
+record:
+  statuses:
+    inherited: >-
+      Measured elsewhere, under conditions this repository has not adopted. A
+      prior awaiting re-test. Not established, not a baseline, not a target.
+    measured: >-
+      Produced by a run in this repository, with the commit that produced it.
+      These are the numbers this project owns rather than inherits.
+    gap: >-
+      Not measured. Recorded because the absence is load-bearing.
+    superseded: >-
+      Replaced by a later measurement, which is named in `superseded_by`. The
+      entry stays. Deleting it would delete the disagreement.
+  compiled_at: null
+  compiled_by: null
+
+# Every `source:` path on an inherited entry resolves against one of these
+# checkouts, at the SHA named here. Pin the SHA, never a branch: a citation to
+# `main` is a citation to whatever `main` says the day it is read.
+#
+# Note the distinction from `measured_at_sha` on an entry, which is the commit
+# the RUN was made at, as recorded by the source itself.
+sources: []
+# - key: <short name used in `source:` paths>
+#   repo: <host/org/name>
+#   sha: <full 40-character SHA>
+#   role: >-
+#     What it contributes. A source that contributes NO measurements still
+#     belongs here, with its absence recorded as a gap — "we read it and it had
+#     nothing" and "we never read it" are different facts.
+
+schema:
+  id: Stable. Never reused, never renumbered. Cite this.
+  statement: One line. What was measured.
+  value: Scalar, or a mapping when the measurement is inherently per-condition.
+  units: >-
+    Explicit, always. Never "units: implied by the source". A number whose units
+    are inferred at the point of use is the archetype of the failure this whole
+    repository is arranged against.
+  n: What the value is aggregated over. Never omitted; `null` where the source does not say.
+  conditions: >-
+    The stimulus, the instrument, the configuration — whatever makes the number
+    reproducible and whatever bounds what it is a measurement OF. This field and
+    `notes` are what stop a number that is true under one condition from being
+    quoted as a property of the system.
+  provenance: {cited_as, source, experiment, run_id, measured_at_sha, environment}
+  provenance.environment: >-
+    The interpreter and library versions the run executed under. `null` where the
+    source records nothing, which is the honest state for most `inherited`
+    entries.
+    A FIELD RATHER THAN A COMMENT. In the instance this template came from it
+    was prose in three places, which meant the one thing several numbers actually
+    claimed — that they do not depend on their environment — was not queryable.
+    `measured_at_sha` says which code produced a number; `environment` says which
+    interpreter did, and for a reproduction claim the second is the load-bearing
+    half.
+    BACKFILL IS NOT INFERENCE. Fill it only where a source already records it.
+    An interpreter that can be guessed from a build artifact is a guess, and a
+    guess written into this field is exactly what the field exists to prevent.
+  status: inherited | measured | gap | superseded
+  superseded_by: The id that replaced it. Required when status is `superseded`.
+  notes: Optional. Caveats that travel with the value, from the source.
+
+# ------------------------------------------------------------------------------
+# THE VALUES
+#
+# Ids are stable and never renumbered. Use one prefix per project so that a
+# citation is self-locating in a report — the instance used `bio-` for its own
+# and `as-` for one predecessor's. The `met-` and `gap-` spaces in this file are
+# allocated the same way. See "HOW IDS ARE ALLOCATED" at the top of
+# docs/state.yaml, which governs every id space in the record, and names the
+# assumption that makes sequential allocation safe.
+# ------------------------------------------------------------------------------
+values: []
+# - id: <prefix>-001
+#   statement: <one line>
+#   value: <scalar or mapping>
+#   units: <explicit>
+#   n: <what it aggregates over, or null>
+#   conditions: <what makes it reproducible, and what bounds it>
+#   provenance:
+#     cited_as: <how the source names it>
+#     source: <path within the pinned checkout, or this repository>
+#     experiment: <exp id>
+#     run_id: <if the source has one>
+#     measured_at_sha: <the commit the run was made at>
+#     environment: {python: null, numpy: null}
+#   status: inherited | measured | gap | superseded
+#   notes: >-
+#     The caveat that must travel with the value. IF THE NUMBER IS MOST EXPOSED
+#     TO SOME GAP, SAY SO HERE, IN THE WORDS YOU WOULD WANT QUOTED. This field is
+#     what a report's verification pass reads back; a caveat that exists only in
+#     a findings file does not travel.
+
+# ==============================================================================
+# CARRIED METHODS
+#
+# A method is a criterion, threshold, tolerance, window, bar, or convention that
+# governs how results are scored. It is not a number about the world; it is a
+# number about how you will decide what the world said.
+#
+# ENTER A METHOD HERE AT FIRST USE, NOT AT FIRST SUSPICION. This is the rule
+# this section exists for and it is the single most expensive lesson in this
+# template.
+#
+# WHY, IN ONE SENTENCE: in the instance this template came from, carried NUMBERS
+# got a `status` field on day two and carried METHODS got one only at experiment
+# twelve, by which time a statistical criterion nobody had examined had governed
+# ten experiments and turned out not to test what it was read as testing.
+#
+# The long version is met-001 below. Read it. It is kept as the section's only
+# entry because a rule with a worked example survives simplification and a rule
+# without one does not.
+#
+# `kind` is the whole point of this section:
+#   measurement — this repository measured it, and the measurement is cited.
+#   choice      — this repository chose it deliberately and said why, here.
+#   carried     — it walked in and has NEVER been examined here. The third
+#                 category is the finding. Count them; the count is a fact about
+#                 the project and belongs in the record as a gap.
+#
+# NOTHING IN THIS SECTION IS RE-DERIVED BY BEING LISTED. The audit is the
+# deliverable. A value being `carried` is not an accusation that it is wrong — it
+# is a statement that nobody here knows whether it is.
+#
+# THE TEST FOR WHETHER SOMETHING BELONGS HERE: if this value changed, would any
+# verdict in this repository change? If yes, it is a method, and it needs an
+# entry the first time it decides anything.
+# ==============================================================================
+methods:
+
+  # --- WORKED EXAMPLE, from the instance. Not one of your methods. -------------
+  #
+  # It is left in place rather than described in a comment because the shape of
+  # the entry is the lesson: what `kind` records, what `re_derived_here` costs
+  # when the answer is NO, and what `to_re_derive` looks like when the thing to
+  # derive is not a quantity at all.
+  #
+  # DELETE IT once your own `methods` section has an entry that teaches the same
+  # thing. Until then it is doing more work than an empty list.
+  - id: met-000-EXAMPLE
+    what: >-
+      An indistinguishability criterion, carried from a predecessor experiment:
+      two arms count as distinguishable on a metric iff the mean paired
+      difference across seeds exceeds BOTH the seed-to-seed spread sd(d_s) AND a
+      2% materiality floor.
+    kind: carried
+    from: >-
+      The predecessor's own first experiment. Its preregistration said so
+      explicitly — "reused rather than invented" — which is exactly the phrase
+      that should have triggered an entry here, and did not.
+    re_derived_here: >-
+      NO, AND THAT IS WHAT IT COST. Used unexamined in ten consecutive
+      experiments — every comparison the project ever scored. The eleventh
+      iteration was the first to notice that sd(d_s) is a SAMPLE STANDARD
+      DEVIATION and not a standard error, so the bar is far stricter than a
+      significance test and was being read as one. The twelfth measured what that
+      cost: 45 of 96 null results read differently under the other bar.
+    to_re_derive: >-
+      Nothing to derive — it is a threshold, not a quantity. What it needed was a
+      STATEMENT OF WHAT IT ASKS, which is "does the effect exceed scene-to-scene
+      variation", i.e. would this reliably help on a NEW scene. That is a
+      legitimate and deliberately strict question. THE DEFECT WAS NEVER THE BAR.
+      It was that nobody had written down which question it answers, so ten
+      experiments' worth of prose called its verdicts "statistically
+      indistinguishable" when the criterion in force was not a significance test.
+    what_the_entry_would_have_cost_on_day_one: >-
+      Four lines and one honest word: `kind: carried`. That is the whole
+      intervention. It does not require examining the method, re-deriving it, or
+      even doubting it — only recording that it walked in unexamined, so that the
+      first person to wonder finds the wondering already half done.
+    status: examined_at_experiment_twelve
+
+# ------------------------------------------------------------------------------
+# GAPS
+#
+# Measurements that were NOT made and whose absence bounds what can be claimed.
+# They have ids and are cited exactly like values, because "we did not measure
+# this" is a thing a foreclosure needs to be able to point at.
+#
+# A gap is not a to-do list item. A to-do can be closed by deciding it does not
+# matter; a gap is closed only by a measurement, or by a foreclosure that says
+# in writing what is being given up.
+# ------------------------------------------------------------------------------
+gaps: []
+# - id: gap-001
+#   statement: <what was not measured>
+#   why_it_is_load_bearing: >-
+#     Which claims are bounded by it, cited by id. A gap that bounds nothing is
+#     an idea for future work and does not belong here.
+#   what_would_close_it: <the run, and the instrument it needs>

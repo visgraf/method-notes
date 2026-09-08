@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Reference clones, disposable. Pinned checkouts of the repositories this
+# project reads from are cloned here and read BY PEOPLE, never by code:
+# tests/test_scaffold.py enforces that. They are absent in CI, so any code path
+# that reached into one would pass locally and fail everywhere else.
+.reference/
+
+# Run artifacts
+results/

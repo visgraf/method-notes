@@ -645,6 +645,39 @@ open_decisions:
       a record's authority, which is claim 25's defect.
     depends_on: [gap-004]
 
+  - id: od-007
+    altitude: infra
+    status: open
+    title: >-
+      The markdown-to-LaTeX converter is not in the repository, and it now
+      carries a guard that is load-bearing.
+    the_question: >-
+      report/sections/*.tex are GENERATED from report/draft.md. The script that
+      generates them has never been committed — it lives outside the tree — so
+      the regeneration a reader is told to perform cannot be performed, and the
+      diff between draft and typeset output that report/main.tex calls the place
+      a mangled number shows cannot be reproduced by anyone else.
+      IT MATTERS MORE SINCE 2026-09-08. The converter now refuses to emit a
+      straight double quote, an unconverted curly quote, dash or section mark —
+      the guard added after two straight quotes reached the built PDF. That
+      guard is the only thing standing between this document and a repeat, and
+      it is not in the repository.
+    what_would_decide_it: >-
+      A judgement the maintainer has to make, because the obvious fix reopens a
+      closed decision. Committing the script means putting Python back in a
+      repository that deleted it deliberately (fc-002, fc-003), which would drag
+      pyproject.toml, the lint and type gates, and the .reference/ import guard
+      back with it — fc-002's scope says exactly that. Three options, none free:
+        (1) commit the script alone, exempt from tooling, and say so — cheapest,
+            and it makes "no executable code here" false;
+        (2) commit it and accept the tooling back, honouring fc-002's scope;
+        (3) leave it out and delete the claim that the .tex is regenerable,
+            treating the typeset files as hand-maintained from here on — which
+            costs the diffability the whole draft/typeset practice exists for.
+      DECIDE BEFORE THE NEXT EDIT TO THE PROSE, because (3) becomes true by
+      default the moment someone edits a .tex directly.
+    depends_on: []
+
   - id: od-005
     altitude: impl
     status: RESOLVED

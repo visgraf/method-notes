@@ -745,6 +745,57 @@ and that is a maintenance cost, not a one-time fix.
 
 ---
 
+# The transit, and the defect it surfaced
+
+**This is what the draft/typeset separation is for**, and it has now caught
+something, so the practice is recorded as having fired rather than argued for.
+
+**Straight double quotes survived into the typeset output**, in two places, both
+inside verbatim quotations — the passage from `active-stereo`'s constitution in
+§2, and the findings-file phrase in §6. LaTeX renders `"` as **two right-facing
+marks**, so the *opening* quote of each pointed the wrong way. In Markdown the
+two forms render identically, which is exactly why the defect is invisible at the
+source and visible only after the transit.
+
+**The cause was a converter that handled curly quotes and not straight ones.**
+The draft mostly uses `“ ”`, which were mapped from the first version; the two
+straight pairs were the exceptions, and nothing looked for them.
+
+**The fix is in the converter, not in the `.tex`.** The section files are
+generated from `report/draft.md`; editing them by hand would have been reverted
+by the next regeneration, silently, and the document would have been correct
+exactly until someone re-ran the conversion. Straight pairs are now converted to
+`` `` ``…`` '' `` before output.
+
+**And the converter now fails rather than warns.** It refuses to write output
+containing a straight double quote, an unconverted curly quote, an em or en dash,
+or a section mark — the guard was tested by removing one closing quote from the
+draft, and the conversion exits non-zero naming the file and the count. *This
+defect was found by eye, in a built PDF, which is the most expensive place to
+find it; it cannot ship that way again.*
+
+## The rest of the audit, reported in full
+
+| class | found | verdict |
+|---|---|---|
+| straight `"` in `sections/` | **0** after the fix | enforced by the guard |
+| apostrophes (`word's`, `experiments'`) | 49 | **correct as-is** — LaTeX renders `'` as a right single quote, which is what an apostrophe is |
+| possessives on section refs (`\S4.1's`) | 5 | correct; flagged only because a digit precedes them |
+| opening single quotes | 0 | none to fix |
+| ellipses (`...` or `…`) | 0 | none present |
+| stray backticks | 0 | every `` ` `` is half of a `` `` `` pair |
+| unconverted `— – § “ ”` | 0 | clean |
+| straight `"` in `main.tex` | 1 | **inside a LaTeX comment**, never rendered — reported rather than "fixed", because changing it would suggest it mattered |
+| quotes inside `\texttt{}` | 0 | checked, because the conversion runs on code-span contents too and would have corrupted a literal |
+
+**The last row is the one worth keeping.** The quote conversion also runs over
+code-span contents, so a `"` inside a `` ` ` `` span would have been silently
+turned into typographic marks in a literal. There are none in this draft — but
+that is a property of this draft, not of the converter, and a future one could
+trip it.
+
+---
+
 # What this pass did not do
 
 - **No prose was written and no `.tex` file was touched.** The two amendments in `9b58d1a` were made before this pass, under the specification's explicit exception, and are recorded as claim 14's partial resolution.

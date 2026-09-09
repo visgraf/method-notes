@@ -1,0 +1,53 @@
+\section{The template}
+
+The method described here is extracted into a repository template, public and instantiable. This section says what is in it, what deliberately is not, and what it does not yet know.
+
+\subsection{What it contains}
+
+\textbf{A constitution.} The rules the file-holding surface operates under: what it may do without asking, what requires permission, what it may never do. About a third of the original was domain-specific --- coordinate frames, units, conventions particular to one problem --- and that third is now an empty section marked \textit{domain invariants}, with the filled original visible beside it. The blank is the template; the example is what makes the blank legible.
+
+\textbf{A workflow.} The four-station loop, the three verdicts, the rule that every specification carries a falsifier and names the repository state it assumes. Plus the two additions \S4 argued for: the devil's advocate pass with its triggers, and the note that the reviewing surface's clone is a separate checkout it reads and runs and never commits to.
+
+\textbf{Two ledgers, as schema and prose headers with no entries.} Most of their value is in the headers --- the rule that one is written by the surface holding the files and read by the surface that does not; the distinction between what is derivable and what is intent; the procedure for reopening a closed decision, which is to annotate and never reverse.
+
+\textbf{An experiment exemplar.} Five empty files in the order they are written, pre-registration first, with a short note on why the order is load-bearing.
+
+\textbf{The low-ceremony lane}, with its rules, its enforcement test, and --- per \S6 --- its own record of non-use.
+
+\textbf{A report scaffold}, including the claims-verification practice: prose drafted in one format, typeset in another, both committed so the translation is diffable, and a pass that checks every load-bearing claim at source before anything is set.
+
+\textbf{A list of specification defects}, which is the artifact \S6 says did not exist, seeded with the two that recurred.
+
+\subsection{What it does not contain}
+
+No library code, no experiments, no ledger entries, no domain content. The rules travel; the content does not.
+
+Also absent, deliberately: several practices from the original project judged specific to it rather than general. A migration audit of two particular predecessors --- the practice survives inside \textit{carry only what can fail}, the artifact does not. A provenance file for fixture data, which without any data beside it is ceremony. A structural test resting on a decision the template's user has not taken.
+
+Each omission is recorded with its reason, which is the same discipline the template applies to everything else.
+
+\subsection{The rule the template is built on}
+
+One rule governed the extraction and it is worth stating on its own:
+
+\begin{quote}
+\textbf{Every rule that ships carries the observed failure that motivated it, in one sentence.}
+\end{quote}
+
+A rule without its reason gets simplified away by the next person to read it. Someone encountering \textit{mark carried methods at first use} with no explanation will reasonably conclude it is bureaucratic and drop it. Someone encountering it beside \textit{a carried criterion governed ten experiments before anyone asked what it tested} will not.
+
+This has a consequence that took a moment to accept. \textbf{The template is mostly a record of failures}, and it reads that way. That is correct. A methodology presented as a set of good practices is a set of assertions; presented as a set of failures with their remedies attached, it is evidence.
+
+\subsection{What it does not know}
+
+The template was audited against one question: can a session starting cold, with no other context, read it and write a first specification without asking what any of it means? That audit found several gaps, and four were closed in a single change. Its residue is argued below rather than recorded in the template, because recording it would mean inventing rules the original project never exercised.
+
+The largest: one of the method's own concepts --- the distinction between decisions that change what the project \textit{is} and decisions about how to build it --- is defined in the template by an example from a layered software architecture. For a project without that structure, the distinction has no test. It is a real gap and the honest fix is for a second project to supply the general case by having its own.
+
+\subsection{And the thing to hold on to}
+
+The template's value is \textbf{unproven}, and its front page says so. One researcher, one field, one project, five days. It does not claim to be a validated methodology. What it claims is narrower and checkable: these rules were exercised, several of them failed in specific recorded ways, and the fixes are marked as new and untested.
+
+There is one exception, and it is the only place in the template where a rule is caught working rather than argued for. The check for figures repeated across a document fired on the template's own front page, where a count had been taken from the highest identifier rather than from the set --- and the figure had been repeated in a second file, so correcting the first would have left the second standing. The tree-wide search found it; a re-reading would not have.
+
+That is a small error about an unimportant number. It is also, exactly, the failure this whole method exists to prevent, occurring in the provenance paragraph of the document that ships the remedy. It is recorded there, beside the rule, for that reason.

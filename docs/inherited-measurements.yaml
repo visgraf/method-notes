@@ -113,23 +113,37 @@ sources:
 
   - key: active-stereo
     repo: visgraf/active-stereo
-    sha: null
+    sha: 3f7a263011d9c5c53a4733957ac34cd28c2e85ba
     role: >-
       Predecessor. A full implementation with verified geometry and a decision
       record, whose loop never ran. The draft cites it for two things: the
       failure that motivated the low-ceremony lane, and the constitution clause
       that was false and talked a reviewer out of verifying.
-    checkout_status: CLONED 2026-09-08 (default branch; no SHA pinned). See gap-001.
+    checkout_status: >-
+      CLONED 2026-09-08 and PINNED at 3f7a263 (gap-003). Claims 2, 5 and 46 of
+      the first pass rest on it. Claim 2 is a VERBATIM QUOTATION cited to
+      CLAUDE.md:141; re-verified at the pinned SHA on the day it was pinned —
+      the line reads "the rule above would be unenforceable — Chat holds
+      excerpts by construction, so", continuing into :142. 3f7a263 is the
+      repository's final merge, so the pin will not move, but that is a fact
+      about this repository's history and not a substitute for pinning.
 
   - key: bioeye
     repo: visgraf/bioeye
-    sha: null
+    sha: e90817018e629ce1cd23af0c9e8bc4a6aa15daff
     role: >-
       Predecessor. A thin vertical slice that closed the accumulation loop and
       not the perception-action loop. Listed with NO measurements attributed to
       it, which is a fact and not an oversight: "we read it and it had nothing"
       and "we never read it" are different, and this is the second.
-    checkout_status: CLONED 2026-09-08 (default branch; no SHA pinned). See gap-001.
+    checkout_status: >-
+      CLONED 2026-09-08 and PINNED at 3f7a263 (gap-003). Claims 2, 5 and 46 of
+      the first pass rest on it. Claim 2 is a VERBATIM QUOTATION cited to
+      CLAUDE.md:141; re-verified at the pinned SHA on the day it was pinned —
+      the line reads "the rule above would be unenforceable — Chat holds
+      excerpts by construction, so", continuing into :142. 3f7a263 is the
+      repository's final merge, so the pin will not move, but that is a fact
+      about this repository's history and not a substitute for pinning.
 
 schema:
   id: Stable. Never reused, never renumbered. Cite this.
@@ -581,6 +595,14 @@ gaps:
       field-counting collapses the result to a single line. See od-003.
 
   - id: gap-003
+    status: CLOSED 2026-09-08
+    closed_by: >-
+      Both SHAs recorded in `sources` above and claim 2's quotation re-read at
+      active-stereo@3f7a263, CLAUDE.md:141, where it still says what the claim
+      says. THE POINT OF THE CLOSURE IS THE RE-READ, NOT THE PIN: a line number
+      against a branch is a citation to whatever that branch says on the day it
+      is read, and pinning without re-reading would have recorded the SHA
+      without ever confirming the line survived to it.
     statement: >-
       active-stereo and bioeye are cloned at their default branches, not at a
       pinned SHA. No SHA for either is recorded in `sources`.
@@ -599,8 +621,22 @@ gaps:
   - id: gap-004
     statement: >-
       The method has no channel for a specification that was correctly rejected
-      before work was spent. Six claims in the pass are UNSUPPORTED and four of
-      them are unrecordable BY CONSTRUCTION, not merely unrecorded.
+      before work was spent. Six claims in the pass are UNSUPPORTED and most of
+      them are unrecordable rather than merely unrecorded.
+      TWO COUNTS ARE IN CIRCULATION AND BOTH ARE RIGHT, which is the mn-001 /
+      mn-002 situation again and is recorded the same way rather than resolved
+      by picking one. FOUR are unrecordable BY CONSTRUCTION — the workflow
+      guarantees no artifact: claims 17 and 20 live in specifications, which are
+      never committed; 12 is a rate over conversational turns; 25 is a cleared
+      session's search. FIVE "describe an event the workflow guarantees will
+      leave no trace", which is the selector §6's subsection uses, and it admits
+      claim 45 as well: the afternoons a foreclosure cost were events, and
+      nothing in the method logs duration.
+      THE ODD ONE OUT UNDER EITHER SELECTOR IS CLAIM 38 — "about a third of the
+      original was domain-specific". It is not an event at all; it is a
+      proportion of a document that still exists, so it is unsupported but
+      MEASURABLE, and it is the only one of the six a successor could close by
+      going and looking.
     why_it_is_load_bearing: >-
       It bounds §4.2 and §5 of the draft, which rest on "three specifications
       were rejected on false assumptions" (claim 17) and call the rejections
@@ -609,6 +645,46 @@ gaps:
       commit: docs/workflow.md states that a specification is the only artifact
       of the loop that leaves no trace, and that no specification was ever
       committed in the instance.
+      COUNT CORRECTED 2026-09-08 (second correction to this entry). This entry
+      said THREE fragments survive. It is FOUR passages that report specification
+      content — exp007/preregistration.md:38, exp009/preregistration.md:19,
+      exp007/findings.md:123 ("The specification said 18 steps for A, A', D and
+      E", under a heading reading "A deviation from the specification, and why"),
+      and exp007/findings.md:32. The third item originally listed here,
+      exp007/findings.md:46, does NOT qualify: it records what the specification
+      did NOT state, which is an absence, not a quotation.
+      HOW THE UNDERCOUNT HAPPENED, since it is the reusable part: the search
+      returned four hits and the summary said three. findings.md:123 was in the
+      output and was never opened. Recorded as docs/spec-defects.md §6.
+      AND THE "ARGUING WITH" CHARACTERISATION IS TOO NARROW. Three of the four
+      depart from the clause they quote; exp007/findings.md:32 AGREES with it —
+      "The specification asked for this to be visible rather than inferred, and
+      it is". The conclusion is unaffected and this is why the correction is
+      cheap: the load-bearing condition is that the specification was EXECUTED
+      and produced an artifact, which holds for all four. Agreement or
+      disagreement, a rejected specification produces no artifact either way.
+      PRECISION ADDED 2026-09-08, correcting this entry's own overstatement.
+      "No specification was ever COMMITTED" is true — no specification file
+      exists in the instance at 5f8e39f, and no filename matches spec, task,
+      brief, instruction or prompt. "No specification TEXT SURVIVES" would be
+      FALSE, and the difference is worth the lines. Three fragments survive,
+      quoted inside artifacts that were being committed anyway:
+      experiments/exp007_rendered_policy_sweep/preregistration.md:38 quotes it
+      directly — the specification says "six arms, one stimulus";
+      experiments/exp009_epipolar_cost/preregistration.md:19 quotes a clause,
+      "the specification says to compose rectification_rotation into
+      eye_camera_poses", and then argues it is wrong; and
+      experiments/exp007_rendered_policy_sweep/findings.md:46 records a reading
+      "which neither exp005 nor this specification stated".
+      THE PATTERN SHARPENS THE ARGUMENT RATHER THAN WEAKENING IT. Every
+      surviving fragment is text that an artifact was ARGUING WITH.
+      Specification text reaches the record only when a preregistration or a
+      findings file has to disagree with it in order to justify what it did
+      instead — that is, only when the specification was EXECUTED and produced
+      an artifact. A specification rejected before work begins produces no
+      artifact, so nothing is ever in a position to quote it. The survival
+      mechanism is parasitic on the work happening, which is precisely why it
+      cannot preserve a rejection.
       THE ASYMMETRY IS THE FINDING: the workflow records what work PRODUCED and
       has no channel for work it correctly PREVENTED — so the method's own
       strongest evidence is the kind it systematically destroys. state.yaml's

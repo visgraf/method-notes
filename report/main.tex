@@ -53,11 +53,32 @@
 \usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 
-% biblatex + biber, not bibtex. biblatex is what carries per-entry provenance
-% notes -- including a software entry pinned to a COMMIT rather than to a branch,
-% which is the only citation form that means anything for a repository.
-\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
-\addbibresource{refs.bib}
+% A MONOSPACE PATH CANNOT HYPHENATE, and this document is full of them. The one
+% overfull box the first full build produced was exactly that -- \texttt{} around
+% report/claims-verified.md, 17.6pt too wide, with no break point TeX would take.
+% It reads fine in Markdown, where nothing justifies.
+%
+% \allowbreak after the slash was tried first and did NOT take -- recorded
+% because the obvious fix failing is the useful half. \sloppy, scoped to the one
+% block that contains the path, does. It is scoped rather than global: one box in
+% twenty-two pages does not justify loosening how the whole document is set. If
+% paths multiply, revisit -- seqsplit, or hyphenat with [htt], is the general
+% answer, and either would add a package to the CI install list.
+
+% NO BIBLIOGRAPHY, and that is a finding rather than an omission. The draft cites
+% no published work -- checked, not assumed: no author name, no "et al.", no
+% year-in-parentheses anywhere in report/draft.md. The four repositories in
+% Appendix A are named in prose, not cited. Rather than invent entries, biblatex
+% is commented out here and refs.bib holds its rule and no entries.
+%
+% WHAT WOULD GO IN IT, when it is wanted: four @software entries, one per
+% repository in Appendix A, each pinned to the SHA now recorded in
+% docs/inherited-measurements.yaml -- bio-3d-vision 5f8e39f, math-ai-method
+% 81a638e, active-stereo 3f7a263, bioeye e908170. That is the only citation form
+% that means anything for a repository, and refs.bib says why.
+%
+% \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+% \addbibresource{refs.bib}
 
 \graphicspath{{figures/}}
 
@@ -76,9 +97,11 @@
   Luiz Velho \\
   \normalsize IMPA
   \and
-  Claude \\
+  Claude\thanks{These notes were produced in collaboration with Claude ---
+    model Opus, high reasoning effort. See \S8.4, which takes the recursion as a
+    subject rather than a disclaimer.} \\
   \normalsize Anthropic \\
-  \normalsize \textit{collaborator; see \S8.4}
+  \normalsize \textit{collaborator}
 }
 
 \date{\today}
@@ -86,36 +109,54 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-REPLACE THIS. Write the abstract last, and then verify it first: in the instance
-this template came from, the abstract was where a correctly-measured ratio lost
-the one condition that bounded it, because the abstract is the passage furthest
-from the record and the one most rewarded for compression.
-\end{abstract}
+% NO ABSTRACT. The draft has none, and writing one here would be composing prose
+% that has never been through a claims pass -- in the passage the template
+% identifies as the most dangerous in a report, because it is furthest from the
+% record and most rewarded for compression. The status note below is the draft's
+% own, typeset from it.
+\begin{quote}
+\small\sloppy
+\textbf{Draft status.} This document was drafted on the conversational surface
+and assembled by hand. Its factual claims about the source project have now been
+through \textbf{one} claims-verification pass --- the practice \S4.1 describes
+and \S7 ships --- covering \S\S1--8.5, resolved against pinned checkouts of the
+repositories it makes claims about.
 
-% Sections live in sections/ and are \input here. The directory ships empty; add
-% files and uncomment. Keeping them separate is what lets a verification pass
-% cite a claim by file and line.
-%
-% \input{sections/introduction}
-% \input{sections/background}
-% \input{sections/findings}
-% \input{sections/conclusion}
+\textbf{42 claims: 22 confirmed, 5 corrected, 8 under-qualified, 6 unsupported,
+1 partial} (\texttt{mn-004}). The thirteen corrected and under-qualified claims
+have been applied, across twenty passages. Every verdict, its source, and the
+sentence it replaced are in \texttt{report/claims-verified.md}.
 
-\section{Placeholder}
-This document compiles with no sections so that the build is green from the
-first commit. Delete this section when the first real one lands.
+\textbf{Six claims remain UNSUPPORTED and are unchanged in the prose.} They are
+not contradicted by the record; they are unestablishable from it, and four of the
+six describe events this method guarantees will leave no artifact --- see
+\texttt{gap-004} and \texttt{od-006}. Read \S4.2's rejection count and \S4.5's
+cold-session search as recollection, not record.
 
-% Keeps the bibliography non-empty so a fresh clone builds with no warnings.
-% Delete it with the placeholder entry in refs.bib -- a scaffold that warns on
-% day one teaches you to read past warnings, which is a habit worth not having
-% in a repository where the build is part of the evidence.
-\nocite{example-repository}
+\S6's \textit{The method destroys its own best evidence} was written after that
+pass and checked separately: \textbf{seven claims, A1--A7 --- five confirmed, one
+corrected, one under-qualified.} Both non-confirmed claims have since been
+corrected in the prose, so the section now stands as verified throughout.
 
-\section{References}
-\printbibliography[heading=none]
+Sections 8.6, 8.7 and 8.8 are the first author's, written in the first person.
+They make no checkable factual claims and are out of scope for that pass.
+\end{quote}
+
+% GENERATED FROM report/draft.md, one file per numbered section. The draft is the
+% prose of record and these are its typeset form; the converter is deterministic
+% and the transit was checked word-for-word (11,628 words in, 11,628 out, zero
+% differing blocks). Edit the draft, re-run the conversion, and commit both --
+% the diff between them is where a mangled figure shows.
+\input{sections/01-what-this-is}
+\input{sections/02-the-setting}
+\input{sections/03-the-project}
+\input{sections/04-how-it-goes-wrong}
+\input{sections/05-what-it-cost}
+\input{sections/06-where-it-failed}
+\input{sections/07-the-template}
+\input{sections/08-reflection}
 
 \appendix
-% \input{sections/appendix}
+\input{sections/09-appendix-availability}
 
 \end{document}

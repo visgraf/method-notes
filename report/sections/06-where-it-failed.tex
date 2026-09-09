@@ -1,0 +1,89 @@
+\section{Where the method failed}
+
+Four of the seven mechanisms in \S4 arrived late, after the failure they were built for had already happened. That is not damning --- a method extracted from one project will be, by construction, a record of what that project learned the hard way. Those are covered where they occurred.
+
+This section is about the failures that are still live. The last one is the serious one, and I want to arrive at it properly.
+
+\subsection{Three that arrived late}
+
+\textbf{The inherited marker was applied to numbers and not to methods.} Day one for figures, experiment twelve for criteria --- by which point a carried statistical bar had governed ten experiments. The asymmetry is the finding: a repository that would not let a number cross without provenance let a criterion cross unmarked, and the criterion determined how every number was read.
+
+\textbf{Verification ran per passage while repetition crossed passages.} Found only because the same ratio appeared twice and someone happened to look at both.
+
+\textbf{Specification defects had no ledger.} Decisions got foreclosures, measurements got provenance, and badly-written specifications got nothing --- so the same two errors recurred: bundling a bounded task with an unbounded one, and naming a branch without asking for a commit. Both were cheap and both were avoidable by a five-line list that did not exist.
+
+All three now ship in the template, each with the failure that motivated it. That is the ordinary way a method matures, and it is unremarkable.
+
+\subsection{The devil's advocate was agreed and never written down}
+
+Less ordinary, and worth its own paragraph because of what it demonstrates.
+
+The pass was proposed, discussed, refined into two triggers, and endorsed. It ran twice, informally, and both times produced something the loop would not have produced. \textbf{It was never written into the workflow file.}
+
+By the method's own foundational rule --- every handoff is a versioned artifact, never chat context --- that means it did not exist. A mechanism designed to catch the failure of a method going unquestioned was itself never subjected to the method. If the sessions had been cleared, it would have vanished without trace, and nobody would have known to miss it.
+
+\subsection{The method destroys its own best evidence}
+
+The three failures above are ordinary: rules that arrived after the thing they were built for. This one is different in kind, because it cannot be fixed retroactively at all.
+
+\S4.2 describes three specifications rejected on false assumptions about repository state, each caught before any work was spent, and calls this \textit{the clearest case in the project of a rule paying for itself.} That claim came back from the verification pass \textbf{unsupported} --- not contradicted, but not establishable from any record.
+
+The reason is structural. A specification is written on one surface, relayed by a human, and executed on another. \textbf{No specification was ever committed.} No file in the instance is one, and none is named as one. The work a specification produces lands in a branch; the specification itself lives in a chat window and a paste buffer.
+
+Fragments do survive, and where they survive is the finding. Four passages in the instance report specification text --- a pre-registration quoting a clause before departing from it, another quoting an instruction and then arguing it is wrong, a findings file recording a deviation and the clause it deviates from, and one recording that the specification asked for something that was duly delivered. \textbf{Every one is text that an artifact had to reckon with --- mostly to depart from it, once to confirm it.}
+
+That is the whole mechanism, and the fourth passage is what makes it precise. Specification text reaches the record only where a pre-registration or a findings file had to account for it --- usually to justify departing from it, once to note that it was met --- which in either case requires the specification to have been \textbf{executed} and to have produced an artifact in the first place. A specification rejected before work begins produces no artifact, so nothing is ever in a position to quote it. \textbf{The survival mechanism is parasitic on the work happening, which is exactly why it cannot preserve a rejection.}
+
+Five of the six unsupported claims in this document describe events the workflow guarantees will leave no trace. One rejection survives in the record, and only incidentally: it reshaped a decision that was taken anyway, so the decision's entry carries a fragment of it. That fragment is not even a stale-state rejection, which is the class \S4.2's claim was about.
+
+The finding is worse than a gap in the record.
+
+\begin{quote}
+\textbf{The method logs what work produced and has no channel for work it correctly prevented.} Its most valuable events are the ones where a rule stopped something before it existed --- and those are precisely the events that leave nothing behind.
+\end{quote}
+
+This inverts a claim made twice elsewhere in these notes. \S5 argues that the costs and the catches are the same list read twice, and that a wrong belief costs everything downstream of it. Both are true. But the catches that produce an artifact are the ones where something \textit{was} built and then corrected, and the catches that produce nothing are the ones where the rule worked earliest and cheapest. \textbf{The record is therefore biased toward the expensive saves and blind to the cheap ones} --- which means it systematically understates the value of the mechanisms that fire first.
+
+And there is no repairing this project's record. The three rejections happened; the specifications that were rejected are gone; nothing can be reconstructed that would not be reconstruction. This is the only failure in these notes with no remedy available to the project that suffered it.
+
+For a successor the fix is trivial and should have been obvious: \textbf{commit the specification alongside the branch it produces, and commit a rejected one too, with the assumption that was false.} A rejected specification is a small file recording that a rule fired, what it caught, and what it cost --- which is exactly the evidence this section is unable to supply.
+
+That it was not obvious is worth sitting with. The method's foundational rule is that every handoff is a versioned artifact and never chat context. The specification \textbf{is the handoff.} It is the one thing the rule was most clearly about, and it was the one thing the rule was never applied to.
+
+\subsection{And now the one that matters}
+
+Two components of the method were never used. Not underused. \textbf{Zero times.}
+
+The low-ceremony lane --- where an idea can be tried and thrown away, no decision record, no findings entry, no definition of done, one permitted output --- shipped on the first day with its rules, its README, and a test that enforces its one constraint in continuous integration. It was used zero times in thirteen experiments.
+
+The third surface, for cross-experiment synthesis and work spanning many artifacts, was designed into the workflow, given a role in the table, and used zero times. The synthesis it existed for happened in a chat window and had to be reconstructed afterwards from recollection.
+
+The obvious reading is oversight. It is not, and the evidence against it is specific and damning.
+
+\textbf{The lane was built as a fix for exactly this failure, in the previous project, where it had already cost something.} In that project a step was written up twice and never started, accumulating five declared items, four of them open questions, because the constitution had one standard --- plan, decision record, findings, tests, definition of done --- and that standard is right for library code and far too expensive for exploration. When a question is open and the only sanctioned move is to write about it, uncertainty turns into documents. The diagnosis was made explicitly. The remedy was designed explicitly. It was carried into the new repository on day one, complete with enforcement.
+
+And then the new project \textbf{did the same thing again.} Not by forgetting the lane, but by never reaching for it, while writing preambles and specifications and analyses about questions that could have been settled in twenty minutes by trying them.
+
+So the finding is not \textit{the method lacked a lane for informal work.} It is:
+
+\begin{quote}
+\textbf{A project with strong ceremony does not reach for its low-ceremony lane, even when the lane exists, is enforced, is documented, and was built specifically because its absence had already caused harm.}
+\end{quote}
+
+The mechanism is not mysterious once stated. Every artifact that meets a high standard raises the felt cost of producing one that does not. After ten pre-registered experiments with falsifiers, verdicts and provenance, writing a directory containing a rough script and no record does not feel like the sanctioned move it formally is. \textbf{It feels like a lapse.} The rigour is self-reinforcing, and self-reinforcement does not distinguish between the parts of itself that are load-bearing and the parts that are ritual.
+
+This has a second face which is worse. The formal parts of the method are the ones that produce artifacts, and artifacts are the only thing the method can see. A spike that would have settled a question in an afternoon leaves nothing behind if it succeeds --- the whole point is that it is deleted. \textbf{So the method is structurally blind to the value of the work it is discouraging}, and the record it produces will always show that the ceremony was worth it, because the record is made of ceremony.
+
+I felt this directly and did not name it at the time. There were several afternoons of writing about a question --- carefully, with pointers and open questions and a plan for resolving it --- where the honest move was to spend twenty minutes finding out. The writing was good. It met the standard. It also postponed the answer, and it was easier than admitting I did not know, because a document that says \textit{here are the four open questions} looks like progress and a directory called \texttt{does-the-fixture-need-occlusion} looks like not knowing.
+
+That is the thing a methodology cannot fix by adding a rule, which is why it is the last section rather than a bullet in \S4. \textbf{Adding the directory was not enough. It was already there.}
+
+\subsection{What might actually work}
+
+Not confident about this, and stating it as a proposal rather than a finding.
+
+A \textbf{trigger} rather than a lane, in the same shape as the devil's advocate pass: \textit{when a question has been written about twice without being tested, it goes to a spike.} Twice is countable. It fires on the observable --- documents produced --- rather than on a judgement about whether something needs trying, which is exactly the judgement the ceremony corrupts.
+
+And a \textbf{default toward the cheap move at the moment of maximum uncertainty}. The method's autonomy ladder governs how much the collaborator decides; nothing governs how much rigour the artifact must carry, and the answer should vary. At the point where a question is genuinely open, the standard should drop, not rise.
+
+Both are in the template. Neither has been tested, and the reader should treat them accordingly --- as the most recent guesses of someone who has now made this mistake twice.

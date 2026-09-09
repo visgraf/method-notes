@@ -241,8 +241,21 @@ pattern is a property of first-order reports rather than of prose in general.
 **Six claims are UNSUPPORTED — not contradicted, unestablishable.** The
 specification predicted what this would mean: §4.5's failure occurring in the
 document that describes it. It is that, and it is sharper than that, because
-**the unsupported claims are not scattered. Every one of them is about an event
+**the unsupported claims are not scattered. Five of the six are about an event
 the workflow guarantees will leave no artifact.**
+
+> **Two counts, both right, recorded rather than reconciled away.** *Four* are
+> unrecordable **by construction** — the workflow guarantees no artifact
+> (claims 17 and 20 live in specifications, which are never committed; 12 is a
+> rate over conversational turns; 25 is a cleared session's search). *Five*
+> "describe an event the workflow guarantees will leave no trace", the selector
+> §6's *The method destroys its own best evidence* uses, which also admits claim
+> 45: the afternoons a foreclosure cost were events, and nothing logs duration.
+> **Claim 38 is the odd one out under either selector** — not an event at all,
+> but a proportion of a document that still exists, so it is unsupported and
+> *measurable*, and the only one of the six a successor could close by looking.
+> This is `mn-001`/`mn-002` again: two numbers, two selectors, neither wrong.
+> See `gap-004`.
 
 | claim | what it asserts | why no record exists |
 |---|---|---|
@@ -549,6 +562,108 @@ does not yet reach, the rejections. Recorded as `od-006`.
 
 ---
 
+# Addendum — §6, *The method destroys its own best evidence*
+
+**Checked at the same pinned SHAs, on the revised text.** Seven checkable
+claims: **five CONFIRMED, one CORRECTED, one UNDER-QUALIFIED.** Numbered A1–A7
+and kept out of `mn-004`'s tally, which covers §§1–8.5 as they stood at the
+first pass.
+
+> **BOTH NON-CONFIRMED CLAIMS ARE NOW CLOSED IN THE PROSE** (A6, A7), together
+> with a third sentence neither verdict named — see *Resolutions*. The section
+> stands as verified throughout. The verdicts below are kept as written, with the
+> superseded wording quoted, because the disagreement between what was drafted
+> and what the record supports is the information.
+
+### A1. "§4.2 describes three specifications rejected… *the clearest case in the project of a rule paying for itself*"
+**CONFIRMED.** Quoted accurately from §4.2.
+
+### A2. "That claim came back from the verification pass **unsupported**"
+**CONFIRMED.** Claim 17, UNSUPPORTED.
+
+### A3. "**No specification was ever committed.** No file in the instance is one, and none is named as one."
+**CONFIRMED, and this is the sentence the previous round got wrong.** Re-checked
+at `instance` @`5f8e39f`: no tracked file is a specification, and no filename
+matches *spec*, *task*, *brief*, *instruction*, *relay* or *prompt* — zero hits.
+The earlier form, *"no specification text survives anywhere"*, was false. This
+form is true.
+
+### A4. "One rejection survives… it reshaped a decision that was taken anyway… not even a stale-state rejection"
+**CONFIRMED on all three parts.** `fc-012`'s entry: "THAT VERSION WAS REJECTED
+BECAUSE IT MAKES AZIMUTH AND VERGENCE INERT, and the rejection is the reason
+this entry exists in the form it does." The decision was taken; the rejection
+was on a geometry defect, not a repository-state assumption.
+
+### A5. "Five of the six unsupported claims… describe events the workflow guarantees will leave no trace"
+**CONFIRMED under the selector the sentence states** — admits 12, 17, 20, 25, 45;
+excludes 38, which is a proportion of a document rather than an event. A stricter
+selector ("unrecordable by construction") gives four. Both recorded; see
+`gap-004`.
+
+### A6. "**Three** passages in the instance quote specification text"
+**CORRECTED → four passages report specification content, and one of the three named is not one of them.**
+
+| passage | reports spec content? | what it does |
+|---|---|---|
+| `exp007/preregistration.md:38` | **yes** | quotes it — the specification says "six arms, one stimulus" |
+| `exp009/preregistration.md:19` | **yes** | reports the clause, then argues it is wrong |
+| `exp007/findings.md:123` | **yes** | "The specification said 18 steps for A, A′, D and E", under a heading reading *"A deviation from the specification, and why"* |
+| `exp007/findings.md:32` | **yes** | "The specification asked for this to be visible rather than inferred, and it is" |
+| `exp007/findings.md:46` | **no** | "the correct reading, which neither exp005 nor this specification stated" — **records an ABSENCE in the specification.** The blockquote after it is the findings file's own reading, not the specification's words. |
+
+- **The third named fragment is the one that does not qualify**, and
+  `exp007/findings.md:123` — omitted — is the clearest instance of the section's
+  own thesis: an artifact departing from a specification clause and quoting it to
+  say so.
+- **This is my error propagating, and it is worth naming as such.** The
+  search behind the previous round returned *four* hits and the report said
+  *three*: `findings.md:123` was in the output and never opened. The section was
+  then written from that summary. See `docs/spec-defects.md` §6.
+
+**Proposed:** "Four passages in the instance report specification text — a
+pre-registration quoting a clause before departing from it, another quoting an
+instruction and then arguing it is wrong, a findings file recording a deviation
+and the clause it deviates from, and one recording that the specification asked
+for something that was duly delivered."
+
+**APPLIED 2026-09-09**, verbatim. All four passages were re-read at
+`5f8e39f` before the sentence was written, and each characterisation checked
+against its text.
+
+### A7. "**Every one is text that an artifact was arguing with.**"
+**UNDER-QUALIFIED — true of three of the four, and the fourth is a counterexample.**
+- Arguing: `exp007/preregistration.md:38` (declares a design change),
+  `exp009/preregistration.md:19` ("The second half is wrong"),
+  `exp007/findings.md:123` ("A deviation from the specification, and why").
+- **Not arguing:** `exp007/findings.md:32` — "The specification asked for this to
+  be visible rather than inferred, **and it is**." An artifact *agreeing* with a
+  specification and carrying its content into the record.
+
+**THE SECTION'S CONCLUSION SURVIVES INTACT, AND THIS IS THE IMPORTANT PART.** The
+load-bearing sentence is the next one — *the survival mechanism is parasitic on
+the work happening* — and `findings.md:32` satisfies it completely: agreement or
+disagreement, the fragment is there because the specification was **executed**
+and produced an artifact. A rejected specification produces no artifact either
+way. **"Arguing with" is too narrow a mechanism for a conclusion that only needs
+"executed".** Narrowing it costs the argument nothing and removes a false
+universal.
+
+**Proposed:** "Every one is text that an artifact had to reckon with — mostly to
+depart from it, once to confirm it."
+
+**APPLIED 2026-09-09**, verbatim — **and it was not enough on its own.** The
+paragraph that follows restated the same overreach in different words:
+*"reaches the record only where a pre-registration or a findings file had to
+**disagree** with it in order to justify doing something else."* A7's verdict
+named one sentence and the defect was in two. Corrected to "had to **account
+for** it — usually to justify departing from it, once to note that it was met",
+which keeps the mechanism and drops the false universal. **This is the
+repeated-claim rule applying to a characterisation rather than a figure**, and
+nothing in the mechanical check would have caught it: it repeats an idea, not a
+number.
+
+---
+
 # Resolutions
 
 ## What resolved
@@ -562,29 +677,61 @@ does not yet reach, the rejections. Recorded as `od-006`.
 
 ## What is still flagged and was not corrected
 
-**Every claim above with a verdict other than CONFIRMED is in this list.** The
-specification reserved prose corrections to the maintainer; this pass's output
-is the record. Ordered by what it would cost to leave.
+**APPLIED 2026-09-08.** All 13 proposed replacements — every CORRECTED and every
+UNDER-QUALIFIED claim — were applied to `report/draft.md` by the maintainer's
+wholesale approval. They touched **20 passages**, because five claims recur:
 
-| # | claim | verdict | whose call |
-|---|---|---|---|
-| **14** | "Of eighteen claims… seven stood" (§4.1:391) | UNDER-QUALIFIED | **Maintainer — urgent.** The same figure was amended at :870 and :1219 and not here, so the document now states it two ways. This is the repeated-claim defect, currently live, in the document that ships the check. |
-| 17 | "three specifications were rejected" (§4.2, §5) | UNSUPPORTED | Maintainer. Either soften to the one recorded rejection, or accept that the strongest evidence for §4.2 is unrecorded and say so. |
-| 24 | "shaped every specification for a week" | CORRECTED → one day | Maintainer. |
-| 22 | "numbers on day two" (§4.4, §6) | CORRECTED → day one | Maintainer. Two locations. |
-| 41 | "four remain open" (§7) | CORRECTED | Maintainer. |
-| 29 | "four of thirteen went to establishing this" (§4.6) | CORRECTED → three | Maintainer. Two locations (:620, :638). |
-| 26 | "an order of magnitude worse in the tail" | CORRECTED → 22.7× | Maintainer. |
-| 11 | "about the instrument" (§3) | UNDER-QUALIFIED | Maintainer. Related to 29. |
-| 27 | "four fifths of the total error" | UNDER-QUALIFIED | Maintainer — one word, "squared". |
-| 21 | "thirteen carried methods" | UNDER-QUALIFIED | Maintainer. |
-| 31 | "two of thirteen iterations" | UNDER-QUALIFIED | Maintainer. |
-| 46 | "unused in two consecutive projects" | UNDER-QUALIFIED | Maintainer. |
-| 1 | "five days" | UNDER-QUALIFIED | Maintainer — affects six locations. |
-| 5 | "five open questions" | UNDER-QUALIFIED | Maintainer. |
-| 12, 20, 25, 38, 45 | the remaining unsupported claims | UNSUPPORTED | **Maintainer, and see `od-006`.** Four of the five are unrecordable by construction, not merely unrecorded. |
+| claim | verdict | locations changed |
+|---|---|---|
+| 1 | UNDER-QUALIFIED | 4 of 6 "five days" — the two register descriptors (§1, §7) were left, per the entry, since they are not about elapsed time |
+| 5 | UNDER-QUALIFIED | 3 — §2, §6, **and §6's later "here are the five open questions"**, which the check caught and the entry had not named |
+| 11 | UNDER-QUALIFIED | 1 |
+| 14 | UNDER-QUALIFIED | 1 — §4.1:398, the third occurrence the previous commit left inconsistent |
+| 21 | UNDER-QUALIFIED | 1 |
+| 22 | CORRECTED | 2 — §4.4 and §6 |
+| 24 | CORRECTED | 1 |
+| 26 | CORRECTED | 1 |
+| 27 | UNDER-QUALIFIED | 1 |
+| 29 | CORRECTED | 2 — the count and the proportion that follows from it |
+| 31 | UNDER-QUALIFIED | 1 |
+| 41 | CORRECTED | 1 — first option taken; the second would require editing `template` |
+| 46 | UNDER-QUALIFIED | 1 |
+
+**Two entries offered alternatives and the first was taken in both** (31 and 41).
+For 41 the second option — record the four gaps in the template and cite them —
+is not available from this repository.
+
+### §6's addendum: A6 and A7, closed 2026-09-09
+
+| claim | was | resolution |
+|---|---|---|
+| **A6** | "**Three** passages in the instance quote specification text", listing one that records an *absence* rather than a quotation | Applied. **Four** passages, re-read at `5f8e39f` and re-characterised individually. `exp007/findings.md:46` dropped from the list; `exp007/findings.md:123` and `:32` added. |
+| **A7** | "Every one is text that an artifact was arguing with" | Applied. "…had to **reckon with** — mostly to depart from it, once to confirm it." |
+| **(unnumbered)** | "reaches the record only where a pre-registration or a findings file had to **disagree** with it" | **Corrected in the same change, and it had no verdict of its own.** The next paragraph restated A7's overreach in different words. Now "had to **account for** it — usually to justify departing from it, once to note that it was met". |
+
+**The third row is the one worth keeping.** A7's verdict named one sentence; the
+defect was in two, sixty words apart, in the same subsection. **The mechanical
+repeated-figure check could not have found it** — it repeats an *idea*, not a
+number, and every word in the restatement differs. The only thing that finds this
+class is applying a correction and then re-reading the paragraph around it for
+the same claim in other words. That is now the practice: **when a
+characterisation is corrected, read forward for its restatements**, exactly as a
+corrected figure is grepped for its other occurrences.
+
+`gap-004` already carried the corrected count of four, so the ledger and the
+prose now agree; before this change they did not, and the ledger was right.
+
+### Still standing: the six UNSUPPORTED claims
+
+**12, 17, 20, 25, 38, 45 are unchanged in the prose.** They carry no proposed
+replacement because none can be written from the record: four of the six describe
+events the workflow guarantees leave no artifact. `gap-004` and `od-006` hold the
+argument. **This is the maintainer's decision and it has not been taken** — the
+options are to soften each to what the record supports, or to keep them and say
+in the text that they rest on recollection.
 
 ---
+
 
 # The repeated-figure check, as run — and the fix for `od-003`
 
@@ -603,10 +750,24 @@ also matches only numerals, and this document spells its figures out.
 #   3. -H so the field offsets hold for one file as well as many;
 #   4. drop bare decimals -- in markdown they are section numbers, not claims.
 for f in "$@"; do
-  grep -onHE '\b([0-9]+(\.[0-9]+)?(×|x|:1|%|-fold)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|eighteen|twenty-two|forty-one|eighty-seven|thousand)\b' "$f" \
+  grep -onHEi '\b([0-9]+(\.[0-9]+)?(×|x|:1|%|-fold)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|eighteen|twenty-two|forty-one|eighty-seven|thousand)\b' "$f" \
   | grep -vE ':[0-9]+\.[0-9]+$'
-done | awk -F: '{n[$3]=n[$3]" "$2} END {for (v in n) {c=split(n[v],a," "); if (c>1) printf "%3d  %-12s lines:%s\n", c, v, n[v]}}' | sort -rn
+done | awk -F: '{v=tolower($3); n[v]=n[v]" "$2} END {for (v in n) {c=split(n[v],a," "); if (c>1) printf "%3d  %-12s lines:%s\n", c, v, n[v]}}' | sort -rn
 ```
+
+> **`-i`, AND THE GROUPING LOWERCASED TOO — ADDED AFTER THE CHECK WAS ALREADY
+> SHIPPED AS `od-003`'s FIX.** The first version was case-sensitive, so it saw
+> "three passages" and missed "Three passages". Measured over these files:
+> **252 hits case-sensitive against 301 case-insensitive — it was missing 49, or
+> 16%, and the missed class was every sentence-initial figure.** Prose puts
+> figures at the start of sentences constantly.
+>
+> It was found by hand: a figure known to be in §6 did not appear in the output.
+> **A check that silently drops a sixth of its input is worse than no check,
+> because it is reported as a clean run** — which is `docs/spec-defects.md` §6
+> in the tool built to prevent §6's defect. Both halves matter: `-i` on the grep
+> finds the hits, and `tolower` in the awk stops "Three" and "three" from being
+> counted as two different figures.
 
 **It was validated against a known answer before being trusted**, which the
 shipped one never was: it had to surface the `mn-001`/`mn-002` pair, and it does
@@ -622,6 +783,57 @@ shipped one never was: it had to surface the `mn-001`/`mn-002` pair, and it does
 figure written as a word not on the list is missed. The list covers every
 spelled-out figure this draft uses; it will need extending for the next document,
 and that is a maintenance cost, not a one-time fix.
+
+---
+
+# The transit, and the defect it surfaced
+
+**This is what the draft/typeset separation is for**, and it has now caught
+something, so the practice is recorded as having fired rather than argued for.
+
+**Straight double quotes survived into the typeset output**, in two places, both
+inside verbatim quotations — the passage from `active-stereo`'s constitution in
+§2, and the findings-file phrase in §6. LaTeX renders `"` as **two right-facing
+marks**, so the *opening* quote of each pointed the wrong way. In Markdown the
+two forms render identically, which is exactly why the defect is invisible at the
+source and visible only after the transit.
+
+**The cause was a converter that handled curly quotes and not straight ones.**
+The draft mostly uses `“ ”`, which were mapped from the first version; the two
+straight pairs were the exceptions, and nothing looked for them.
+
+**The fix is in the converter, not in the `.tex`.** The section files are
+generated from `report/draft.md`; editing them by hand would have been reverted
+by the next regeneration, silently, and the document would have been correct
+exactly until someone re-ran the conversion. Straight pairs are now converted to
+`` `` ``…`` '' `` before output.
+
+**And the converter now fails rather than warns.** It refuses to write output
+containing a straight double quote, an unconverted curly quote, an em or en dash,
+or a section mark — the guard was tested by removing one closing quote from the
+draft, and the conversion exits non-zero naming the file and the count. *This
+defect was found by eye, in a built PDF, which is the most expensive place to
+find it; it cannot ship that way again.*
+
+## The rest of the audit, reported in full
+
+| class | found | verdict |
+|---|---|---|
+| straight `"` in `sections/` | **0** after the fix | enforced by the guard |
+| apostrophes (`word's`, `experiments'`) | 49 | **correct as-is** — LaTeX renders `'` as a right single quote, which is what an apostrophe is |
+| possessives on section refs (`\S4.1's`) | 5 | correct; flagged only because a digit precedes them |
+| opening single quotes | 0 | none to fix |
+| ellipses (`...` or `…`) | 0 | none present |
+| stray backticks | 0 | every `` ` `` is half of a `` `` `` pair |
+| unconverted `— – § “ ”` | 0 | clean |
+| straight `"` in `main.tex` | 1 | **inside a LaTeX comment**, never rendered — reported rather than "fixed", because changing it would suggest it mattered |
+| quotes inside `\texttt{}` | 0 | checked, because the conversion runs on code-span contents too and would have corrupted a literal |
+
+**The last row is the one worth keeping.** The quote conversion also runs over
+code-span contents, so a `"` inside a `` ` ` `` span would have been silently
+turned into typographic marks in a literal. There are none in this draft — but
+that is a property of this draft, not of the converter, and a future one could
+trip it.
 
 ---
 

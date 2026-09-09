@@ -125,9 +125,127 @@ nobody counted. The station that writes the rules is not outside them.
 
 ---
 
+## 4. A specification that contradicts the environment it sets up
+
+**The defect.** One instruction did two things. A setup step enabled branch
+protection on `main` — *"require a pull request before merging"* — and a later
+step in the same instruction said **"first commit direct to main; PRs after
+that."** The second is not merely wrong, it is *made* wrong by the first. The
+push was rejected by the ruleset the same specification had just installed.
+
+**What it cost.** A round trip, and a commit that had to be moved onto a branch
+after it was made — so its message, already written and already pushed, records
+being committed direct to `main` at the maintainer's instruction, which is now
+false. Correcting it would have meant a force-push, which the working agreement
+forbids. **The cheapest possible defect still left a permanent wrong sentence in
+the history**, because the history is the one thing the method will not rewrite.
+
+**Why it is hard to see when writing.** The two halves are separately correct and
+are usually written at different moments — the setup half is infrastructure and
+feels like it belongs to a different task. Neither half is reviewed against the
+other, because the reviewer is checking whether each step is *right*, not whether
+the environment one step creates is one the next step can run in. A specification
+is normally checked against the repository as it is; this class of defect is a
+specification checked against a repository that its own earlier clause has
+changed.
+
+**The check.** **Read the setup steps against the task steps before sending.**
+Ask of each task step: does an earlier step in this same instruction make this
+impossible? It is a two-pass read of one document and it takes a minute.
+
+## 5. A placeholder that was never filled
+
+**The defect.** A specification's Part B read: *"Insert the text the maintainer
+supplies"*, followed by the literal line **`[PASTE THE SECTION TEXT HERE]`**. The
+text was never pasted. Everything around it was complete and specific — the
+insertion point named to the adjacent subsection headings, the title given, a
+falsifiable claim about the content stated and marked checkable, and an
+instruction not to edit it — which is exactly what made the hole hard to see: a
+placeholder surrounded by precision reads as precision.
+
+**What it cost.** One part of four could not be done, and it was the part the
+next part depended on: the section was to be inserted into the prose that the
+following step typesets. The dependent work was done anyway against the prose as
+it stands, so it must be revisited when the text arrives.
+
+**Why it is hard to see when writing.** The author of a specification is
+assembling it from parts they already hold, and a paste marker is a note to
+themselves that reads as satisfied the moment they think of the text. It is
+invisible to a re-read for *correctness*, because there is nothing incorrect
+there — the sentence around it is true.
+
+**The check.** **Grep the specification for its own placeholders before sending**
+— square brackets, `TODO`, `TBD`, `<...>`, "here". Mechanical, like the
+repeated-figure check and for the same reason: it is a failure of attention that
+attention does not catch, because the reader supplies the missing content from
+their own head.
+
+**Both entries above were observed in specifications for *this* repository**, in
+consecutive tasks, and neither is a defect of judgement. They are defects of
+assembly, and the two checks are both mechanical two-minute reads.
+
+---
+
+## 6. A verification search written from the expected finding, not from the claim
+
+**The defect.** A claim was to be checked: *no specification text survives
+anywhere in the instance.* The search run against it grepped for
+`REPOSITORY STATE ASSUMED` and `reject and report if` — **phrases a committed
+specification would contain.** Finding none, it reported the claim confirmed.
+
+But those phrases could only ever have found a *whole specification sitting in a
+file*. The claim was about **text**, and the way specification text actually
+reaches a record is as a **quotation inside some other artifact** — a
+pre-registration repeating a clause in order to depart from it, a findings file
+naming the instruction it deviated from. A search for a committed specification
+is structurally incapable of finding a quoted one. It was not a weak search; it
+was a search for the wrong object, and it returned exactly the answer it had
+been built to return.
+
+**What it cost.** The claim shipped in a draft section, was caught on a
+re-check, and the section had to be rewritten around the weaker and true claim —
+*no specification was ever committed.* One round trip, and the corrected version
+is better than the original, because where the fragments survive turned out to
+be the interesting part.
+
+**It then happened a second time, in the correction.** The re-check searched for
+`specification (said|says|reads|stated)` and returned **four** hits. The report
+said **three** — one hit was in the output and was never opened, and it was the
+best example of the very thing the section argues. The replacement text was
+written from that summary and inherited the wrong count and a false universal
+("every one is text an artifact was arguing with"; one of them agrees). **The
+second search was better-aimed than the first and was still read from the
+expectation rather than from the output.**
+
+**Why it is hard to see when writing.** You search for what you expect to find,
+because that is the only image you have of what the thing looks like. A search
+built from the expected answer returns the expected answer whether or not the
+answer is true, and — this is the part that makes it dangerous — **it returns it
+with the authority of a mechanical check.** "I grepped the tree" sounds like
+evidence. It is evidence only about the pattern you chose.
+
+**The check.** Two clauses, both cheap:
+
+- **Search for what would falsify the claim, not for what would confirm it.** If
+  the claim is *no X survives*, the search must be for anything that could
+  possibly be X — including X quoted, paraphrased, referenced, or embedded in
+  something else — not for X in the form you imagine it taking.
+- **Open every hit before you report a count.** A grep that returns four and a
+  report that says three is not a mechanical check; it is a mechanical check
+  followed by an unmechanical reading. This is `## 3` — count the set, not the
+  ceiling — occurring one level up: **the ceiling of your attention rather than
+  the ceiling of an identifier.**
+
+**Where this one came from is part of the entry**, as with `## 3`: the first
+instance was written by Chat, the second by Code, in a repository whose subject
+is claims that are well-formed, plausible and wrong. Both stations made the same
+error inside three iterations of each other.
+
+---
+
 ## The general shape
 
-Both entries above are the same defect wearing different clothes: **the
+Entries 1 and 2 are the same defect wearing different clothes: **the
 specification stated what to do and not what "done" looks like.** The falsifier
 rule in `docs/workflow.md` covers the scientific half of that — what result
 would mean the question was wrong. This file covers the mechanical half — what
@@ -136,3 +254,21 @@ state the world is in when the task is over.
 A specification needs both. They fail differently: a missing falsifier produces
 a result nobody can interpret, and a missing finish condition produces work
 nobody can find.
+
+**Entries 3, 4, 5 and 6 are a second family, and the file is more useful for
+separating them.** They are not about what "done" looks like; each states a
+finish condition perfectly well. They are defects of **assembly** — a figure
+copied from the wrong place, a clause contradicted by another clause, a
+placeholder left unfilled. What they share is that **re-reading does not catch
+them**, because each one reads correctly in isolation and the error is a relation
+between two things. Every check in this family is therefore mechanical: count the
+set, diff the setup against the task, grep for your own placeholders. If a
+proposed check for a defect in this family can only be described as "be careful",
+it is not a check.
+
+**Entry 6 is the family's sharpest case**, because the defective check *was*
+mechanical. A grep is not made trustworthy by being a grep: it inherits every
+assumption in the pattern, and then hands its output to a reader who already
+believes the answer. The two clauses that survive contact with that — search for
+the falsifier, open every hit — are the same two moves the repeated-figure check
+in `report/claims-verified.md` makes, which is not a coincidence.

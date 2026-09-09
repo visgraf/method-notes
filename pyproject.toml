@@ -1,0 +1,67 @@
+# TOOL CONFIGURATION ONLY. NO PACKAGE, NO BUILD BACKEND.
+#
+# This file was deleted at instantiation (fc-002) and is restored to honour that
+# entry's own scope clause: bringing Python back brings the gates back with it.
+# What is NOT restored is the half fc-002 was really about -- `[build-system]`,
+# hatchling, `[project] name/version`, and `packages = ["src/research"]`. There
+# is no library here and there is not going to be one; a build backend for a
+# package that does not exist is the kind of scaffolding that gets believed.
+#
+# WHAT ACTUALLY LANDED, and why the tooling followed it: tools/md2tex.py, the
+# converter that generates report/sections/*.tex from report/draft.md. It was
+# outside the repository, which made report/main.tex's claim that the .tex is
+# regenerable true and unverifiable at the same time (od-007).
+#
+# NOTE THAT fc-002's SCOPE NAMED THE WRONG TRIGGER. It said the entry stops
+# holding "the moment one generated figure is wanted". No figure is wanted; a
+# converter arrived instead. fc-003's scope named the right one -- "the moment
+# any .py file lands" -- and is generic where fc-002's was specific to the use
+# it happened to be imagining. Both entries are annotated in docs/state.yaml.
+#
+# NO DEPENDENCIES, and the converter is written to keep it that way: standard
+# library only, no markdown or LaTeX package. Adding one needs asking
+# (CLAUDE.md's working agreement), and this is the file where the asking would
+# become visible in a diff.
+
+# DEPENDENCY GROUPS (PEP 735), NOT `[project.optional-dependencies]`, AND THE
+# REASON IS THE FAILURE THAT PUT THEM HERE. The first version used an optional
+# dependency and CI installed it with `pip install ".[dev]"` -- which asks pip to
+# BUILD THIS DIRECTORY AS A PACKAGE. There is no build backend, deliberately, so
+# setuptools was guessed at and rejected the file: "`project` must contain
+# ['version'] properties". It passed locally, where the tools were already
+# installed and nothing ever ran the install step.
+#
+# The fix is not to add a version and a build backend -- that would manufacture
+# the package this file exists to avoid. `[dependency-groups]` is the table for
+# exactly this case: development tooling for something that is not a package.
+# Installed with `pip install --group dev`, which never builds anything.
+#
+# The versions stay HERE rather than in the workflow, so a local environment and
+# the runner install the same set and neither can drift ahead of the other.
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "mypy>=1.11",
+    "ruff>=0.6",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+markers = [
+    "infrastructure: pins the scaffold, not any claim about the subject matter",
+]
+
+[tool.ruff]
+line-length = 100
+src = ["tools", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["tools", "tests"]
+strict = true
+warn_unreachable = true

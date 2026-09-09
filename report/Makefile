@@ -14,7 +14,7 @@
 
 LATEXMK := latexmk
 
-.PHONY: all figures clean distclean
+.PHONY: all sections figures clean distclean
 
 all: main.pdf
 
@@ -23,6 +23,17 @@ all: main.pdf
 # below match nothing today and are correct in advance rather than wrong later.
 main.pdf: main.tex $(wildcard sections/*.tex) $(wildcard figures/*.pdf) refs.bib
 	$(LATEXMK) -pdf main.tex
+
+# Regenerates report/sections/*.tex from report/draft.md. NEEDS PYTHON; the PDF
+# build above does not, and must not -- the .tex files are committed so that a
+# clean checkout compiles with a TeX installation alone. Run this after editing
+# the draft, then commit both, which is what keeps the translation diffable.
+#
+# tests/test_scaffold.py regenerates into a temporary directory and compares
+# bytes, so a .tex that has drifted from the draft fails CI rather than being
+# silently overwritten the next time someone runs this.
+sections:
+	python3 ../tools/md2tex.py
 
 # Regenerates every committed figure, then you commit the PDFs it changes: a
 # figure and the claim it supports move through the same pull request, which is

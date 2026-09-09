@@ -68,7 +68,12 @@ done. Read the draft accordingly.
 Instantiated from the template
 [`visgraf/math-ai-method`](https://github.com/visgraf/math-ai-method) at commit
 `81a638e`, then adapted to a document-only shape: no library, no experiments, no
-test suite, no Python. What was deleted and what was kept is recorded with its
+test suite, no Python. **Three of those four still hold.** `tools/md2tex.py`
+generates `report/sections/*.tex` from the draft; it was outside the repository,
+which made the claim that the `.tex` is regenerable true and unverifiable at once
+(`od-007`). Committing it brought back `pyproject.toml` (tool configuration only,
+no build backend), two scaffold guards, and the lint, type and test gates —
+because `fc-002`'s scope said it would. What was deleted and what was kept is recorded with its
 reasoning in the `foreclosures` block of
 [`docs/state.yaml`](docs/state.yaml) — `fc-001` through `fc-006` — rather than
 left to be inferred from an absence.

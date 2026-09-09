@@ -1,0 +1,39 @@
+\section{The project}
+
+Everything after this section draws its examples from one research project. This section supplies enough of it to follow them. It is deliberately brief and deliberately non-technical; the project has its own report, and readers who want the science should go there.
+
+\subsection{The question}
+
+\textbf{Active vision} is the proposition that perception is better posed as a controlled sampling problem than as a reconstruction problem --- that \textit{choosing where to look} improves what is perceived. The project tested that claim for binocular depth estimation.
+
+The biological motivation is concrete. A camera samples every pixel at the same resolution; an eye does not. The human fovea covers one to two degrees at high acuity, resolution falls off sharply beyond it, and several times a second a saccade repositions that window. And the two eyes are not cameras with fixed geometry: they rotate about centres fixed in the head, converging on whatever is being looked at, so the stereo geometry itself changes every time gaze moves.
+
+\subsection{The machinery, in six sentences}
+
+Two views of a scene, taken from slightly separated positions, disagree about where things are. That disagreement --- \textbf{disparity} --- is larger for near surfaces than far ones, so depth can be recovered from it. A \textbf{matcher} finds, for each point in one image, the corresponding point in the other; it returns a disparity, a confidence, and a \textbf{validity mask} marking points where it found nothing trustworthy. \textbf{Vergence} is how far away the two lines of sight cross --- what the system is focused on --- and converting disparity into metric depth requires knowing it. A \textbf{belief} accumulates the depth estimates across successive fixations, each new measurement combined with what is already believed, weighted by confidence. And a \textbf{gaze policy} chooses where to look next, typically by finding where the belief is least certain.
+
+That loop --- fixate, measure, update the belief, choose the next fixation --- is the object under study. Whether closing it improves anything is the question.
+
+\subsection{Three things that recur in the examples}
+
+\textbf{Half-occlusion.} At a depth discontinuity --- the edge of a nearer surface against a farther one --- a strip of the background is visible to one eye and hidden from the other. Those points have no correspondent at all. The matcher does not report this; it finds the best available wrong match, and a sharp minimum at a wrong disparity is genuinely sharp. \textbf{The result is a confident, incorrect estimate at exactly the geometry an active system might hope to resolve by looking elsewhere.} This is the phenomenon that motivated the whole project, and several examples turn on it.
+
+\textbf{Foveal weighting.} Implementing the fovea by measuring everything at full resolution and then \textit{discounting} what is far from gaze --- as opposed to a real retina, which never samples the periphery finely in the first place. The difference between weighting and sampling turns out to matter a great deal.
+
+\textbf{The synthetic stimulus.} A random-dot stereogram: a field of noise, warped by a known depth field to produce the second view. Its virtue is that depth exists \textit{only} in disparity --- nothing can be recovered from shading or texture, so a system that appears to see depth is genuinely seeing stereo. \S4.6 is about what was wrong with it.
+
+\subsection{The shape of the work}
+
+Thirteen experiments over five working days, each pre-registered before its runner existed. Two predecessor repositories, from which geometry, measurements and a set of methods were carried forward. Roughly four thousand lines of library code against a slightly larger volume of tests, thirteen foreclosed decisions, eighty-seven measurements taken in the project and forty-one inherited.
+
+Experiments are referred to below by their position in that sequence rather than by name. What matters for these notes is not which experiment found what, but that each was declared in advance, ran, and reported against its own falsifier.
+
+\subsection{What it found, in brief}
+
+The negative results were consistent. The choice of gaze objective did not matter: two objectives that never once selected the same pixel produced indistinguishable results. Knowing \textit{where} measurement was possible outweighed knowing \textit{how uncertain} it was by a large factor. Foveal weighting on a uniformly sampled sensor was strictly lossy. Deliberately re-converging in order to bring new depths into range made estimation worse.
+
+One positive result survived. Closing the loop --- actually re-imaging at each new fixation rather than re-weighting a single capture --- helped, at a substantial cost, and the benefit decomposed almost entirely into \textbf{coverage} rather than accuracy: the moving system's advantage was that it \textit{saw more of the scene}, not that it \textit{estimated better}.
+
+And four of the thirteen experiments turned out to be about the instrument or the criterion rather than the framework. They were the precondition for reading the other nine.
+
+None of that is the subject of these notes. It is the material the examples come from.

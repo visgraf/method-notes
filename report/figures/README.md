@@ -13,12 +13,12 @@ practice this repository performs.**
 
 ## If a figure is ever added, these come back with it
 
-**Restore `pyproject.toml` first** (from the template at `81a638e`), having asked
-before adding the plotting dependency — `CLAUDE.md`'s working agreement, and the
-scope clause of `fc-002`. Restore the `.reference/` import guard from
-`tests/test_scaffold.py` with it, per `fc-003`: a figure script is the first
-executable code here, and it is the first thing that could read a pinned checkout
-from code instead of by eye.
+**`pyproject.toml` and the guards are already back** — restored when
+`tools/md2tex.py` landed (`od-007`), not for a figure. So the two steps this
+section used to prescribe are done, and what remains for a figure is narrower:
+**ask before adding the plotting dependency**, per `CLAUDE.md`'s working
+agreement and `fc-002`'s scope. `pyproject.toml` is currently dependency-free and
+that is a property worth not losing by accident.
 
 **Commit the generated PDF.** That is what lets `.github/workflows/report.yml`
 build with a TeX installation alone and no language runtime, which is the

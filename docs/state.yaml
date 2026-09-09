@@ -676,6 +676,26 @@ open_decisions:
       until now. Option 3 — dropping the claim and hand-maintaining the .tex —
       would have cost exactly the diffability the draft/typeset practice exists
       for, and it was the option that would have become true by default.
+      AND THE FIRST ATTEMPT AT THE GATES FAILED IN CI, which is worth the entry
+      because it is the same failure shape as od-004's. The `code` job ran
+      `pip install ".[dev]"`, which asks pip to BUILD THIS DIRECTORY AS A
+      PACKAGE. There is no build backend by design, so setuptools was guessed at
+      and rejected pyproject.toml: "`project` must contain ['version']
+      properties". It passed locally because the tools were already installed and
+      the install step never ran there — LOCAL SUCCESS AGAIN MEANT NOTHING,
+      exactly as with the Psych 3/Psych 4 split in od-004, and for the same
+      reason: the author's machine had already done the step CI has to do from
+      scratch.
+      THE FIX IS NOT TO ADD A VERSION AND A BUILD BACKEND, which would
+      manufacture the package this file exists to avoid. It is
+      `[dependency-groups]` (PEP 735) with `pip install --group dev`, the table
+      for development tooling belonging to something that is not a package. The
+      versions stay in pyproject.toml rather than the workflow, so local and
+      runner cannot drift.
+      THE GATES WERE THEN RE-RUN AGAINST THE VERSIONS CI ACTUALLY INSTALLS —
+      ruff 0.16.6, mypy 2.3.1, pytest 9.1.1, all newer than the local ones — and
+      all four pass. Checking against the local versions alone would have
+      repeated the mistake a third time.
       COSTS PAID, recorded so the trade is legible: the script had to be
       rewritten to pass the gates it was arriving under (it was scratch-quality —
       semicolons, percent formatting), and its output was verified byte-identical

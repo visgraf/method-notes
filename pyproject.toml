@@ -23,9 +23,23 @@
 # (CLAUDE.md's working agreement), and this is the file where the asking would
 # become visible in a diff.
 
-requires-python = ">=3.12"
+# DEPENDENCY GROUPS (PEP 735), NOT `[project.optional-dependencies]`, AND THE
+# REASON IS THE FAILURE THAT PUT THEM HERE. The first version used an optional
+# dependency and CI installed it with `pip install ".[dev]"` -- which asks pip to
+# BUILD THIS DIRECTORY AS A PACKAGE. There is no build backend, deliberately, so
+# setuptools was guessed at and rejected the file: "`project` must contain
+# ['version'] properties". It passed locally, where the tools were already
+# installed and nothing ever ran the install step.
+#
+# The fix is not to add a version and a build backend -- that would manufacture
+# the package this file exists to avoid. `[dependency-groups]` is the table for
+# exactly this case: development tooling for something that is not a package.
+# Installed with `pip install --group dev`, which never builds anything.
+#
+# The versions stay HERE rather than in the workflow, so a local environment and
+# the runner install the same set and neither can drift ahead of the other.
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "pytest>=8.0",
     "mypy>=1.11",

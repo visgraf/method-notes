@@ -115,12 +115,21 @@ jobs:
           python-version: "3.13"
           cache: pip
 
-      # No project dependencies: tools/md2tex.py is standard library only, and
-      # pyproject.toml says so. Only the dev extra is installed.
+      # `--group dev`, NOT `pip install ".[dev]"`, AND THE FIRST VERSION FAILED
+      # HERE. Installing the directory asks pip to BUILD IT AS A PACKAGE; there
+      # is no build backend on purpose, so setuptools was guessed at and rejected
+      # pyproject.toml with "`project` must contain ['version'] properties". It
+      # passed locally because the tools were already installed and the install
+      # step never ran. PEP 735 dependency groups install tooling without
+      # building anything, which is exactly this case. `--upgrade pip` first,
+      # because --group needs pip 25.1 or newer.
+      #
+      # No project dependencies to install: tools/md2tex.py is standard library
+      # only, and pyproject.toml says so.
       - name: Install
         run: |
           python -m pip install --upgrade pip
-          pip install ".[dev]"
+          pip install --group dev
 
       - name: Lint
         run: ruff check tools tests

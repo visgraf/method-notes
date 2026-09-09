@@ -5,7 +5,16 @@
 # could not even reach its first step, and a workflow that is red for reasons
 # unrelated to the report is one people learn to override.
 #
-# TWO JOBS NOW: `ledgers` parses the record, `build` compiles the document.
+# THREE JOBS NOW: `ledgers` parses the record, `code` gates the one Python file
+# in the repository, `build` compiles the document.
+#
+# THE `code` JOB EXISTS BECAUSE fc-002's SCOPE SAID IT WOULD. tools/md2tex.py
+# generates report/sections/*.tex from report/draft.md; it was outside the
+# repository, which made main.tex's claim that the .tex is regenerable true and
+# unverifiable at once (od-007). Committing it reopened fc-002 and fc-003, and
+# fc-002's scope is explicit that pyproject.toml comes back with the gates
+# attached. Restoring the code without the gates would have been taking the
+# convenient half of a decision and leaving the part that cost something.
 # od-004 closed -- the gap that used to be recorded here, that nothing checked
 # whether docs/state.yaml and docs/inherited-measurements.yaml still parse, is
 # closed by the first job below.
@@ -81,6 +90,51 @@ jobs:
               end
             end
             exit(ok ? 0 : 1)'
+
+  # The one Python file, and the two guards that make its claims testable.
+  #
+  # PYTEST IS THE POINT, and the other three are the price fc-002's scope set.
+  # test_scaffold.py regenerates the sections into a temporary directory and
+  # compares bytes, so "report/sections/*.tex is generated from report/draft.md"
+  # -- asserted in main.tex's header since the document was first typeset -- is
+  # now a claim that can fail. It was verified failing before it was committed,
+  # by appending a comment to one .tex.
+  #
+  # ONE INTERPRETER, NOT A MATRIX. The template ran 3.12 and 3.13 because its
+  # pyproject.toml declared `requires-python = ">=3.12"` and something had to
+  # test the declaration. This one declares the same, and the honest note is
+  # that a single stdlib script is not evidence for the floor -- the matrix is
+  # not restored because there is nothing here it would discriminate.
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      # No project dependencies: tools/md2tex.py is standard library only, and
+      # pyproject.toml says so. Only the dev extra is installed.
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install ".[dev]"
+
+      - name: Lint
+        run: ruff check tools tests
+
+      - name: Format check
+        run: ruff format --check tools tests
+
+      - name: Types
+        run: mypy
+
+      # `-rs` reports skips: a silent skip is a gap in the evidence that looks
+      # like a pass.
+      - name: Tests
+        run: pytest -rs
 
   build:
     runs-on: ubuntu-latest

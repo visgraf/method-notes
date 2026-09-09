@@ -354,6 +354,19 @@ runs:
         packages on a GitHub runner, first run — which is a measurement of the
         APT INSTALL, not of the compile, and was made against the template's
         package set rather than this one. Treat it as a prior.
+    - call: make -C report sections
+      does: >-
+        Regenerates report/sections/*.tex from report/draft.md via
+        tools/md2tex.py. NEEDS PYTHON, which the PDF build deliberately does not:
+        the .tex files are committed so a clean checkout compiles with TeX alone.
+        Never runs during a build.
+      cost: Sub-second; nine files.
+    - call: pytest -q
+      does: >-
+        Two scaffold guards — nothing under tools/ or tests/ reads the pinned
+        clones, and report/sections/ is byte-identical to what the converter
+        produces from the draft.
+      cost: Sub-second.
     - call: the claims-verification pass
       does: >-
         Not a command. A person, reading report/draft.md against cloned
@@ -647,7 +660,30 @@ open_decisions:
 
   - id: od-007
     altitude: infra
-    status: open
+    status: RESOLVED
+    resolved_at: 2026-09-09
+    resolution: >-
+      OPTION 2 TAKEN, on the maintainer's decision: the converter is committed at
+      tools/md2tex.py and the tooling came back with it, honouring fc-002's
+      scope rather than taking the code and leaving the price. pyproject.toml is
+      tool configuration only — no build backend, no package — because there is
+      still no library. Both foreclosures are ANNOTATED, not reversed.
+      WHAT THE REOPENING BOUGHT, which is more than the converter being readable:
+      tests/test_scaffold.py::test_typeset_sections_match_the_draft regenerates
+      report/sections/ into a temporary directory and compares bytes. The claim
+      in report/main.tex's header that the .tex is generated from the draft has
+      been asserted since the document was first typeset and was untestable
+      until now. Option 3 — dropping the claim and hand-maintaining the .tex —
+      would have cost exactly the diffability the draft/typeset practice exists
+      for, and it was the option that would have become true by default.
+      COSTS PAID, recorded so the trade is legible: the script had to be
+      rewritten to pass the gates it was arriving under (it was scratch-quality —
+      semicolons, percent formatting), and its output was verified byte-identical
+      afterwards; CLAUDE.md's Commands section, its definition-of-done clause 2,
+      .gitignore's note that the guard was gone, README.md's "no Python", and
+      report/figures/README.md's restore instructions were all made false by this
+      change and were corrected in the same commit. A decision that invalidates
+      five statements elsewhere is one whose cost is mostly in the prose.
     title: >-
       The markdown-to-LaTeX converter is not in the repository, and it now
       carries a guard that is load-bearing.
@@ -822,6 +858,29 @@ foreclosures:
       contingency; see fc-005.
     cost_to_reopen: Low. Restore from `template` and add the plotting dependency, having asked.
     decided_in: The instantiation commit.
+    annotated_2026_09_09: >-
+      REOPENED BY ITS OWN TERMS, BUT NOT BY THE TRIGGER IT NAMED, and the closure
+      is annotated rather than reversed per CLAUDE.md. pyproject.toml is back —
+      as TOOL CONFIGURATION ONLY, with no [build-system], no hatchling and no
+      package, because there is still no library. The half this entry was really
+      about is still closed.
+      THE SCOPE CLAUSE NAMED THE WRONG TRIGGER, and that is the finding worth
+      keeping. It said this entry "stops holding the moment one generated figure
+      is wanted". No figure is wanted and report/figures/ is still empty. What
+      arrived was tools/md2tex.py, the converter that generates
+      report/sections/*.tex — a use nobody had imagined when the scope was
+      written. Compare fc-003, whose scope said "the moment any .py file lands"
+      and covered this exactly. THE DIFFERENCE IS SPECIFICITY: fc-002's scope
+      described the use it happened to be picturing, fc-003's described the
+      CONDITION. A scope clause that names an instance instead of a condition
+      will be silent on the case that actually occurs, and will look wrong when
+      it is not.
+      What came back with it, per this entry's own instruction that the gates
+      return with the file: ruff, ruff format, mypy and pytest, as the `code` job
+      in .github/workflows/report.yml. Taking the code without the gates would
+      have been taking the convenient half of a decision. NO DEPENDENCIES were
+      added; the converter is standard library only, and this entry's requirement
+      to ask before adding one is untouched and still binding.
 
   - id: fc-003
     altitude: fw
@@ -853,6 +912,26 @@ foreclosures:
       Moderate for src/ and experiments/, but reopening those means this is no
       longer a document-only repository, which is a different decision.
     decided_in: The instantiation commit.
+    annotated_2026_09_09: >-
+      THE CONDITION THIS SCOPE NAMED HAS OCCURRED, AND THE ORDER IT PRESCRIBED
+      WAS FOLLOWED. tools/md2tex.py landed (od-007), so "stops holding the moment
+      any .py file lands" fired, and the pinned-clone guard was restored FIRST,
+      as the clause required — it is the first test in tests/test_scaffold.py and
+      it is first for that reason and no other.
+      IT CAUGHT SOMETHING ON ITS FIRST RUN: the docstrings of the two files that
+      restored it named the directory in prose, and the guard is a crude line
+      scan that cannot tell prose from a code path. The prose was rewritten and
+      the guard was left crude. Loosening a check to admit its first true
+      positive is how a check stops being one.
+      WHAT REMAINS CLOSED: src/ and experiments/. There is still no library and
+      no experiment, so the package-imports guard and the
+      every-experiment-has-a-preregistration guard were NOT restored — each would
+      have passed by scanning an empty set. A SECOND GUARD WAS ADDED INSTEAD, and
+      it is the one that earns the reopening: test_typeset_sections_match_the_draft
+      regenerates the sections into a temporary directory and compares bytes, so
+      report/main.tex's standing claim that the .tex is generated from the draft
+      is now a claim that can fail. It was watched failing before it was
+      committed, by appending a comment to one .tex file.
 
   - id: fc-004
     altitude: fw

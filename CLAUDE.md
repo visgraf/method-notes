@@ -186,15 +186,19 @@ A task is done when all of these hold:
    > *Why this clause is first:* the predecessor's five conditions were all about
    > artifact quality, so a perfectly-tested component could be added to a loop
    > that had never run — and was.
-2. **Every claim it adds to the prose is traceable.** There is no test suite
-   here and clause 2 cannot be about one. Its replacement is the standard the
-   draft is held to: a new factual sentence names which repository it is true
-   of, and any figure in it has an entry in
-   `docs/inherited-measurements.yaml` — written at the same time, not later.
-   > *Why the substitution and not a deletion:* clause 2 existed so that new
-   > behaviour could not arrive unchecked. New prose is the only thing that
-   > arrives here, and the unchecked version of it is this project's entire
-   > failure mode.
+2. **Every claim it adds to the prose is traceable, and new behaviour has a
+   test.** Both halves are live now. The prose half is the one that matters
+   almost always: a new factual sentence names which repository it is true of,
+   and any figure in it has an entry in `docs/inherited-measurements.yaml`,
+   written at the same time and not later. The code half applies to
+   `tools/` and `tests/`, which exist again as of `od-007`.
+   > *Why this clause was rewritten twice:* it originally read "new behaviour has
+   > a test, and the suite passes", which was inapplicable when there was no
+   > suite; it was replaced by the prose standard alone; and the code half came
+   > back when `tools/md2tex.py` did. **The prose half was never the substitute
+   > for the code half — it is the more important of the two here**, because new
+   > prose is what mostly arrives and the unchecked version of it is this
+   > project's entire failure mode.
 3. Conventions are stated in `## Domain invariants` above, because there is no
    code to state them at. See the note there.
 4. `docs/state.yaml` is updated if any of it changed.
@@ -238,8 +242,8 @@ the source is the finding and the prose is the bug.
 
 ## Working agreement
 
-- **Branch.** `docs/…`, `report/…`, `fix/…`. Never commit to `main`. (`exp/…`
-  and `spike/…` are dropped: this repository has neither.)
+- **Branch.** `docs/…`, `report/…`, `feat/…`, `fix/…`. Never commit to `main`.
+  (`exp/…` and `spike/…` stay dropped: this repository has neither.)
 - **Never commit or push unless asked.** Never force-push or rewrite history.
   > *Why the asking is explicit:* a specification that names a branch but never
   > asks for a commit leaves the work sitting uncommitted and costs a round
@@ -271,12 +275,29 @@ method, with its provenance.
 
 ```bash
 make -C report             # build the report PDF (needs a TeX installation)
+make -C report sections    # regenerate report/sections/*.tex from draft.md (needs Python)
+pytest -q                  # the two scaffold guards
+ruff check tools tests     # lint
+ruff format tools tests    # format
+mypy                       # types
 ```
 
-**That is the whole list, and it is one line.** No suite, no linter, no type
-checker — there is no code for them to run against, and `pyproject.toml` was
-deleted rather than kept as an empty promise. The build is the only automated
-check this repository has, and `.github/workflows/report.yml` is the only
-workflow. Everything else that could go wrong here goes wrong in prose, and the
-only instrument for that is `report/claims-verified.md`, run by a person against
-a pinned checkout.
+**This list was one line until `tools/md2tex.py` landed, and the change is worth
+naming rather than absorbing.** The converter generates `report/sections/*.tex`
+from `report/draft.md`. It lived outside the repository, which made
+`report/main.tex`'s claim that the `.tex` is regenerable true and unverifiable at
+the same time — `od-007`. Committing it reopened `fc-002` and `fc-003`, and
+`fc-002`'s scope is explicit that `pyproject.toml` returns with the gates
+attached. Taking the code without the gates would have been taking the convenient
+half of a decision.
+
+**What is still true:** there is no library and no experiment. `pyproject.toml`
+carries tool configuration and no build backend. The PDF build needs no Python —
+the `.tex` files are committed, so `make -C report` compiles from a clean
+checkout with TeX alone, and `make -C report sections` is a separate step that
+never runs during a build.
+
+**And the prose instrument is unchanged and still the important one.** The gates
+catch nothing that a claims pass catches. `report/claims-verified.md`, run by a
+person against a pinned checkout, is where this repository's characteristic
+failure is caught.

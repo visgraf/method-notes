@@ -4,12 +4,16 @@
 # claim about `visgraf/bio-3d-vision` or its predecessors, and "verifiable at
 # source" means a checkout at the SHA pinned in docs/inherited-measurements.yaml.
 #
-# THE ENFORCEMENT THAT USED TO SIT BESIDE THIS IS GONE, and that is worth saying
-# rather than leaving to be discovered. The template guarded this directory with
-# a test asserting that no code reads from it. This repository has no code, so
-# the guard had nothing to guard and was deleted with the rest of the suite. The
-# convention survives on nobody's authority but this comment. If a figure script
-# ever lands here, restore the guard with it -- see report/figures/README.md.
+# THE ENFORCEMENT IS BACK, and this comment is no longer the only thing holding
+# the convention up. It was: the template's guard was deleted with the rest of
+# the suite because there was no code to guard, and this paragraph said so. When
+# tools/md2tex.py landed (od-007), fc-003's scope required the guard to be
+# restored FIRST, before any other -- and it was. tests/test_scaffold.py now
+# fails if anything under tools/ or tests/ so much as names this directory.
+#
+# IT FIRED IMMEDIATELY, on the docstrings of the two files that restored it,
+# which mentioned the path in prose. The prose was rewritten rather than the
+# guard loosened. It is crude on purpose.
 .reference/
 
 # LaTeX build artifacts are ignored in report/.gitignore, beside the build that

@@ -27,8 +27,9 @@
 > search as recollection, not record.
 >
 > §6's *The method destroys its own best evidence* was written after that pass
-> and its five checkable claims were verified before insertion — all confirmed,
-> recorded as A1–A5.
+> and checked separately: **seven claims, A1–A7 — five confirmed, one corrected,
+> one under-qualified.** Both non-confirmed claims have since been corrected in
+> the prose, so the section now stands as verified throughout.
 >
 > Sections 8.6, 8.7 and 8.8 are the first author's, written in the first person.
 > They make no checkable factual claims and are out of scope for that pass.
@@ -967,16 +968,19 @@ file in the instance is one, and none is named as one. The work a specification
 produces lands in a branch; the specification itself lives in a chat window and
 a paste buffer.
 
-Fragments do survive, and where they survive is the finding. Three passages in
-the instance quote specification text — a pre-registration repeating a clause
-before narrowing it, another quoting an instruction and then arguing it is
-wrong, a findings file recording a reading *"which neither exp005 nor this
-specification stated."* **Every one is text that an artifact was arguing with.**
+Fragments do survive, and where they survive is the finding. Four passages in
+the instance report specification text — a pre-registration quoting a clause
+before departing from it, another quoting an instruction and then arguing it is
+wrong, a findings file recording a deviation and the clause it deviates from,
+and one recording that the specification asked for something that was duly
+delivered. **Every one is text that an artifact had to reckon with — mostly to
+depart from it, once to confirm it.**
 
-That is the whole mechanism. Specification text reaches the record only where a
-pre-registration or a findings file had to disagree with it in order to justify
-doing something else — which requires the specification to have been **executed**
-and to have produced an artifact in the first place. A specification rejected
+That is the whole mechanism, and the fourth passage is what makes it precise.
+Specification text reaches the record only where a pre-registration or a findings
+file had to account for it — usually to justify departing from it, once to note
+that it was met — which in either case requires the specification to have been
+**executed** and to have produced an artifact in the first place. A specification rejected
 before work begins produces no artifact, so nothing is ever in a position to
 quote it. **The survival mechanism is parasitic on the work happening, which is
 exactly why it cannot preserve a rejection.**

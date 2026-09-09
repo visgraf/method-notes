@@ -569,6 +569,12 @@ claims: **five CONFIRMED, one CORRECTED, one UNDER-QUALIFIED.** Numbered A1–A7
 and kept out of `mn-004`'s tally, which covers §§1–8.5 as they stood at the
 first pass.
 
+> **BOTH NON-CONFIRMED CLAIMS ARE NOW CLOSED IN THE PROSE** (A6, A7), together
+> with a third sentence neither verdict named — see *Resolutions*. The section
+> stands as verified throughout. The verdicts below are kept as written, with the
+> superseded wording quoted, because the disagreement between what was drafted
+> and what the record supports is the information.
+
 ### A1. "§4.2 describes three specifications rejected… *the clearest case in the project of a rule paying for itself*"
 **CONFIRMED.** Quoted accurately from §4.2.
 
@@ -620,6 +626,10 @@ instruction and then arguing it is wrong, a findings file recording a deviation
 and the clause it deviates from, and one recording that the specification asked
 for something that was duly delivered."
 
+**APPLIED 2026-09-09**, verbatim. All four passages were re-read at
+`5f8e39f` before the sentence was written, and each characterisation checked
+against its text.
+
 ### A7. "**Every one is text that an artifact was arguing with.**"
 **UNDER-QUALIFIED — true of three of the four, and the fourth is a counterexample.**
 - Arguing: `exp007/preregistration.md:38` (declares a design change),
@@ -640,6 +650,17 @@ universal.
 
 **Proposed:** "Every one is text that an artifact had to reckon with — mostly to
 depart from it, once to confirm it."
+
+**APPLIED 2026-09-09**, verbatim — **and it was not enough on its own.** The
+paragraph that follows restated the same overreach in different words:
+*"reaches the record only where a pre-registration or a findings file had to
+**disagree** with it in order to justify doing something else."* A7's verdict
+named one sentence and the defect was in two. Corrected to "had to **account
+for** it — usually to justify departing from it, once to note that it was met",
+which keeps the mechanism and drops the false universal. **This is the
+repeated-claim rule applying to a characterisation rather than a figure**, and
+nothing in the mechanical check would have caught it: it repeats an idea, not a
+number.
 
 ---
 
@@ -679,6 +700,26 @@ wholesale approval. They touched **20 passages**, because five claims recur:
 **Two entries offered alternatives and the first was taken in both** (31 and 41).
 For 41 the second option — record the four gaps in the template and cite them —
 is not available from this repository.
+
+### §6's addendum: A6 and A7, closed 2026-09-09
+
+| claim | was | resolution |
+|---|---|---|
+| **A6** | "**Three** passages in the instance quote specification text", listing one that records an *absence* rather than a quotation | Applied. **Four** passages, re-read at `5f8e39f` and re-characterised individually. `exp007/findings.md:46` dropped from the list; `exp007/findings.md:123` and `:32` added. |
+| **A7** | "Every one is text that an artifact was arguing with" | Applied. "…had to **reckon with** — mostly to depart from it, once to confirm it." |
+| **(unnumbered)** | "reaches the record only where a pre-registration or a findings file had to **disagree** with it" | **Corrected in the same change, and it had no verdict of its own.** The next paragraph restated A7's overreach in different words. Now "had to **account for** it — usually to justify departing from it, once to note that it was met". |
+
+**The third row is the one worth keeping.** A7's verdict named one sentence; the
+defect was in two, sixty words apart, in the same subsection. **The mechanical
+repeated-figure check could not have found it** — it repeats an *idea*, not a
+number, and every word in the restatement differs. The only thing that finds this
+class is applying a correction and then re-reading the paragraph around it for
+the same claim in other words. That is now the practice: **when a
+characterisation is corrected, read forward for its restatements**, exactly as a
+corrected figure is grepped for its other occurrences.
+
+`gap-004` already carried the corrected count of four, so the ledger and the
+prose now agree; before this change they did not, and the ledger was right.
 
 ### Still standing: the six UNSUPPORTED claims
 

@@ -522,9 +522,23 @@ open_decisions:
       eighteen-claims figure (draft.md:391) that a per-passage reading missed and
       that the two amended locations left inconsistent, and it found that
       "thirteen" carries three different referents and "eighteen" two.
-      ITS LIMIT, recorded so it is not over-trusted: the word list is enumerated,
-      so a figure spelled as a word not on the list is missed. Extending it is a
-      per-document maintenance cost, not a one-time fix.
+      CASE-SENSITIVITY BUG, FOUND AND FIXED 2026-09-08, AFTER THIS ENTRY WAS
+      CLOSED. The shipped version was case-sensitive: it saw "three passages" and
+      missed "Three passages". Measured over the typeset sources, 252 hits
+      against 301 case-insensitive — MISSING 49, or 16%, and the missed class was
+      every sentence-initial figure, which in prose is a large class. Fixed with
+      `-i` on the grep AND `tolower` in the awk grouping; without the second,
+      "Three" and "three" count as two different figures and the check reports
+      false distinctness instead of false absence.
+      HOW IT WAS FOUND: by hand, noticing that a figure known to be in §6 was not
+      in the output. NOT by the check. A check that silently drops a sixth of its
+      input is worse than no check, because it is reported as a clean run — which
+      is docs/spec-defects.md §6 occurring inside the tool built to catch §6's
+      defect. The first version of this check had been run three times and
+      reported as passing before anyone noticed.
+      ITS REMAINING LIMIT, recorded so it is not over-trusted: the word list is
+      enumerated, so a figure spelled as a word not on the list is missed.
+      Extending it is a per-document maintenance cost, not a one-time fix.
     title: >-
       The repeated-claim grep in report/claims-verified.md does not work on this
       repository's prose.

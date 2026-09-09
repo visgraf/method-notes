@@ -962,18 +962,30 @@ from the verification pass **unsupported** — not contradicted, but not
 establishable from any record.
 
 The reason is structural. A specification is written on one surface, relayed by
-a human, and executed on another. **It is the only artifact in the loop that is
-never committed.** The work it produces lands in a branch; the specification
-itself lives in a chat window and a paste buffer. So a specification that was
-*executed* leaves a commit behind, and a specification that was *rejected*
-leaves nothing at all — no branch, no diff, no entry, because the whole point of
-the rejection is that no work was done.
+a human, and executed on another. **No specification was ever committed.** No
+file in the instance is one, and none is named as one. The work a specification
+produces lands in a branch; the specification itself lives in a chat window and
+a paste buffer.
 
-Five of the six unsupported claims in this document have that shape. Each
-describes an event the workflow guarantees will leave no trace. One rejection
-survives in the record, and only incidentally: it reshaped a decision that was
-taken anyway, so the decision's entry carries a fragment of it. That fragment is
-not even a stale-state rejection, which is the class §4.2's claim was about.
+Fragments do survive, and where they survive is the finding. Three passages in
+the instance quote specification text — a pre-registration repeating a clause
+before narrowing it, another quoting an instruction and then arguing it is
+wrong, a findings file recording a reading *"which neither exp005 nor this
+specification stated."* **Every one is text that an artifact was arguing with.**
+
+That is the whole mechanism. Specification text reaches the record only where a
+pre-registration or a findings file had to disagree with it in order to justify
+doing something else — which requires the specification to have been **executed**
+and to have produced an artifact in the first place. A specification rejected
+before work begins produces no artifact, so nothing is ever in a position to
+quote it. **The survival mechanism is parasitic on the work happening, which is
+exactly why it cannot preserve a rejection.**
+
+Five of the six unsupported claims in this document describe events the workflow
+guarantees will leave no trace. One rejection survives in the record, and only
+incidentally: it reshaped a decision that was taken anyway, so the decision's
+entry carries a fragment of it. That fragment is not even a stale-state
+rejection, which is the class §4.2's claim was about.
 
 The finding is worse than a gap in the record.
 

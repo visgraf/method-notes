@@ -186,6 +186,63 @@ assembly, and the two checks are both mechanical two-minute reads.
 
 ---
 
+## 6. A verification search written from the expected finding, not from the claim
+
+**The defect.** A claim was to be checked: *no specification text survives
+anywhere in the instance.* The search run against it grepped for
+`REPOSITORY STATE ASSUMED` and `reject and report if` — **phrases a committed
+specification would contain.** Finding none, it reported the claim confirmed.
+
+But those phrases could only ever have found a *whole specification sitting in a
+file*. The claim was about **text**, and the way specification text actually
+reaches a record is as a **quotation inside some other artifact** — a
+pre-registration repeating a clause in order to depart from it, a findings file
+naming the instruction it deviated from. A search for a committed specification
+is structurally incapable of finding a quoted one. It was not a weak search; it
+was a search for the wrong object, and it returned exactly the answer it had
+been built to return.
+
+**What it cost.** The claim shipped in a draft section, was caught on a
+re-check, and the section had to be rewritten around the weaker and true claim —
+*no specification was ever committed.* One round trip, and the corrected version
+is better than the original, because where the fragments survive turned out to
+be the interesting part.
+
+**It then happened a second time, in the correction.** The re-check searched for
+`specification (said|says|reads|stated)` and returned **four** hits. The report
+said **three** — one hit was in the output and was never opened, and it was the
+best example of the very thing the section argues. The replacement text was
+written from that summary and inherited the wrong count and a false universal
+("every one is text an artifact was arguing with"; one of them agrees). **The
+second search was better-aimed than the first and was still read from the
+expectation rather than from the output.**
+
+**Why it is hard to see when writing.** You search for what you expect to find,
+because that is the only image you have of what the thing looks like. A search
+built from the expected answer returns the expected answer whether or not the
+answer is true, and — this is the part that makes it dangerous — **it returns it
+with the authority of a mechanical check.** "I grepped the tree" sounds like
+evidence. It is evidence only about the pattern you chose.
+
+**The check.** Two clauses, both cheap:
+
+- **Search for what would falsify the claim, not for what would confirm it.** If
+  the claim is *no X survives*, the search must be for anything that could
+  possibly be X — including X quoted, paraphrased, referenced, or embedded in
+  something else — not for X in the form you imagine it taking.
+- **Open every hit before you report a count.** A grep that returns four and a
+  report that says three is not a mechanical check; it is a mechanical check
+  followed by an unmechanical reading. This is `## 3` — count the set, not the
+  ceiling — occurring one level up: **the ceiling of your attention rather than
+  the ceiling of an identifier.**
+
+**Where this one came from is part of the entry**, as with `## 3`: the first
+instance was written by Chat, the second by Code, in a repository whose subject
+is claims that are well-formed, plausible and wrong. Both stations made the same
+error inside three iterations of each other.
+
+---
+
 ## The general shape
 
 Entries 1 and 2 are the same defect wearing different clothes: **the
@@ -198,7 +255,7 @@ A specification needs both. They fail differently: a missing falsifier produces
 a result nobody can interpret, and a missing finish condition produces work
 nobody can find.
 
-**Entries 3, 4 and 5 are a second family, and the file is more useful for
+**Entries 3, 4, 5 and 6 are a second family, and the file is more useful for
 separating them.** They are not about what "done" looks like; each states a
 finish condition perfectly well. They are defects of **assembly** — a figure
 copied from the wrong place, a clause contradicted by another clause, a
@@ -208,3 +265,10 @@ between two things. Every check in this family is therefore mechanical: count th
 set, diff the setup against the task, grep for your own placeholders. If a
 proposed check for a defect in this family can only be described as "be careful",
 it is not a check.
+
+**Entry 6 is the family's sharpest case**, because the defective check *was*
+mechanical. A grep is not made trustworthy by being a grep: it inherits every
+assumption in the pattern, and then hands its output to a reader who already
+believes the answer. The two clauses that survive contact with that — search for
+the falsifier, open every hit — are the same two moves the repeated-figure check
+in `report/claims-verified.md` makes, which is not a coincidence.

@@ -645,6 +645,24 @@ gaps:
       commit: docs/workflow.md states that a specification is the only artifact
       of the loop that leaves no trace, and that no specification was ever
       committed in the instance.
+      COUNT CORRECTED 2026-09-08 (second correction to this entry). This entry
+      said THREE fragments survive. It is FOUR passages that report specification
+      content — exp007/preregistration.md:38, exp009/preregistration.md:19,
+      exp007/findings.md:123 ("The specification said 18 steps for A, A', D and
+      E", under a heading reading "A deviation from the specification, and why"),
+      and exp007/findings.md:32. The third item originally listed here,
+      exp007/findings.md:46, does NOT qualify: it records what the specification
+      did NOT state, which is an absence, not a quotation.
+      HOW THE UNDERCOUNT HAPPENED, since it is the reusable part: the search
+      returned four hits and the summary said three. findings.md:123 was in the
+      output and was never opened. Recorded as docs/spec-defects.md §6.
+      AND THE "ARGUING WITH" CHARACTERISATION IS TOO NARROW. Three of the four
+      depart from the clause they quote; exp007/findings.md:32 AGREES with it —
+      "The specification asked for this to be visible rather than inferred, and
+      it is". The conclusion is unaffected and this is why the correction is
+      cheap: the load-bearing condition is that the specification was EXECUTED
+      and produced an artifact, which holds for all four. Agreement or
+      disagreement, a rejected specification produces no artifact either way.
       PRECISION ADDED 2026-09-08, correcting this entry's own overstatement.
       "No specification was ever COMMITTED" is true — no specification file
       exists in the instance at 5f8e39f, and no filename matches spec, task,

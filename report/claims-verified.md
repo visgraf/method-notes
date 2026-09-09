@@ -564,46 +564,82 @@ does not yet reach, the rejections. Recorded as `od-006`.
 
 # Addendum — §6, *The method destroys its own best evidence*
 
-**Added after the first pass and checked before it was inserted**, because new
-prose making factual claims is what this document exists to catch. Verified at
-the same pinned SHAs. Five checkable claims, all CONFIRMED — so the tally in
-`mn-004` is unchanged and these are numbered separately as A1–A5.
+**Checked at the same pinned SHAs, on the revised text.** Seven checkable
+claims: **five CONFIRMED, one CORRECTED, one UNDER-QUALIFIED.** Numbered A1–A7
+and kept out of `mn-004`'s tally, which covers §§1–8.5 as they stood at the
+first pass.
 
-### A1. "§4.2 describes three specifications rejected on false assumptions about repository state… and calls this *the clearest case in the project of a rule paying for itself*"
-**CONFIRMED.** `report/draft.md` §4.2: "Three specifications were rejected on
-false assumptions, each correctly, each before any work was spent… it is the
-clearest case in the project of a rule paying for itself." Quoted accurately.
+### A1. "§4.2 describes three specifications rejected… *the clearest case in the project of a rule paying for itself*"
+**CONFIRMED.** Quoted accurately from §4.2.
 
 ### A2. "That claim came back from the verification pass **unsupported**"
-**CONFIRMED.** Claim 17 of this document, UNSUPPORTED.
+**CONFIRMED.** Claim 17, UNSUPPORTED.
 
-### A3. "It is the only artifact in the loop that is never committed."
-**CONFIRMED, and this is the claim the specification flagged as the stop
-condition.** Re-checked at `instance` @`5f8e39f`: no committed file is a
-specification, and no tracked filename matches *spec*, *task*, *brief*,
-*instruction*, *relay* or *prompt* — zero hits.
-- **Note what this sentence does NOT say.** An earlier draft of this section was
-  reported to assert that *no specification text survives anywhere*, which is
-  **false**: three fragments survive, quoted inside artifacts that were being
-  committed anyway (`exp007/preregistration.md:38`, `exp009/preregistration.md:19`,
-  `exp007/findings.md:46`). The supplied text says "never committed", which is
-  the true and weaker claim. **The distinction is load-bearing and the section
-  gets it right.**
+### A3. "**No specification was ever committed.** No file in the instance is one, and none is named as one."
+**CONFIRMED, and this is the sentence the previous round got wrong.** Re-checked
+at `instance` @`5f8e39f`: no tracked file is a specification, and no filename
+matches *spec*, *task*, *brief*, *instruction*, *relay* or *prompt* — zero hits.
+The earlier form, *"no specification text survives anywhere"*, was false. This
+form is true.
 
-### A4. "One rejection survives in the record, and only incidentally: it reshaped a decision that was taken anyway… That fragment is not even a stale-state rejection"
-**CONFIRMED on all three parts.** `instance: docs/state.yaml` — the `fc-012`
-entry reads "THAT VERSION WAS REJECTED BECAUSE IT MAKES AZIMUTH AND VERGENCE
-INERT, and the rejection is the reason this entry exists in the form it does."
-`fc-012` was taken (rectifying in the camera), so the decision stands. And the
-rejection was on a geometry defect, not on a false assumption about repository
-state — so it is not of §4.2's class.
+### A4. "One rejection survives… it reshaped a decision that was taken anyway… not even a stale-state rejection"
+**CONFIRMED on all three parts.** `fc-012`'s entry: "THAT VERSION WAS REJECTED
+BECAUSE IT MAKES AZIMUTH AND VERGENCE INERT, and the rejection is the reason
+this entry exists in the form it does." The decision was taken; the rejection
+was on a geometry defect, not a repository-state assumption.
 
-### A5. "Five of the six unsupported claims in this document have that shape."
-**CONFIRMED under the selector the sentence states** — "describes an event the
-workflow guarantees will leave no trace" admits 12, 17, 20, 25 and 45, and
-excludes 38, which is a proportion of a document rather than an event. See the
-two-count note under falsifier 3: a stricter selector gives four, and both are
-recorded rather than reconciled away.
+### A5. "Five of the six unsupported claims… describe events the workflow guarantees will leave no trace"
+**CONFIRMED under the selector the sentence states** — admits 12, 17, 20, 25, 45;
+excludes 38, which is a proportion of a document rather than an event. A stricter
+selector ("unrecordable by construction") gives four. Both recorded; see
+`gap-004`.
+
+### A6. "**Three** passages in the instance quote specification text"
+**CORRECTED → four passages report specification content, and one of the three named is not one of them.**
+
+| passage | reports spec content? | what it does |
+|---|---|---|
+| `exp007/preregistration.md:38` | **yes** | quotes it — the specification says "six arms, one stimulus" |
+| `exp009/preregistration.md:19` | **yes** | reports the clause, then argues it is wrong |
+| `exp007/findings.md:123` | **yes** | "The specification said 18 steps for A, A′, D and E", under a heading reading *"A deviation from the specification, and why"* |
+| `exp007/findings.md:32` | **yes** | "The specification asked for this to be visible rather than inferred, and it is" |
+| `exp007/findings.md:46` | **no** | "the correct reading, which neither exp005 nor this specification stated" — **records an ABSENCE in the specification.** The blockquote after it is the findings file's own reading, not the specification's words. |
+
+- **The third named fragment is the one that does not qualify**, and
+  `exp007/findings.md:123` — omitted — is the clearest instance of the section's
+  own thesis: an artifact departing from a specification clause and quoting it to
+  say so.
+- **This is my error propagating, and it is worth naming as such.** The
+  search behind the previous round returned *four* hits and the report said
+  *three*: `findings.md:123` was in the output and never opened. The section was
+  then written from that summary. See `docs/spec-defects.md` §6.
+
+**Proposed:** "Four passages in the instance report specification text — a
+pre-registration quoting a clause before departing from it, another quoting an
+instruction and then arguing it is wrong, a findings file recording a deviation
+and the clause it deviates from, and one recording that the specification asked
+for something that was duly delivered."
+
+### A7. "**Every one is text that an artifact was arguing with.**"
+**UNDER-QUALIFIED — true of three of the four, and the fourth is a counterexample.**
+- Arguing: `exp007/preregistration.md:38` (declares a design change),
+  `exp009/preregistration.md:19` ("The second half is wrong"),
+  `exp007/findings.md:123` ("A deviation from the specification, and why").
+- **Not arguing:** `exp007/findings.md:32` — "The specification asked for this to
+  be visible rather than inferred, **and it is**." An artifact *agreeing* with a
+  specification and carrying its content into the record.
+
+**THE SECTION'S CONCLUSION SURVIVES INTACT, AND THIS IS THE IMPORTANT PART.** The
+load-bearing sentence is the next one — *the survival mechanism is parasitic on
+the work happening* — and `findings.md:32` satisfies it completely: agreement or
+disagreement, the fragment is there because the specification was **executed**
+and produced an artifact. A rejected specification produces no artifact either
+way. **"Arguing with" is too narrow a mechanism for a conclusion that only needs
+"executed".** Narrowing it costs the argument nothing and removes a false
+universal.
+
+**Proposed:** "Every one is text that an artifact had to reckon with — mostly to
+depart from it, once to confirm it."
 
 ---
 
@@ -673,10 +709,24 @@ also matches only numerals, and this document spells its figures out.
 #   3. -H so the field offsets hold for one file as well as many;
 #   4. drop bare decimals -- in markdown they are section numbers, not claims.
 for f in "$@"; do
-  grep -onHE '\b([0-9]+(\.[0-9]+)?(×|x|:1|%|-fold)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|eighteen|twenty-two|forty-one|eighty-seven|thousand)\b' "$f" \
+  grep -onHEi '\b([0-9]+(\.[0-9]+)?(×|x|:1|%|-fold)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|eighteen|twenty-two|forty-one|eighty-seven|thousand)\b' "$f" \
   | grep -vE ':[0-9]+\.[0-9]+$'
-done | awk -F: '{n[$3]=n[$3]" "$2} END {for (v in n) {c=split(n[v],a," "); if (c>1) printf "%3d  %-12s lines:%s\n", c, v, n[v]}}' | sort -rn
+done | awk -F: '{v=tolower($3); n[v]=n[v]" "$2} END {for (v in n) {c=split(n[v],a," "); if (c>1) printf "%3d  %-12s lines:%s\n", c, v, n[v]}}' | sort -rn
 ```
+
+> **`-i`, AND THE GROUPING LOWERCASED TOO — ADDED AFTER THE CHECK WAS ALREADY
+> SHIPPED AS `od-003`'s FIX.** The first version was case-sensitive, so it saw
+> "three passages" and missed "Three passages". Measured over these files:
+> **252 hits case-sensitive against 301 case-insensitive — it was missing 49, or
+> 16%, and the missed class was every sentence-initial figure.** Prose puts
+> figures at the start of sentences constantly.
+>
+> It was found by hand: a figure known to be in §6 did not appear in the output.
+> **A check that silently drops a sixth of its input is worse than no check,
+> because it is reported as a clean run** — which is `docs/spec-defects.md` §6
+> in the tool built to prevent §6's defect. Both halves matter: `-i` on the grep
+> finds the hits, and `tolower` in the awk stops "Three" and "three" from being
+> counted as two different figures.
 
 **It was validated against a known answer before being trusted**, which the
 shipped one never was: it had to surface the `mn-001`/`mn-002` pair, and it does
